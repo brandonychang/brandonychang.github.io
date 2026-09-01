@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="An experimental and analytical workflow for measuring cellulosic composition, quantifying monomeric sugars, and interpreting fermentation yield in biofuel and bioethanol research.">
-  <title>Cellulosic Biofuel Analysis | Brandon Y. Chang</title>
+  <meta name="description" content="A retrieval-augmented customer-support chatbot designed to answer from approved company knowledge, complete supported actions, and escalate cases when the available evidence is insufficient.">
+  <title>GenAI Chatbot Prototype | Brandon Y. Chang</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
@@ -34,27 +34,27 @@
       <div class="page">
         <section class="project-hero">
           <a class="label project-back" href="index.html#work">← Back to selected work</a>
-          <p class="label headnote">IFF · Fermentation R&D</p>
-          <h1 class="title project-title">Cellulosic Biofuel Analysis</h1>
+          <p class="label headnote">Side project · Customer support AI</p>
+          <h1 class="title project-title">GenAI Chatbot Prototype</h1>
           <div class="grid">
-            <p class="project-lead">An experimental and analytical workflow for measuring cellulosic composition, quantifying monomeric sugars, and interpreting fermentation yield in biofuel and bioethanol research.</p>
+            <p class="project-lead">A retrieval-augmented customer-support chatbot designed to answer from approved company knowledge, complete supported actions, and escalate cases when the available evidence is insufficient.</p>
             <div class="project-facts">
-              <div class="project-fact"><p class="label">Role</p><p>Data science intern</p></div>
-              <div class="project-fact"><p class="label">Location</p><p>Palo Alto, California</p></div>
-              <div class="project-fact"><p class="label">Methods</p><p>HPLC, Python, Excel, MATLAB, acid hydrolysis</p></div>
+              <div class="project-fact"><p class="label">Role</p><p>Product scoping and delivery</p></div>
+              <div class="project-fact"><p class="label">Architecture</p><p>Retrieval-augmented generation</p></div>
+              <div class="project-fact"><p class="label">Methods</p><p>Chunking, embeddings, retrieval, tools, web integration</p></div>
             </div>
           </div>
         </section>
 
         <section class="section">
           <header class="section-head"><p class="label label-ink">(01) — Case study</p></header>
-          <h2 class="title section-title">Connect laboratory methods with usable data</h2>
+          <h2 class="title section-title">Ground every answer in evidence</h2>
           <div class="grid"><div class="project-blocks">
-              <article class="project-block"><h3>Refine acid hydrolysis</h3><div class="project-block-copy"><p>Developed and refined a severity-based acid hydrolysis procedure to break cellulosic material into monomeric sugars. Adjusted acid concentration, temperature, and reaction time to improve consistency and sugar recovery across experimental runs.</p></div></article>
-              <article class="project-block"><h3>Quantify sugar profiles</h3><div class="project-block-copy"><p>Used high-performance liquid chromatography to separate and identify sugars in hydrolysate samples. Built calibration curves for quantitative concentration analysis and applied quality-control checks to protect accuracy and reproducibility.</p></div></article>
-              <article class="project-block"><h3>Automate data extraction</h3><div class="project-block-copy"><p>Wrote Python scripts to extract and process experimental results, reducing repetitive manual entry and the risk of transcription errors. The workflow prepared cleaner inputs for downstream analysis.</p></div></article>
-              <article class="project-block"><h3>Visualize fermentation yield</h3><div class="project-block-copy"><p>Connected processed data with Excel and MATLAB to graph fermentation-yield metrics and compare conditions. The visualizations helped the R&D team interpret chemical composition, fermentation efficiency, and potential bioethanol yield.</p></div></article>
-              <article class="project-block"><h3>Support process optimization</h3><div class="project-block-copy"><p>Combined wet-lab measurements, calibration logic, automated processing, and visual analysis into a repeatable workflow. The project supported ongoing evaluation of cellulosic feedstocks and fermentation conditions.</p></div></article>
+              <article class="project-block"><h3>Define the support job</h3><div class="project-block-copy"><p>Scoped the product around repeatable customer questions, knowledge retrieval, and clear escalation boundaries. The goal was a useful help-center experience rather than an unrestricted general chatbot.</p></div></article>
+              <article class="project-block"><h3>Prepare the knowledge base</h3><div class="project-block-copy"><p>Defined document ingestion and chunking requirements for FAQs, help articles, and troubleshooting guides. The design balanced semantic context with chunks small enough for precise retrieval.</p></div></article>
+              <article class="project-block"><h3>Retrieve before generating</h3><div class="project-block-copy"><p>Specified an embedding and vector-search flow that finds the most relevant approved content before the model writes a response. The system prompt requires an evidence-based answer or an explicit escalation.</p></div></article>
+              <article class="project-block"><h3>Add supported actions</h3><div class="project-block-copy"><p>Designed tool-assisted workflows for tasks such as ticket creation and status lookup, with intent checks and clear handoff behavior for cases that required a person.</p></div></article>
+              <article class="project-block"><h3>Evaluate the product</h3><div class="project-block-copy"><p>Validated retrieval relevance, answer quality, latency, groundedness, and escalation behavior. These measures connected technical performance with whether customers received a useful and trustworthy response.</p></div></article>
           </div></div>
         </section>
 
@@ -62,13 +62,13 @@
           <header class="section-head"><p class="label label-ink">(02) — Evidence</p></header>
           <h2 class="title section-title">Project record</h2>
           <div class="grid"><div class="project-outcomes"><div class="data">
-              <div class="data-row"><div class="data-figure">HPLC</div><div class="data-label">Monomeric sugar identification and quantification</div></div>
-              <div class="data-row"><div class="data-figure">Python</div><div class="data-label">Automated experimental-data extraction</div></div>
-              <div class="data-row"><div class="data-figure">Excel + MATLAB</div><div class="data-label">Fermentation-yield visualization</div></div>
-              <div class="data-row"><div class="data-figure">R&D</div><div class="data-label">Repeatable cellulosic-composition workflow</div></div>
+              <div class="data-row"><div class="data-figure">RAG</div><div class="data-label">Knowledge-grounded response architecture</div></div>
+              <div class="data-row"><div class="data-figure">5</div><div class="data-label">Evaluation dimensions defined</div></div>
+              <div class="data-row"><div class="data-figure">Tools</div><div class="data-label">Action and escalation workflows specified</div></div>
+              <div class="data-row"><div class="data-figure">Web</div><div class="data-label">Customer-facing prototype integration</div></div>
           </div></div></div>
           <nav class="project-nav" aria-label="Case study navigation">
-            <a href="usc-parking.html">← Previous: USC parking</a><a href="index.html#work">Back to all work →</a>
+            <a href="protein-binding.html">← Previous: Protein binding</a><a href="dog-poop-detector.html">Next: Behavior detection →</a>
           </nav>
         </section>
       </div>

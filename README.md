@@ -6,7 +6,7 @@ This folder is ready for GitHub Pages at `https://brandonychang.github.io`.
 
 1. Sign in to GitHub and create a public repository named exactly `brandonychang.github.io`.
 2. Open the repository and choose **Add file**, then **Upload files**.
-3. Upload every file from this folder. Upload the individual files, not the ZIP file. The five case-study HTML files must stay beside `index.html`, `styles.css`, and `script.js`.
+3. Upload every file from this folder. Upload the individual files, not the ZIP file. All case-study HTML files must stay beside `index.html`, `styles.css`, and `script.js`.
 4. Choose **Commit changes**.
 5. Open **Settings**, then **Pages**.
 6. Under **Build and deployment**, choose **Deploy from a branch**.
