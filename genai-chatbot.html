@@ -3,82 +3,80 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A retrieval-augmented customer-support chatbot designed to answer from approved company knowledge, complete supported actions, and escalate cases when the available evidence is insufficient.">
-  <title>GenAI Chatbot Prototype | Brandon Y. Chang</title>
+  <meta name="description" content="A retrieval-augmented customer-support chatbot with grounded answers, tool workflows, and escalation logic.">
+  <title>GenAI Chatbot | Brandon Y. Chang</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=3">
-  <script src="script.js?v=3" defer></script>
+  <link rel="stylesheet" href="styles.css?v=5">
+  <script src="script.js?v=5" defer></script>
 </head>
-<body>
-  <div class="shell">
-    <header class="masthead-bar">
-      <div class="page"><div class="bar">
-        <a href="index.html" class="wordmark">Brandon&nbsp;Y.&nbsp;Chang</a>
-        <nav class="nav" aria-label="Primary navigation">
-          <a href="index.html#about" class="nav-item">About</a>
-          <a href="index.html#work" class="nav-item">Work</a>
-          <a href="index.html#experience" class="nav-item">Experience</a>
-          <a href="index.html#contact" class="nav-item">Contact</a>
-        </nav>
-        <button type="button" class="theme-toggle" aria-label="Switch to light mode" title="Switch to light mode"><span aria-hidden="true">☀</span></button>
-        <button type="button" class="burger" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span class="bar-line" aria-hidden="true"></span><span class="bar-line" aria-hidden="true"></span></button>
-      </div></div>
-    </header>
-    <div id="mobile-menu" class="drawer" aria-hidden="true"><div class="page drawer-inner">
-      <a href="index.html" class="drawer-link">Home</a><a href="index.html#about" class="drawer-link">About</a><a href="index.html#work" class="drawer-link">Work</a><a href="index.html#experience" class="drawer-link">Experience</a><a href="index.html#contact" class="drawer-link">Contact</a>
-    </div></div>
+<body class="case-page chatbot-case"><div class="shell"><header class="masthead-bar"><div class="page"><div class="bar">
+    <a href="index.html" class="wordmark">Brandon&nbsp;Y.&nbsp;Chang</a>
+    <nav class="nav" aria-label="Primary navigation"><a href="index.html#about" class="nav-item">About</a><a href="index.html#work" class="nav-item">Work</a><a href="index.html#experience" class="nav-item">Experience</a><a href="index.html#contact" class="nav-item">Contact</a></nav>
+    <button type="button" class="theme-toggle" aria-label="Switch to light mode" title="Switch to light mode"><span aria-hidden="true">☀</span></button>
+    <button type="button" class="burger" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span class="bar-line" aria-hidden="true"></span><span class="bar-line" aria-hidden="true"></span></button>
+  </div></div></header>
+  <div id="mobile-menu" class="drawer" aria-hidden="true"><div class="page drawer-inner"><a href="index.html" class="drawer-link">Home</a><a href="index.html#about" class="drawer-link">About</a><a href="index.html#work" class="drawer-link">Work</a><a href="index.html#experience" class="drawer-link">Experience</a><a href="index.html#contact" class="drawer-link">Contact</a></div></div>
+<main><div class="page">
+  <section class="case-intro">
+    <div class="case-folio"><a class="label" href="index.html#work">← Selected work</a><span class="label">Case study 06 / 08</span></div>
+    <p class="label headnote">Side project / Customer support AI</p>
+    <h1 class="case-title"><span>GenAI</span><span>Chatbot</span></h1>
+    <p class="case-tagline">A support experience that retrieves approved knowledge, answers with evidence, completes supported actions, and knows when to hand off.</p>
+    <dl class="case-credits"><div><dt class="label">Role</dt><dd>Product scoping · requirements · prototype delivery</dd></div><div><dt class="label">Scope</dt><dd>Knowledge ingestion · retrieval · tools · web integration</dd></div><div><dt class="label">Measures</dt><dd>Relevance · groundedness · response quality · latency</dd></div></dl>
+  </section>
+  
+      <section class="case-glance" aria-label="Project at a glance"><p class="label">Product promise</p><p class="case-promise">Answer from the company’s knowledge. Take only supported actions. Escalate when the evidence runs out.</p></section>
 
-    <main>
-      <div class="page">
-        <section class="project-hero">
-          <a class="label project-back" href="index.html#work">← Back to selected work</a>
-          <p class="label headnote">Side project · Customer support AI</p>
-          <h1 class="title project-title">GenAI Chatbot Prototype</h1>
-          <div class="grid">
-            <p class="project-lead">A retrieval-augmented customer-support chatbot designed to answer from approved company knowledge, complete supported actions, and escalate cases when the available evidence is insufficient.</p>
-            <div class="project-facts">
-              <div class="project-fact"><p class="label">Role</p><p>Product scoping and delivery</p></div>
-              <div class="project-fact"><p class="label">Architecture</p><p>Retrieval-augmented generation</p></div>
-              <div class="project-fact"><p class="label">Methods</p><p>Chunking, embeddings, retrieval, tools, web integration</p></div>
-            </div>
+      <section class="story-section">
+        <div class="story-heading"><span class="label story-num">01</span><h2>Scope the job, not the technology</h2></div>
+        <div class="story-copy prose">
+          <p>The prototype focused on repeatable support questions with documented answers. It did not try to act like a general assistant. This boundary shaped the knowledge base, the supported tools, and the moments where the conversation should move to a person.</p>
+          <div class="support-conversation" aria-label="Example support conversation">
+            <div class="message message-user"><span>You</span><p>Why did my account access expire?</p></div>
+            <div class="message message-bot"><span>Assistant</span><p>I found the access policy and renewal steps in the approved help center. Here is the relevant guidance and its source.</p></div>
+            <div class="message message-system"><span>System</span><p>Source attached · confidence checked · escalation available</p></div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="section">
-          <header class="section-head"><p class="label label-ink">(01) — Case study</p></header>
-          <h2 class="title section-title">Ground every answer in evidence</h2>
-          <div class="grid"><div class="project-blocks">
-              <article class="project-block"><h3>Define the support job</h3><div class="project-block-copy"><p>Scoped the product around repeatable customer questions, knowledge retrieval, and clear escalation boundaries. The goal was a useful help-center experience rather than an unrestricted general chatbot.</p></div></article>
-              <article class="project-block"><h3>Prepare the knowledge base</h3><div class="project-block-copy"><p>Defined document ingestion and chunking requirements for FAQs, help articles, and troubleshooting guides. The design balanced semantic context with chunks small enough for precise retrieval.</p></div></article>
-              <article class="project-block"><h3>Retrieve before generating</h3><div class="project-block-copy"><p>Specified an embedding and vector-search flow that finds the most relevant approved content before the model writes a response. The system prompt requires an evidence-based answer or an explicit escalation.</p></div></article>
-              <article class="project-block"><h3>Add supported actions</h3><div class="project-block-copy"><p>Designed tool-assisted workflows for tasks such as ticket creation and status lookup, with intent checks and clear handoff behavior for cases that required a person.</p></div></article>
-              <article class="project-block"><h3>Evaluate the product</h3><div class="project-block-copy"><p>Validated retrieval relevance, answer quality, latency, groundedness, and escalation behavior. These measures connected technical performance with whether customers received a useful and trustworthy response.</p></div></article>
-          </div></div>
-        </section>
+      <section class="story-section">
+        <div class="story-heading"><span class="label story-num">02</span><h2>The retrieval loop</h2></div>
+        <div class="story-copy">
+          <div class="pipeline-strip" aria-label="Retrieval augmented generation flow"><div><span>01</span><strong>Ingest</strong><small>FAQs and support docs</small></div><div><span>02</span><strong>Chunk</strong><small>Preserve useful context</small></div><div><span>03</span><strong>Retrieve</strong><small>Rank relevant passages</small></div><div><span>04</span><strong>Generate</strong><small>Answer from evidence</small></div><div><span>05</span><strong>Act or hand off</strong><small>Use tools within bounds</small></div></div>
+          <div class="prose"><p>Chunk size creates a product tradeoff. Large chunks preserve context but dilute retrieval precision. Small chunks improve specificity but split related instructions. The requirements therefore connect chunking decisions with retrieval tests, not a fixed technical recipe.</p></div>
+        </div>
+      </section>
 
-        <section class="section">
-          <header class="section-head"><p class="label label-ink">(02) — Evidence</p></header>
-          <h2 class="title section-title">Project record</h2>
-          <div class="grid"><div class="project-outcomes"><div class="data">
-              <div class="data-row"><div class="data-figure">RAG</div><div class="data-label">Knowledge-grounded response architecture</div></div>
-              <div class="data-row"><div class="data-figure">5</div><div class="data-label">Evaluation dimensions defined</div></div>
-              <div class="data-row"><div class="data-figure">Tools</div><div class="data-label">Action and escalation workflows specified</div></div>
-              <div class="data-row"><div class="data-figure">Web</div><div class="data-label">Customer-facing prototype integration</div></div>
-          </div></div></div>
-          <nav class="project-nav" aria-label="Case study navigation">
-            <a href="protein-binding.html">← Previous: Protein binding</a><a href="dog-poop-detector.html">Next: Behavior detection →</a>
-          </nav>
-        </section>
-      </div>
-    </main>
+      <section class="story-section">
+        <div class="story-heading"><span class="label story-num">03</span><h2>Three response paths</h2></div>
+        <div class="story-copy">
+          <div class="decision-grid decision-grid-three">
+            <article><p class="label">Known answer</p><h3>Respond with a source</h3><p>Retrieve relevant approved content and ground the response in the passage.</p></article>
+            <article><p class="label">Supported action</p><h3>Call a tool</h3><p>Collect required information, confirm intent, then create a ticket or run an allowed workflow.</p></article>
+            <article><p class="label">Insufficient evidence</p><h3>Escalate clearly</h3><p>Avoid guessing. Explain the limit and pass context to a human support path.</p></article>
+          </div>
+        </div>
+      </section>
 
-    <footer class="colophon" id="contact"><div class="page"><div class="grid footer-grid">
-      <div class="c-4"><p class="label">Brandon Y. Chang</p><p class="colophon-note">Healthcare analytics, product systems, and applied data. San Jose, California.</p><p class="colophon-note">© 2026</p></div>
-      <div class="c-4"><p class="label">Contact</p><ul class="colophon-list"><li><a class="link" href="mailto:bychang@alumni.usc.edu">bychang@alumni.usc.edu</a></li></ul></div>
-      <div class="c-4"><p class="label">Elsewhere</p><ul class="colophon-list"><li><a class="link" href="https://www.linkedin.com/in/brandonychang" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li></ul></div>
-    </div></div></footer>
-  </div>
-</body>
-</html>
+      <section class="story-section">
+        <div class="story-heading"><span class="label story-num">04</span><h2>Evaluation before expansion</h2></div>
+        <div class="story-copy">
+          <div class="comparison-table eval-table" role="table" aria-label="Chatbot evaluation framework">
+            <div class="comparison-row comparison-head" role="row"><span role="columnheader">Signal</span><span role="columnheader">Question</span><span role="columnheader">Failure to catch</span></div>
+            <div class="comparison-row" role="row"><span role="cell">Retrieval relevance</span><span role="cell">Did the system find the right passage?</span><span role="cell">Fluent answer from the wrong document</span></div>
+            <div class="comparison-row" role="row"><span role="cell">Groundedness</span><span role="cell">Does every claim follow the evidence?</span><span role="cell">Invented policy or unsupported step</span></div>
+            <div class="comparison-row" role="row"><span role="cell">Task quality</span><span role="cell">Did the response resolve the support job?</span><span role="cell">Accurate but unusable guidance</span></div>
+            <div class="comparison-row" role="row"><span role="cell">Latency</span><span role="cell">Did the answer arrive at conversational speed?</span><span role="cell">A correct experience users abandon</span></div>
+            <div class="comparison-row" role="row"><span role="cell">Escalation</span><span role="cell">Did uncertainty trigger the right handoff?</span><span role="cell">False confidence</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="story-section story-close">
+        <div class="story-heading"><span class="label story-num">05</span><h2>Product takeaway</h2></div>
+        <div class="story-copy prose"><p>The model sits inside a larger support system. Knowledge maintenance, retrieval quality, tool permissions, web experience, and human escalation determine whether the chatbot earns trust.</p><p>I treated response quality and latency as product measures, then paired them with relevance and groundedness so speed or fluency could not hide a weak answer.</p></div>
+      </section>
+  <nav class="project-nav case-nav" aria-label="Case study navigation"><a href="protein-binding.html">← Protein binding</a><a href="dog-poop-detector.html">Behavior detection →</a></nav>
+</div></main><footer class="colophon" id="contact"><div class="page"><div class="grid footer-grid"><div class="c-4"><p class="label">Brandon Y. Chang</p><p class="colophon-note">Healthcare analytics, product systems, and applied data. San Jose, California.</p><p class="colophon-note">© 2026</p></div><div class="c-4"><p class="label">Contact</p><ul class="colophon-list"><li><a class="link" href="mailto:bychang@alumni.usc.edu">bychang@alumni.usc.edu</a></li></ul></div><div class="c-4"><p class="label">Elsewhere</p><ul class="colophon-list"><li><a class="link" href="https://www.linkedin.com/in/brandonychang" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li></ul></div></div></div></footer></div></body></html>
