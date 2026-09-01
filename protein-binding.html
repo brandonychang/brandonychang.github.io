@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A structure-informed machine-learning pipeline for predicting protein-ligand binding while protecting model evaluation from data leakage and difficult molecular parsing cases.">
+  <title>Protein Binding Prediction | Brandon Y. Chang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="masthead-bar">
+      <div class="page"><div class="bar">
+        <a href="index.html" class="wordmark">Brandon&nbsp;Y.&nbsp;Chang</a>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="index.html#about" class="nav-item">About</a>
+          <a href="index.html#work" class="nav-item">Work</a>
+          <a href="index.html#experience" class="nav-item">Experience</a>
+          <a href="index.html#contact" class="nav-item">Contact</a>
+        </nav>
+        <button type="button" class="theme-toggle" aria-label="Switch to light mode" title="Switch to light mode"><span aria-hidden="true">☀</span></button>
+        <button type="button" class="burger" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span class="bar-line" aria-hidden="true"></span><span class="bar-line" aria-hidden="true"></span></button>
+      </div></div>
+    </header>
+    <div id="mobile-menu" class="drawer" aria-hidden="true"><div class="page drawer-inner">
+      <a href="index.html" class="drawer-link">Home</a><a href="index.html#about" class="drawer-link">About</a><a href="index.html#work" class="drawer-link">Work</a><a href="index.html#experience" class="drawer-link">Experience</a><a href="index.html#contact" class="drawer-link">Contact</a>
+    </div></div>
+
+    <main>
+      <div class="page">
+        <section class="project-hero">
+          <a class="label project-back" href="index.html#work">← Back to selected work</a>
+          <p class="label headnote">Machine learning · Structural biology</p>
+          <h1 class="title project-title">Protein Binding Prediction</h1>
+          <div class="grid">
+            <p class="project-lead">A structure-informed machine-learning pipeline for predicting protein-ligand binding while protecting model evaluation from data leakage and difficult molecular parsing cases.</p>
+            <div class="project-facts">
+              <div class="project-fact"><p class="label">Role</p><p>Modeling, data engineering, and evaluation</p></div>
+              <div class="project-fact"><p class="label">Dataset</p><p>967 PDB protein-ligand complexes</p></div>
+              <div class="project-fact"><p class="label">Methods</p><p>PyTorch, Keras, RDKit, Biopython</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <header class="section-head"><p class="label label-ink">(01) — Case study</p></header>
+          <h2 class="title section-title">Reliable modeling starts with reliable data</h2>
+          <div class="grid"><div class="project-blocks">
+              <article class="project-block"><h3>Build the structural dataset</h3><div class="project-block-copy"><p>Parsed protein and ligand structures from 967 PDB complexes and assembled model-ready representations with RDKit and Biopython. The workflow accounted for inconsistent identifiers, missing records, and molecular edge cases.</p></div></article>
+              <article class="project-block"><h3>Evaluate model families</h3><div class="project-block-copy"><p>Tested structure and sequence inputs from tools including AlphaFold, OmegaFold, and ESMFold, then trained neural architectures in Keras and PyTorch. A Conv1D model reached a mean absolute error of approximately 4.05 kcal/mol.</p></div></article>
+              <article class="project-block"><h3>Correct leakage</h3><div class="project-block-copy"><p>Identified and corrected UniProt-to-PDB leakage that inflated validation performance. Rebuilt the evaluation approach so related structures did not give the model an unfair advantage.</p></div></article>
+              <article class="project-block"><h3>Harden the pipeline</h3><div class="project-block-copy"><p>Created more than 100 tests for parsing and structural-data edge cases. The tests made failures visible earlier and improved confidence in the dataset and evaluation results.</p></div></article>
+          </div></div>
+        </section>
+
+        <section class="section">
+          <header class="section-head"><p class="label label-ink">(02) — Evidence</p></header>
+          <h2 class="title section-title">Project record</h2>
+          <div class="grid"><div class="project-outcomes"><div class="data">
+              <div class="data-row"><div class="data-figure">967</div><div class="data-label">PDB complexes processed</div></div>
+              <div class="data-row"><div class="data-figure">4.05</div><div class="data-label">Approximate Conv1D MAE in kcal/mol</div></div>
+              <div class="data-row"><div class="data-figure">100+</div><div class="data-label">Structural-data edge-case tests</div></div>
+              <div class="data-row"><div class="data-figure">1</div><div class="data-label">Major leakage issue found and corrected</div></div>
+          </div></div></div>
+          <nav class="project-nav" aria-label="Case study navigation">
+            <a href="email-ticket-automation.html">← Previous: Email automation</a><a href="usc-parking.html">Next: USC parking →</a>
+          </nav>
+        </section>
+      </div>
+    </main>
+
+    <footer class="colophon" id="contact"><div class="page"><div class="grid footer-grid">
+      <div class="c-4"><p class="label">Brandon Y. Chang</p><p class="colophon-note">Healthcare analytics, product systems, and applied data. Denver, Colorado.</p><p class="colophon-note">© 2026</p></div>
+      <div class="c-4"><p class="label">Contact</p><ul class="colophon-list"><li><a class="link" href="mailto:bychang@alumni.usc.edu">bychang@alumni.usc.edu</a></li></ul></div>
+      <div class="c-4"><p class="label">Elsewhere</p><ul class="colophon-list"><li><a class="link" href="https://www.linkedin.com/in/brandonychang" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li></ul></div>
+    </div></div></footer>
+  </div>
+</body>
+</html>

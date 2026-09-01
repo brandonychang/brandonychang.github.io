@@ -35,12 +35,14 @@ document.querySelectorAll(".drawer-link, .wordmark").forEach((link) => link.addE
 
 const record = document.querySelector(".record");
 const recordButton = document.querySelector(".record-toggle");
-recordButton.addEventListener("click", () => {
-  const open = !record.classList.contains("record-open");
-  record.classList.toggle("record-open", open);
-  recordButton.setAttribute("aria-expanded", String(open));
-  recordButton.textContent = open ? "Show fewer" : "Show 3 more";
-});
+if (record && recordButton) {
+  recordButton.addEventListener("click", () => {
+    const open = !record.classList.contains("record-open");
+    record.classList.toggle("record-open", open);
+    recordButton.setAttribute("aria-expanded", String(open));
+    recordButton.textContent = open ? "Show fewer" : "Show 3 more";
+  });
+}
 
 const principleBodies = [
   "I start with the operating problem, define the decision a product needs to support, and stay close through launch. Success includes adoption and measurable workflow change.",
@@ -49,14 +51,16 @@ const principleBodies = [
 ];
 
 const principleBody = document.querySelector("#principle-body");
-document.querySelectorAll("[data-principle]").forEach((button) => {
-  button.addEventListener("click", () => {
-    document.querySelectorAll("[data-principle]").forEach((item) => {
-      item.classList.remove("active");
-      item.setAttribute("aria-pressed", "false");
+if (principleBody) {
+  document.querySelectorAll("[data-principle]").forEach((button) => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll("[data-principle]").forEach((item) => {
+        item.classList.remove("active");
+        item.setAttribute("aria-pressed", "false");
+      });
+      button.classList.add("active");
+      button.setAttribute("aria-pressed", "true");
+      principleBody.textContent = principleBodies[Number(button.dataset.principle)];
     });
-    button.classList.add("active");
-    button.setAttribute("aria-pressed", "true");
-    principleBody.textContent = principleBodies[Number(button.dataset.principle)];
   });
-});
+}
