@@ -6,7 +6,7 @@ This folder is ready for GitHub Pages at `https://brandonychang.github.io`.
 
 1. Sign in to GitHub and create a public repository named exactly `brandonychang.github.io`.
 2. Open the repository and choose **Add file**, then **Upload files**.
-3. Extract the ZIP, open the extracted folder, and upload every file inside it. Do not upload the ZIP itself. This package uses no folders, so `brandon-portrait.jpg` and `chatdb-interface.png` stay beside `index.html`, `styles.css`, and `script.js`.
+3. Extract the ZIP, open the extracted folder, and upload every file inside it. Do not upload the ZIP itself. This package uses no folders, so `brandon-portrait.jpg`, `chatdb-interface.png`, `dog-pose-yard.jpg`, and `dog-pose-indoor.jpg` stay beside `index.html`, `styles.css`, and `script.js`.
 4. Choose **Commit changes**.
 5. Open **Settings**, then **Pages**.
 6. Under **Build and deployment**, choose **Deploy from a branch**.

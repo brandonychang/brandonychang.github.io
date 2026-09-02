@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=8">
-  <script src="script.js?v=8" defer></script>
+  <link rel="stylesheet" href="styles.css?v=9">
+  <script src="script.js?v=9" defer></script>
 </head>
 <body class="case-page healthcare-case"><div class="shell">
   <header class="masthead-bar"><div class="page"><div class="bar">
@@ -24,7 +24,17 @@
       <div class="case-folio"><a class="label" href="index.html#work">← Selected work</a><span class="label">Case study 01 / 08</span></div>
       <div class="healthcare-hero-grid">
         <div><p class="label headnote">DaVita / Healthcare product portfolio</p><h1>Six releases.<br>Six real problems.</h1><p class="healthcare-deck">I took six healthcare products from an unclear operating need through definition, launch, adoption, and measurable workflow change.</p></div>
-        <div class="portfolio-dial interactive-surface" data-tilt aria-label="Six product releases"><span class="dial-number">6</span><span class="dial-label">end-to-end releases</span><i class="dial-ring ring-one"></i><i class="dial-ring ring-two"></i><b class="dial-dot dot-one"></b><b class="dial-dot dot-two"></b><b class="dial-dot dot-three"></b><b class="dial-dot dot-four"></b><b class="dial-dot dot-five"></b><b class="dial-dot dot-six"></b></div>
+        <div class="portfolio-dial" data-tilt aria-label="Explore six healthcare product releases">
+          <i class="dial-ring ring-one"></i><i class="dial-ring ring-two"></i>
+          <div class="dial-readout" aria-live="polite"><span id="dial-number">01</span><strong id="dial-product">Glean AI</strong><small id="dial-outcome">87% daily active use</small></div>
+          <button type="button" class="dial-dot dot-one active" data-release-orbit="0" aria-label="Glean AI Knowledge Assistant"><span>1</span></button>
+          <button type="button" class="dial-dot dot-two" data-release-orbit="1" aria-label="Safety Action Dashboard"><span>2</span></button>
+          <button type="button" class="dial-dot dot-three" data-release-orbit="2" aria-label="PCT Retention Journey"><span>3</span></button>
+          <button type="button" class="dial-dot dot-four" data-release-orbit="3" aria-label="Pyramid Report Modernization"><span>4</span></button>
+          <button type="button" class="dial-dot dot-five" data-release-orbit="4" aria-label="Clinical Requirements Heatmap"><span>5</span></button>
+          <button type="button" class="dial-dot dot-six" data-release-orbit="5" aria-label="Healthcare Analytics Request Tracker"><span>6</span></button>
+          <p class="dial-instruction">Hover, focus, or select a release</p>
+        </div>
       </div>
       <dl class="case-credits healthcare-credits"><div><dt class="label">Role</dt><dd>Product Manager, Data Analytics &amp; Platforms</dd></div><div><dt class="label">Reach</dt><dd>Clinic staff, field leaders, clinical operations, safety, and analytics teams</dd></div><div><dt class="label">Methods</dt><dd>User interviews · product requirements · SQL/ETL · dashboard design · rollout measurement</dd></div></dl>
     </section>

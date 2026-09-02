@@ -80,8 +80,45 @@ const projectPeeks = {
   "protein-binding.html": ["967 PDB complexes", [95, 62, 39, 24]],
   "genai-chatbot.html": ["retrieve → ground → act", [25, 52, 77, 91]],
   "dog-poop-detector.html": ["camera → clip → alert", [33, 48, 86, 66]],
-  "usc-parking.html": ["documents + maps + traffic", [72, 38, 57, 88]],
+  "usc-parking.html": ["routes + crowds + event traffic", [72, 38, 57, 88]],
 };
+
+const releaseOrbitData = [
+  { number: "01", product: "Glean AI", outcome: "87% daily active use" },
+  { number: "02", product: "Safety Dashboard", outcome: "35% to 80%+ adoption" },
+  { number: "03", product: "PCT Retention", outcome: "40% longer pilot retention" },
+  { number: "04", product: "Pyramid Report", outcome: "80% faster reporting" },
+  { number: "05", product: "Clinical Heatmap", outcome: "4 hours to 5 seconds" },
+  { number: "06", product: "Request Tracker", outcome: "250 requests, 40+ fields" },
+];
+
+function renderReleaseOrbit(index) {
+  const number = document.querySelector("#dial-number");
+  if (!number) return;
+  const release = releaseOrbitData[index];
+  number.textContent = release.number;
+  document.querySelector("#dial-product").textContent = release.product;
+  document.querySelector("#dial-outcome").textContent = release.outcome;
+  const dial = document.querySelector(".portfolio-dial");
+  dial.dataset.activeRelease = String(index + 1);
+  document.querySelectorAll("[data-release-orbit]").forEach((button) => {
+    const active = Number(button.dataset.releaseOrbit) === index;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+}
+
+document.querySelectorAll("[data-release-orbit]").forEach((button) => {
+  const index = Number(button.dataset.releaseOrbit);
+  ["mouseenter", "focus"].forEach((eventName) => button.addEventListener(eventName, () => renderReleaseOrbit(index)));
+  button.addEventListener("click", () => {
+    renderReleaseOrbit(index);
+    const tile = document.querySelectorAll(".release-tile")[index];
+    document.querySelectorAll(".release-tile").forEach((item) => item.classList.remove("orbit-linked"));
+    tile?.classList.add("orbit-linked");
+    window.setTimeout(() => tile?.classList.remove("orbit-linked"), 1200);
+  });
+});
 
 document.querySelectorAll("#work .index-row[href]").forEach((row) => {
   const key = row.getAttribute("href");
@@ -131,29 +168,48 @@ document.querySelectorAll("[data-model-tab]").forEach((button) => {
 });
 
 const parkingData = {
-  a: { title: "Structure A", walk: 6, traffic: 62, confidence: 88, trafficLabel: "Moderate" },
-  b: { title: "Structure B", walk: 11, traffic: 82, confidence: 74, trafficLabel: "Light" },
-  c: { title: "Structure C", walk: 8, traffic: 68, confidence: 81, trafficLabel: "Variable" },
+  blue: {
+    title: "Blue Structure", walk: 7, access: 90,
+    drive: { normal: 10, event: 20, evening: 12 },
+    crowd: { normal: 58, event: 94, evening: 46 },
+    status: { normal: "Open", event: "Expo closure nearby", evening: "Open · lit route" },
+  },
+  flower: {
+    title: "Flower Street Structure", walk: 11, access: 78,
+    drive: { normal: 12, event: 15, evening: 14 },
+    crowd: { normal: 44, event: 68, evening: 38 },
+    status: { normal: "Open", event: "Open · slower exit", evening: "Open" },
+  },
+  royal: {
+    title: "Royal Street Structure", walk: 14, access: 84,
+    drive: { normal: 14, event: 16, evening: 13 },
+    crowd: { normal: 35, event: 52, evening: 30 },
+    status: { normal: "Open", event: "Open · lower crowd", evening: "Open · lit route" },
+  },
 };
 
-const parkingState = { condition: "normal", priority: "walk", selected: "a" };
+const parkingState = { condition: "normal", priority: "fastest", tolerance: 3, selected: "blue" };
 
 function parkingScores() {
-  const conditionAdjustments = {
-    normal: { a: 0, b: 0, c: 0 },
-    event: { a: -24, b: 12, c: -6 },
-    late: { a: -4, b: -8, c: 14 },
-  };
   return Object.entries(parkingData).map(([key, item]) => {
-    const walkFit = Math.max(35, 112 - item.walk * 4);
-    const weights = parkingState.priority === "walk" ? [0.56, 0.24, 0.2]
-      : parkingState.priority === "traffic" ? [0.2, 0.58, 0.22]
-      : [0.18, 0.22, 0.6];
-    const adjustment = conditionAdjustments[parkingState.condition][key];
-    const trafficFit = Math.max(20, Math.min(98, item.traffic + adjustment));
-    const score = Math.round(walkFit * weights[0] + trafficFit * weights[1] + item.confidence * weights[2]);
-    return { key, item, walkFit, trafficFit, score };
+    const drive = item.drive[parkingState.condition];
+    const crowd = item.crowd[parkingState.condition];
+    const totalMinutes = drive + item.walk;
+    const timeFit = Math.max(22, Math.min(98, 126 - totalMinutes * 2.15));
+    const crowdFit = Math.max(15, Math.min(98, 108 - crowd + (parkingState.tolerance - 3) * 9));
+    const weights = parkingState.priority === "fastest" ? [0.62, 0.2, 0.18]
+      : parkingState.priority === "crowd" ? [0.25, 0.6, 0.15]
+      : [0.24, 0.16, 0.6];
+    const score = Math.round(timeFit * weights[0] + crowdFit * weights[1] + item.access * weights[2]);
+    return { key, item, drive, crowd, timeFit, crowdFit, score };
   }).sort((a, b) => b.score - a.score);
+}
+
+function crowdLabel(value) {
+  if (value >= 85) return "Very high";
+  if (value >= 62) return "High";
+  if (value >= 42) return "Medium";
+  return "Low";
 }
 
 function renderParking(preferredChoice) {
@@ -164,25 +220,52 @@ function renderParking(preferredChoice) {
   parkingState.selected = preferredChoice || best.key;
   const selected = ranked.find((entry) => entry.key === parkingState.selected) || best;
   const selectedRank = ranked.findIndex((entry) => entry.key === selected.key) + 1;
-  const conditionName = { normal: "normal weekday", event: "event traffic", late: "late-evening" }[parkingState.condition];
-  const priorityName = { walk: "walking time", traffic: "congestion", confidence: "source evidence" }[parkingState.priority];
+  const conditionName = { normal: "weekday", event: "football-event", evening: "evening" }[parkingState.condition];
+  const priorityName = { fastest: "fastest arrival", crowd: "lower crowd exposure", accessible: "route accessibility" }[parkingState.priority];
+
   document.querySelectorAll("[data-parking-choice], [data-parking-card]").forEach((item) => {
     const key = item.dataset.parkingChoice || item.dataset.parkingCard;
-    item.classList.toggle("active", key === selected.key);
+    const active = key === selected.key;
+    item.classList.toggle("active", active);
+    item.setAttribute("aria-pressed", String(active));
   });
   document.querySelectorAll("[data-route-line]").forEach((line) => line.classList.toggle("active", line.dataset.routeLine === selected.key));
+
+  const map = document.querySelector("#xposition-map");
+  map.classList.remove("condition-normal", "condition-event", "condition-evening");
+  map.classList.add(`condition-${parkingState.condition}`);
+  map.style.setProperty("--heat-opacity", String(0.62 - (parkingState.tolerance - 1) * 0.09));
+
   title.textContent = selected.item.title;
   document.querySelector("#parking-choice-body").textContent = selected.key === best.key
-    ? `Top-ranked for ${priorityName} under ${conditionName} conditions. The score combines route fit and source confidence.`
-    : `Manually selected alternative. It ranks ${selectedRank} of 3 for ${priorityName} under ${conditionName} conditions.`;
+    ? `Top-ranked for ${priorityName} during the selected ${conditionName} scenario.`
+    : `Selected alternative. It ranks ${selectedRank} of 3 for ${priorityName} during the ${conditionName} scenario.`;
+  document.querySelector("#parking-drive").textContent = `${selected.drive} min`;
   document.querySelector("#parking-walk").textContent = `${selected.item.walk} min`;
-  document.querySelector("#parking-traffic").textContent = selected.trafficFit >= 76 ? "Light" : selected.trafficFit >= 54 ? "Moderate" : "Heavy";
-  document.querySelector("#parking-confidence").textContent = `${selected.item.confidence}%`;
+  document.querySelector("#parking-traffic").textContent = crowdLabel(selected.crowd);
+  document.querySelector("#parking-status").textContent = selected.item.status[parkingState.condition];
   document.querySelector("#parking-score").textContent = selected.score;
   document.querySelector("#parking-rank").textContent = String(selectedRank).padStart(2, "0");
-  document.querySelector("#parking-walk-bar").style.width = `${selected.walkFit}%`;
-  document.querySelector("#parking-traffic-bar").style.width = `${selected.trafficFit}%`;
-  document.querySelector("#parking-confidence-bar").style.width = `${selected.item.confidence}%`;
+  document.querySelector("#parking-time-bar").style.width = `${selected.timeFit}%`;
+  document.querySelector("#parking-crowd-bar").style.width = `${selected.crowdFit}%`;
+  document.querySelector("#parking-access-bar").style.width = `${selected.item.access}%`;
+  document.querySelector("#parking-source").textContent = `Score combines ${selected.drive} minutes of driving, ${selected.item.walk} minutes of walking, ${crowdLabel(selected.crowd).toLowerCase()} crowd exposure, and the selected priority.`;
+
+  const conditions = {
+    normal: ["WEEKDAY · 4:30 PM", "Moderate traffic around Exposition Boulevard", "No closures"],
+    event: ["FOOTBALL EVENT · 6:30 PM", "Heavy crowding and an Exposition Boulevard closure", "Closure + event crowd"],
+    evening: ["EVENING · 9:15 PM", "Lower traffic with lit-route guidance", "Night lighting shown"],
+  };
+  const condition = conditions[parkingState.condition];
+  document.querySelector("#map-condition-label").textContent = condition[0];
+  document.querySelector("#map-live-status").textContent = condition[1];
+  document.querySelector("#map-change-summary").textContent = condition[2];
+
+  Object.entries(parkingData).forEach(([key, item]) => {
+    const drive = item.drive[parkingState.condition];
+    const crowd = crowdLabel(item.crowd[parkingState.condition]).toLowerCase();
+    document.querySelector(`#parking-card-${key}`).textContent = `${drive} min drive · ${item.walk} min walk · ${crowd} crowd`;
+  });
 }
 
 document.querySelectorAll("[data-parking-condition]").forEach((button) => {
@@ -203,6 +286,19 @@ document.querySelectorAll("[data-parking-priority]").forEach((button) => {
 
 document.querySelectorAll("[data-parking-choice], [data-parking-card]").forEach((button) => {
   button.addEventListener("click", () => renderParking(button.dataset.parkingChoice || button.dataset.parkingCard));
+  button.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      renderParking(button.dataset.parkingChoice || button.dataset.parkingCard);
+    }
+  });
+});
+
+const crowdTolerance = document.querySelector("#crowd-tolerance");
+crowdTolerance?.addEventListener("input", () => {
+  parkingState.tolerance = Number(crowdTolerance.value);
+  document.querySelector("#crowd-tolerance-output").textContent = ["", "Very low", "Low", "Medium", "High", "Very high"][parkingState.tolerance];
+  renderParking();
 });
 
 if (document.querySelector("#parking-choice-title")) renderParking();
@@ -262,6 +358,76 @@ if (dogRun) {
       ? "<span>Screenshot + timestamp saved</span><span>Cleanup map marker added</span>"
       : "<span>Event log waiting</span><span>Cleanup map waiting</span>";
     dogRun.textContent = running ? "Reset simulation" : "Run detector";
+  });
+}
+
+const poseFrames = {
+  yard: {
+    title: "Yard frame",
+    score: 81,
+    decision: "Candidate above 75% threshold",
+    note: "Strong spine and tail geometry produce a candidate vote. The time window still decides whether the event becomes confirmed.",
+  },
+  indoor: {
+    title: "Indoor frame",
+    score: 34,
+    decision: "Hard negative below threshold",
+    note: "The crouched body resembles the target posture, but weak tail confidence and visible movement keep the frame below the event threshold.",
+  },
+};
+
+let activePoseFrame = "yard";
+
+function renderPoseFrame(frameName) {
+  const frame = poseFrames[frameName];
+  if (!frame) return;
+  activePoseFrame = frameName;
+  document.querySelectorAll("[data-pose-frame]").forEach((card) => {
+    const active = card.dataset.poseFrame === frameName;
+    card.classList.toggle("active", active);
+    card.setAttribute("aria-pressed", String(active));
+  });
+  document.querySelector("#pose-frame-title").textContent = frame.title;
+  document.querySelector("#pose-frame-score").textContent = `${frame.score}%`;
+  document.querySelector("#pose-frame-bar").style.width = `${frame.score}%`;
+  document.querySelector("#pose-frame-decision").textContent = frame.decision;
+  document.querySelector("#pose-frame-note").textContent = frame.note;
+}
+
+document.querySelectorAll("[data-pose-frame]").forEach((card) => {
+  card.addEventListener("click", () => renderPoseFrame(card.dataset.poseFrame));
+  card.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      renderPoseFrame(card.dataset.poseFrame);
+    }
+  });
+});
+
+document.querySelectorAll("[data-pose-layer]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const active = !button.classList.contains("active");
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+    document.querySelector("#pose-image-grid").classList.toggle(`hide-${button.dataset.poseLayer}`, !active);
+  });
+});
+
+const poseRun = document.querySelector("#pose-run");
+if (poseRun) {
+  poseRun.addEventListener("click", () => {
+    const grid = document.querySelector("#pose-image-grid");
+    grid.classList.remove("inference-complete");
+    grid.classList.add("inference-running");
+    poseRun.disabled = true;
+    poseRun.textContent = "Reading frame...";
+    window.setTimeout(() => {
+      grid.classList.remove("inference-running");
+      grid.classList.add("inference-complete");
+      renderPoseFrame(activePoseFrame);
+      poseRun.disabled = false;
+      poseRun.textContent = "Run again";
+    }, 1150);
   });
 }
 
