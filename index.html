@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=7">
-  <script src="script.js?v=7" defer></script>
+  <link rel="stylesheet" href="styles.css?v=8">
+  <script src="script.js?v=8" defer></script>
 </head>
 <body class="home-page">
   <div class="shell">
@@ -97,8 +97,8 @@
           <header class="section-head"><p class="label label-ink">(02) — Selected work</p></header>
           <h2 class="title section-title">Projects<br>with a point</h2>
           <div class="index">
-            <a class="index-row" href="healthcare-analytics.html"><span class="index-num">01</span><span class="index-name">Healthcare Analytics Product Portfolio</span><span class="index-desc">Six internal releases spanning planning, reporting, clinical operations, and People Growth workflows.</span><span class="index-meta">DaVita · Product &amp; analytics</span><span class="index-arrow" aria-hidden="true">→</span></a>
-            <a class="index-row" href="email-ticket-automation.html"><span class="index-num">02</span><span class="index-name">HSG Analytics Inbox Tracker</span><span class="index-desc">An end-to-end Outlook email-to-ticket platform with automated classification, SLA tracking, lifecycle management, and leadership reporting.</span><span class="index-meta">Python · Excel · Operations</span><span class="index-arrow" aria-hidden="true">→</span></a>
+            <a class="index-row" href="healthcare-analytics.html"><span class="index-num">01</span><span class="index-name">Healthcare Product Portfolio</span><span class="index-desc">Six named releases spanning AI knowledge search, safety, employee retention, clinical reporting, quality control, and request operations.</span><span class="index-meta">DaVita · Product &amp; analytics</span><span class="index-arrow" aria-hidden="true">→</span></a>
+            <a class="index-row" href="email-ticket-automation.html"><span class="index-num">02</span><span class="index-name">Healthcare Analytics Request Tracker</span><span class="index-desc">An Outlook email-to-ticket platform that turns a shared analytics inbox into classified, deduplicated requests with owners, SLAs, and leadership reporting.</span><span class="index-meta">Python · Excel · Operations</span><span class="index-arrow" aria-hidden="true">→</span></a>
             <a class="index-row" href="glean-ai-rollout.html"><span class="index-num">03</span><span class="index-name">Enterprise AI Search Rollout</span><span class="index-desc">A product-adoption and trust program for enterprise AI search across fragmented healthcare knowledge systems.</span><span class="index-meta">Glean · Product strategy · Analytics</span><span class="index-arrow" aria-hidden="true">→</span></a>
             <a class="index-row" href="chatdb.html"><span class="index-num">04</span><span class="index-name">ChatDB</span><span class="index-desc">A schema-aware SQL and NoSQL learning platform that generates typed examples and executes them against live databases.</span><span class="index-meta">Flask · MySQL · MongoDB</span><span class="index-arrow" aria-hidden="true">→</span></a>
             <a class="index-row" href="protein-binding.html"><span class="index-num">05</span><span class="index-name">Protein Binding Prediction</span><span class="index-desc">A structural biology pipeline trained across 967 PDB complexes, with parsing safeguards for difficult edge cases.</span><span class="index-meta">PyTorch · RDKit · Bioinformatics</span><span class="index-arrow" aria-hidden="true">→</span></a>
@@ -108,27 +108,8 @@
           </div>
         </section>
 
-        <section class="section" id="email-automation">
-          <header class="section-head"><p class="label label-ink">(03) — Featured case study</p></header>
-          <h2 class="title section-title">Email-to-ticket<br>automation</h2>
-          <div class="grid grid-rows">
-            <div class="c-7 start-5 prose">
-              <p>A lightweight operations platform that turns a shared Outlook mailbox into a structured, self-updating ticket system without changing how field teams submit requests.</p>
-              <p>The prototype connects intake, classification, ownership, SLA management, resolution tracking, and leadership reporting in one controlled workflow.</p>
-            </div>
-          </div>
-          <div class="index case-study-index">
-            <article class="index-row"><span class="index-num">01</span><span class="index-name">Zero-friction intake</span><span class="index-desc">Architected and shipped an end-to-end email-to-ticket automation in Python that reads a shared Outlook mailbox through the COM/MAPI interface and converts unstructured emails into approximately 250 structured request records across 40+ fields, eliminating manual triage while requiring zero behavior change from end users.</span><span class="index-meta">Python · Outlook · COM/MAPI</span></article>
-            <article class="index-row"><span class="index-num">02</span><span class="index-name">Classification &amp; deduplication</span><span class="index-desc">Built a tiered keyword-classification and weighted-scoring engine that assigns request type, priority, business impact, action team, and owner. Idempotent merge logic preserves human overrides, while conversation-ID and message-ID deduplication collapses email threads into single self-updating rows.</span><span class="index-meta">Scoring · Data integrity</span></article>
-            <article class="index-row"><span class="index-num">03</span><span class="index-name">SLA lifecycle</span><span class="index-desc">Implemented business-day due dates with WORKDAY, aging, and live On Track, At Risk, and Overdue statuses. Auto-close logic matches Sent Items replies by conversation, timestamps resolutions, and advances ticket state automatically.</span><span class="index-meta">SLA · Workflow automation</span></article>
-            <article class="index-row"><span class="index-num">04</span><span class="index-name">SLA Health Score</span><span class="index-desc">Designed a composite score weighted across SLA adherence, resolution rate, and critical-resolution rate. A metrics-integrity Controllable By classifier isolates enterprise-IT-blocked work, giving leadership one trustworthy trend metric against an 80% target.</span><span class="index-meta">KPI design · Governance</span></article>
-            <article class="index-row"><span class="index-num">05</span><span class="index-name">Offline leadership dashboard</span><span class="index-desc">Developed a dependency-free HTML and JavaScript dashboard that parses the Excel tracker and computes backlog, aging, ownership concentration, and intake-versus-resolution trends entirely in-browser. The HIPAA-friendly, offline design requires no data upload and surfaced 136 open items, a 139% increase over six months.</span><span class="index-meta">HTML · JavaScript · Offline</span></article>
-            <article class="index-row"><span class="index-num">06</span><span class="index-name">Production roadmap</span><span class="index-desc">Authored the platform evaluation and two-stage technical roadmap from an Excel and Python prototype to SharePoint List with HTML and Tableau. Proposal decks and demos aligned leadership around a validated prototype and a scalable production migration path.</span><span class="index-meta">Strategy · Change leadership</span></article>
-          </div>
-        </section>
-
         <section class="section" id="experience">
-          <header class="section-head"><p class="label label-ink">(04) — Experience</p></header>
+          <header class="section-head"><p class="label label-ink">(03) — Experience</p></header>
           <h2 class="title section-title">Across data,<br>science &amp; operations</h2>
           <div class="index">
             <a class="index-row experience-row" href="healthcare-analytics.html"><span class="index-num">01</span><span class="index-name">DaVita</span><span class="index-desc">Own analytics products from problem framing through release and adoption. The work connects clinical operations, finance, field teams, and technical partners around reliable data and simpler decisions.</span><span class="index-meta">2025–Now<br>Healthcare analytics, product delivery &amp; operational systems</span></a>
@@ -139,21 +120,6 @@
           </div>
         </section>
 
-        <section class="section">
-          <header class="section-head"><p class="label label-ink">(05) — Working principles</p></header>
-          <h2 class="title section-title">How I work</h2>
-          <div class="grid principles-grid">
-            <ul class="register c-4">
-              <li><button type="button" class="register-item active" aria-pressed="true" data-principle="0"><span class="register-num">01</span><span class="register-name">Product ownership</span><span class="register-role">Define · Ship · Adopt</span></button></li>
-              <li><button type="button" class="register-item" aria-pressed="false" data-principle="1"><span class="register-num">02</span><span class="register-name">Analytics systems</span><span class="register-role">Model · Validate · Explain</span></button></li>
-              <li><button type="button" class="register-item" aria-pressed="false" data-principle="2"><span class="register-num">03</span><span class="register-name">Scientific rigor</span><span class="register-role">Question · Test · Learn</span></button></li>
-            </ul>
-            <div class="principle-copy c-7 start-6" aria-live="polite">
-              <p id="principle-body">I start with the operating problem, define the decision a product needs to support, and stay close through launch. Success includes adoption and measurable workflow change.</p>
-              <span class="label principle-label">Brandon Y. Chang</span>
-            </div>
-          </div>
-        </section>
       </div>
     </main>
 

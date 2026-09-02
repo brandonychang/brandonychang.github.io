@@ -44,27 +44,6 @@ if (record && recordButton) {
   });
 }
 
-const principleBodies = [
-  "I start with the operating problem, define the decision a product needs to support, and stay close through launch. Success includes adoption and measurable workflow change.",
-  "I trace metrics back to source systems, test edge cases, and make the logic legible. A dashboard earns trust when users understand what changed and why.",
-  "My biology training shapes how I work with uncertainty. I separate evidence from assumptions, design checks early, and revise the approach when results disagree with the model."
-];
-
-const principleBody = document.querySelector("#principle-body");
-if (principleBody) {
-  document.querySelectorAll("[data-principle]").forEach((button) => {
-    button.addEventListener("click", () => {
-      document.querySelectorAll("[data-principle]").forEach((item) => {
-        item.classList.remove("active");
-        item.setAttribute("aria-pressed", "false");
-      });
-      button.classList.add("active");
-      button.setAttribute("aria-pressed", "true");
-      principleBody.textContent = principleBodies[Number(button.dataset.principle)];
-    });
-  });
-}
-
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 document.querySelectorAll(".interactive-surface").forEach((surface) => {
@@ -151,22 +130,140 @@ document.querySelectorAll("[data-model-tab]").forEach((button) => {
   });
 });
 
-const parkingChoices = {
-  primary: { title: "Structure A", body: "Best fit for the destination and current route. Source context supports the recommendation.", walk: "6 min", traffic: "Moderate", confidence: "High" },
-  alt: { title: "Structure B", body: "Useful alternative when capacity or traffic changes near the primary route.", walk: "11 min", traffic: "Light", confidence: "Medium" },
+const parkingData = {
+  a: { title: "Structure A", walk: 6, traffic: 62, confidence: 88, trafficLabel: "Moderate" },
+  b: { title: "Structure B", walk: 11, traffic: 82, confidence: 74, trafficLabel: "Light" },
+  c: { title: "Structure C", walk: 8, traffic: 68, confidence: 81, trafficLabel: "Variable" },
 };
 
-document.querySelectorAll("[data-parking-choice]").forEach((button) => {
+const parkingState = { condition: "normal", priority: "walk", selected: "a" };
+
+function parkingScores() {
+  const conditionAdjustments = {
+    normal: { a: 0, b: 0, c: 0 },
+    event: { a: -24, b: 12, c: -6 },
+    late: { a: -4, b: -8, c: 14 },
+  };
+  return Object.entries(parkingData).map(([key, item]) => {
+    const walkFit = Math.max(35, 112 - item.walk * 4);
+    const weights = parkingState.priority === "walk" ? [0.56, 0.24, 0.2]
+      : parkingState.priority === "traffic" ? [0.2, 0.58, 0.22]
+      : [0.18, 0.22, 0.6];
+    const adjustment = conditionAdjustments[parkingState.condition][key];
+    const trafficFit = Math.max(20, Math.min(98, item.traffic + adjustment));
+    const score = Math.round(walkFit * weights[0] + trafficFit * weights[1] + item.confidence * weights[2]);
+    return { key, item, walkFit, trafficFit, score };
+  }).sort((a, b) => b.score - a.score);
+}
+
+function renderParking(preferredChoice) {
+  const title = document.querySelector("#parking-choice-title");
+  if (!title) return;
+  const ranked = parkingScores();
+  const best = ranked[0];
+  parkingState.selected = preferredChoice || best.key;
+  const selected = ranked.find((entry) => entry.key === parkingState.selected) || best;
+  const selectedRank = ranked.findIndex((entry) => entry.key === selected.key) + 1;
+  const conditionName = { normal: "normal weekday", event: "event traffic", late: "late-evening" }[parkingState.condition];
+  const priorityName = { walk: "walking time", traffic: "congestion", confidence: "source evidence" }[parkingState.priority];
+  document.querySelectorAll("[data-parking-choice], [data-parking-card]").forEach((item) => {
+    const key = item.dataset.parkingChoice || item.dataset.parkingCard;
+    item.classList.toggle("active", key === selected.key);
+  });
+  document.querySelectorAll("[data-route-line]").forEach((line) => line.classList.toggle("active", line.dataset.routeLine === selected.key));
+  title.textContent = selected.item.title;
+  document.querySelector("#parking-choice-body").textContent = selected.key === best.key
+    ? `Top-ranked for ${priorityName} under ${conditionName} conditions. The score combines route fit and source confidence.`
+    : `Manually selected alternative. It ranks ${selectedRank} of 3 for ${priorityName} under ${conditionName} conditions.`;
+  document.querySelector("#parking-walk").textContent = `${selected.item.walk} min`;
+  document.querySelector("#parking-traffic").textContent = selected.trafficFit >= 76 ? "Light" : selected.trafficFit >= 54 ? "Moderate" : "Heavy";
+  document.querySelector("#parking-confidence").textContent = `${selected.item.confidence}%`;
+  document.querySelector("#parking-score").textContent = selected.score;
+  document.querySelector("#parking-rank").textContent = String(selectedRank).padStart(2, "0");
+  document.querySelector("#parking-walk-bar").style.width = `${selected.walkFit}%`;
+  document.querySelector("#parking-traffic-bar").style.width = `${selected.trafficFit}%`;
+  document.querySelector("#parking-confidence-bar").style.width = `${selected.item.confidence}%`;
+}
+
+document.querySelectorAll("[data-parking-condition]").forEach((button) => {
   button.addEventListener("click", () => {
-    document.querySelectorAll("[data-parking-choice]").forEach((item) => item.classList.toggle("active", item === button));
-    const choice = parkingChoices[button.dataset.parkingChoice];
-    document.querySelector("#parking-choice-title").textContent = choice.title;
-    document.querySelector("#parking-choice-body").textContent = choice.body;
-    document.querySelector("#parking-walk").textContent = choice.walk;
-    document.querySelector("#parking-traffic").textContent = choice.traffic;
-    document.querySelector("#parking-confidence").textContent = choice.confidence;
+    parkingState.condition = button.dataset.parkingCondition;
+    document.querySelectorAll("[data-parking-condition]").forEach((item) => item.classList.toggle("active", item === button));
+    renderParking();
   });
 });
+
+document.querySelectorAll("[data-parking-priority]").forEach((button) => {
+  button.addEventListener("click", () => {
+    parkingState.priority = button.dataset.parkingPriority;
+    document.querySelectorAll("[data-parking-priority]").forEach((item) => item.classList.toggle("active", item === button));
+    renderParking();
+  });
+});
+
+document.querySelectorAll("[data-parking-choice], [data-parking-card]").forEach((button) => {
+  button.addEventListener("click", () => renderParking(button.dataset.parkingChoice || button.dataset.parkingCard));
+});
+
+if (document.querySelector("#parking-choice-title")) renderParking();
+
+const dogConfidence = document.querySelector("#dog-confidence");
+const dogDuration = document.querySelector("#dog-duration");
+let dogCondition = "clear";
+
+function renderDogLab() {
+  if (!dogConfidence || !dogDuration) return;
+  const threshold = Number(dogConfidence.value);
+  const duration = Number(dogDuration.value);
+  const penalties = { clear: 0, dark: 12, occluded: 18, stretch: 23 };
+  const sensitivity = Math.max(38, Math.min(96, Math.round(116 - threshold * 0.48 - duration * 4 - penalties[dogCondition] * 0.35)));
+  const falseScore = Math.round((100 - threshold) * 1.25 + (6 - duration) * 7 + (dogCondition === "stretch" ? 18 : 0));
+  const falseRisk = falseScore > 65 ? "High" : falseScore > 38 ? "Medium" : "Low";
+  const status = falseRisk === "High" ? "Fast, noisy" : sensitivity < 60 ? "Conservative" : "Balanced";
+  const notes = {
+    clear: "Clear framing provides the cleanest keypoint geometry.",
+    dark: "Low light lowers keypoint confidence and makes temporal evidence more important.",
+    occluded: "Partial framing increases missed-event risk when spine or tail points disappear.",
+    stretch: "A similar pose is the hardest false-positive test; longer duration and stronger voting help.",
+  };
+  document.querySelector("#dog-confidence-output").textContent = `${threshold}%`;
+  document.querySelector("#dog-duration-output").textContent = `${duration.toFixed(1)}s`;
+  document.querySelector("#dog-lab-status").textContent = status;
+  document.querySelector("#dog-sensitivity").textContent = `${sensitivity}%`;
+  document.querySelector("#dog-false-risk").textContent = falseRisk;
+  document.querySelector("#dog-response").textContent = `${duration.toFixed(1)} seconds`;
+  document.querySelector("#dog-gauge-fill").style.width = `${sensitivity}%`;
+  document.querySelector("#dog-lab-note").textContent = notes[dogCondition];
+}
+
+document.querySelectorAll("[data-dog-condition]").forEach((button) => {
+  button.addEventListener("click", () => {
+    dogCondition = button.dataset.dogCondition;
+    document.querySelectorAll("[data-dog-condition]").forEach((item) => item.classList.toggle("active", item === button));
+    renderDogLab();
+  });
+});
+
+[dogConfidence, dogDuration].forEach((input) => input?.addEventListener("input", renderDogLab));
+renderDogLab();
+
+const dogRun = document.querySelector("#dog-run");
+if (dogRun) {
+  dogRun.addEventListener("click", () => {
+    const demo = document.querySelector(".dog-live-demo");
+    const running = !demo.classList.contains("dog-confirmed");
+    demo.classList.toggle("dog-confirmed", running);
+    document.querySelector("#dog-event-label").textContent = running ? "event confirmed · 81% temporal vote" : "candidate posture · collecting votes";
+    document.querySelector("#dog-live-title").textContent = running ? "Event logged" : "Candidate detected";
+    document.querySelector("#dog-live-copy").textContent = running
+      ? "The state machine crossed its vote threshold, saved the event context, and placed a cleanup marker."
+      : "Run the detector to aggregate posture votes, confirm the event, and place the rear-location marker.";
+    document.querySelector("#dog-actions").innerHTML = running
+      ? "<span>Screenshot + timestamp saved</span><span>Cleanup map marker added</span>"
+      : "<span>Event log waiting</span><span>Cleanup map waiting</span>";
+    dogRun.textContent = running ? "Reset simulation" : "Run detector";
+  });
+}
 
 const lossChart = document.querySelector("#loss-chart");
 if (lossChart) {

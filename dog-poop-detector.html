@@ -3,60 +3,105 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A real-time behavior-detection product for recognizing a dog posture, capturing evidence, and sending a mobile alert.">
-  <title>Dog Poop Detector | Brandon Y. Chang</title>
+  <meta name="description" content="An interactive computer-vision case study for detecting dog behavior with pose estimation, temporal voting, localization, and alerts.">
+  <title>AI Dog Poop Detector | Brandon Y. Chang</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=7">
-  <script src="script.js?v=7" defer></script>
+  <link rel="stylesheet" href="styles.css?v=8">
+  <script src="script.js?v=8" defer></script>
 </head>
-<body class="case-page detector-case"><div class="shell"><header class="masthead-bar"><div class="page"><div class="bar">
+<body class="case-page detector-case"><div class="shell">
+  <header class="masthead-bar"><div class="page"><div class="bar">
     <a href="index.html" class="wordmark">Brandon&nbsp;Y.&nbsp;Chang</a>
     <nav class="nav" aria-label="Primary navigation"><a href="index.html#about" class="nav-item">About</a><a href="index.html#work" class="nav-item">Work</a><a href="index.html#experience" class="nav-item">Experience</a><a href="index.html#contact" class="nav-item">Contact</a></nav>
     <button type="button" class="theme-toggle" aria-label="Switch to light mode" title="Switch to light mode"><span aria-hidden="true">☀</span></button>
     <button type="button" class="burger" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span class="bar-line" aria-hidden="true"></span><span class="bar-line" aria-hidden="true"></span></button>
   </div></div></header>
   <div id="mobile-menu" class="drawer" aria-hidden="true"><div class="page drawer-inner"><a href="index.html" class="drawer-link">Home</a><a href="index.html#about" class="drawer-link">About</a><a href="index.html#work" class="drawer-link">Work</a><a href="index.html#experience" class="drawer-link">Experience</a><a href="index.html#contact" class="drawer-link">Contact</a></div></div>
-<main><div class="page">
-  <section class="case-intro">
-    <div class="case-folio"><a class="label" href="index.html#work">← Selected work</a><span class="label">Case study 07 / 08</span></div>
-    <p class="label headnote">Side project / Real-time computer vision</p>
-    <h1 class="case-title"><span>Dog Poop</span><span>Detector</span></h1>
-    <p class="case-tagline">A deliberately specific computer-vision product: detect a behavior, preserve proof, and notify the user before the moment disappears.</p>
-    <dl class="case-credits"><div><dt class="label">Role</dt><dd>End-to-end product definition</dd></div><div><dt class="label">Scope</dt><dd>Detection requirements · event logic · capture · alerts</dd></div><div><dt class="label">Measures</dt><dd>Precision · recall · latency · false-positive rate</dd></div></dl>
-  </section>
-  
-      <section class="case-glance"><p class="label">The trigger</p><p class="case-promise">A recurring problem outside my USC apartment needed evidence, not another vague complaint.</p></section><section class="camera-demo interactive-surface"><div class="camera-screen"><div class="camera-dog"><i class="dog-head"></i><i class="dog-body"></i><i class="dog-leg dog-leg-a"></i><i class="dog-leg dog-leg-b"></i><i class="dog-tail"></i></div><div class="detection-box"><span>candidate posture · 1.8s</span></div><div class="camera-ui"><span>REC</span><span>14:32:08</span></div></div><div class="camera-copy"><p class="label">Live event surface</p><h2>Hover to confirm the event.</h2><p>The detection box changes from a candidate posture to a confirmed event, then exposes the clip and alert actions.</p><div class="camera-actions"><span>Save 10-second clip</span><span>Send mobile alert</span></div></div></section>
+  <main><div class="page">
+    <section class="case-intro">
+      <div class="case-folio"><a class="label" href="index.html#work">← Selected work</a><span class="label">Case study 07 / 08</span></div>
+      <p class="label headnote">Side project / Pose estimation + event logic</p>
+      <h1 class="case-title"><span>AI Dog Poop</span><span>Detector</span></h1>
+      <p class="case-tagline">A behavior-first product concept that watches posture over time, logs an event, and turns the yard into a simple cleanup map.</p>
+      <dl class="case-credits"><div><dt class="label">Product idea</dt><dd>Detect the behavior instead of searching for the object</dd></div><div><dt class="label">Technical approach</dt><dd>DeepLabCut · six keypoints · temporal voting · OpenCV</dd></div><div><dt class="label">Evaluation</dt><dd>False alerts · missed events · latency · localization error</dd></div></dl>
+    </section>
 
-      <section class="story-section">
-        <div class="story-heading"><span class="label story-num">01</span><h2>From annoyance to product brief</h2></div>
-        <div class="story-copy prose"><p>The system needed to distinguish one short behavior from ordinary movement, keep a useful video clip, and deliver it to a phone. A generic dog detector would create constant noise. The target was an event, not an object.</p><p>I translated the user story into four requirements: identify the relevant posture, confirm it persists long enough to count, capture the surrounding footage, and send an alert with enough context for a person to act.</p></div>
-      </section>
+    <section class="case-glance"><p class="label">Core insight</p><p class="case-promise">Dog waste changes shape, color, and visibility. A crouched spine, straight tail, and stationary pose form a more consistent signal.</p></section>
 
-      <section class="story-section">
-        <div class="story-heading"><span class="label story-num">02</span><h2>Define the event</h2></div>
-        <div class="story-copy">
-          <div class="pose-card" aria-label="Pose estimation concept"><div class="pose-figure"><span class="pose-head"></span><span class="pose-body"></span><span class="pose-leg leg-a"></span><span class="pose-leg leg-b"></span><span class="pose-tail"></span></div><div><p class="label">Observable signal</p><h3>Posture plus duration</h3><p>Keypoint relationships describe the crouch. A time threshold separates a true event from sitting, stretching, or a single noisy frame.</p></div></div>
-          <div class="state-track" aria-label="Detection state sequence"><div><span>01</span><strong>Idle</strong><small>Monitor motion</small></div><div><span>02</span><strong>Candidate</strong><small>Posture detected</small></div><div><span>03</span><strong>Confirmed</strong><small>Duration met</small></div><div><span>04</span><strong>Complete</strong><small>Save and alert</small></div></div>
+    <section class="camera-demo interactive-surface dog-live-demo">
+      <div class="camera-screen" id="dog-camera-screen">
+        <div class="camera-dog"><i class="dog-head"></i><i class="dog-body"></i><i class="dog-leg dog-leg-a"></i><i class="dog-leg dog-leg-b"></i><i class="dog-tail"></i></div>
+        <div class="dog-keypoints" aria-hidden="true"><i style="--x:39%;--y:48%"></i><i style="--x:49%;--y:51%"></i><i style="--x:59%;--y:55%"></i><i style="--x:67%;--y:48%"></i><i style="--x:74%;--y:42%"></i><i style="--x:82%;--y:37%"></i></div>
+        <div class="detection-box"><span id="dog-event-label">candidate posture · collecting votes</span></div>
+        <div class="yard-marker" id="yard-marker" aria-hidden="true"></div>
+        <div class="camera-ui"><span>REC</span><span id="dog-clock">14:32:08</span></div>
+      </div>
+      <div class="camera-copy">
+        <p class="label">Try the event loop</p>
+        <h2 id="dog-live-title">Candidate detected</h2>
+        <p id="dog-live-copy">Run the detector to aggregate posture votes, confirm the event, and place the rear-location marker.</p>
+        <button type="button" class="dog-run-button" id="dog-run">Run detector</button>
+        <div class="camera-actions" id="dog-actions"><span>Event log waiting</span><span>Cleanup map waiting</span></div>
+      </div>
+    </section>
+
+    <section class="dog-lab" aria-labelledby="dog-lab-title">
+      <div class="dog-lab-copy">
+        <p class="label">Interactive threshold lab</p>
+        <h2 id="dog-lab-title">Tune sensitivity against alert fatigue.</h2>
+        <p>This simulation shows the product tradeoff. A lower vote threshold and shorter duration react quickly but admit more false positives. Stricter settings reduce noise but increase missed events.</p>
+        <div class="dog-sliders">
+          <label for="dog-confidence"><span>Vote threshold</span><output id="dog-confidence-output">75%</output><input id="dog-confidence" type="range" min="50" max="95" value="75"></label>
+          <label for="dog-duration"><span>Required duration</span><output id="dog-duration-output">3.0s</output><input id="dog-duration" type="range" min="1" max="6" step=".5" value="3"></label>
         </div>
-      </section>
+        <div class="dog-condition-buttons" aria-label="Test condition"><button type="button" class="active" data-dog-condition="clear">Clear view</button><button type="button" data-dog-condition="dark">Low light</button><button type="button" data-dog-condition="occluded">Partial occlusion</button><button type="button" data-dog-condition="stretch">Similar pose</button></div>
+      </div>
+      <div class="dog-lab-result" aria-live="polite">
+        <span class="label">Simulated result</span>
+        <strong id="dog-lab-status">Balanced</strong>
+        <div class="dog-gauge"><i id="dog-gauge-fill"></i></div>
+        <dl><div><dt>Estimated sensitivity</dt><dd id="dog-sensitivity">78%</dd></div><div><dt>False-alert risk</dt><dd id="dog-false-risk">Medium</dd></div><div><dt>Response</dt><dd id="dog-response">3.0 seconds</dd></div></dl>
+        <p id="dog-lab-note">A 75% temporal vote mirrors the behavior-first concept in the project notes.</p>
+      </div>
+    </section>
 
-      <section class="story-section">
-        <div class="story-heading"><span class="label story-num">03</span><h2>Camera-to-alert workflow</h2></div>
-        <div class="story-copy"><ol class="process-list"><li><span>01</span><div><h3>Observe the scene</h3><p>A fixed camera supplies continuous footage of the problem area.</p></div></li><li><span>02</span><div><h3>Estimate pose</h3><p>Annotated body and tail keypoints support a posture classifier tuned to the event.</p></div></li><li><span>03</span><div><h3>Confirm and capture</h3><p>State logic waits for sustained evidence, then preserves footage around the event.</p></div></li><li><span>04</span><div><h3>Notify</h3><p>A mobile alert delivers a thumbnail and clip link for review.</p></div></li></ol></div>
-      </section>
+    <section class="story-section">
+      <div class="story-heading"><span class="label story-num">01</span><h2>From problem to observable signal</h2></div>
+      <div class="story-copy prose"><p>A generic object detector asks the camera to recognize waste after it appears. That approach breaks under grass, darkness, scale, occlusion, and changing appearance. The stronger product hypothesis recognizes the dog’s behavior at the moment the location is known.</p><p>The working definition combines three spine points, three tail points, body motion, and time. One frame never decides the event. Evidence accumulates across consecutive frames.</p></div>
+    </section>
 
-      <section class="story-section">
-        <div class="story-heading"><span class="label story-num">04</span><h2>The real product tradeoffs</h2></div>
-        <div class="story-copy">
-          <div class="comparison-table" role="table" aria-label="Behavior detector tradeoffs"><div class="comparison-row comparison-head" role="row"><span role="columnheader">Decision</span><span role="columnheader">Too sensitive</span><span role="columnheader">Too conservative</span></div><div class="comparison-row" role="row"><span role="cell">Posture threshold</span><span role="cell">Alerts on sitting or stretching</span><span role="cell">Misses unusual body shapes</span></div><div class="comparison-row" role="row"><span role="cell">Duration</span><span role="cell">Confirms noisy frames</span><span role="cell">Notification arrives late</span></div><div class="comparison-row" role="row"><span role="cell">Model size</span><span role="cell">Lower accuracy on edge cases</span><span role="cell">Slower real-time inference</span></div><div class="comparison-row" role="row"><span role="cell">Clip length</span><span role="cell">Insufficient context</span><span role="cell">Larger storage and upload cost</span></div></div>
-        </div>
-      </section>
+    <section class="story-section">
+      <div class="story-heading"><span class="label story-num">02</span><h2>Six keypoints become a state machine</h2></div>
+      <div class="story-copy">
+        <div class="pose-card"><div class="pose-figure"><span class="pose-head"></span><span class="pose-body"></span><span class="pose-leg leg-a"></span><span class="pose-leg leg-b"></span><span class="pose-tail"></span><i class="pose-dot p1"></i><i class="pose-dot p2"></i><i class="pose-dot p3"></i><i class="pose-dot p4"></i><i class="pose-dot p5"></i><i class="pose-dot p6"></i></div><div><p class="label">DeepLabCut foundation</p><h3>Spine curve + tail alignment + stationarity</h3><p>Annotated keypoints produce coordinates. Custom Python logic converts those coordinates into interpretable geometry and votes over time.</p></div></div>
+        <div class="state-track"><div><span>01</span><strong>Observe</strong><small>Read camera frame</small></div><div><span>02</span><strong>Estimate</strong><small>Locate six keypoints</small></div><div><span>03</span><strong>Vote</strong><small>Aggregate geometry over time</small></div><div><span>04</span><strong>Record</strong><small>Log and map the event</small></div></div>
+      </div>
+    </section>
 
-      <section class="story-section story-close">
-        <div class="story-heading"><span class="label story-num">05</span><h2>How I would evaluate it</h2></div>
-        <div class="story-copy"><div class="architecture-grid"><article><p class="label">Precision</p><h3>Is an alert real?</h3><p>Protect the user from alert fatigue.</p></article><article><p class="label">Recall</p><h3>Was an event missed?</h3><p>Measure coverage of the behavior.</p></article><article><p class="label">Latency</p><h3>How fast is the alert?</h3><p>Keep the notification operationally useful.</p></article><article><p class="label">Error analysis</p><h3>Where does it fail?</h3><p>Segment by light, occlusion, breed, angle, and similar poses.</p></article></div><div class="prose"><p>The evaluation plan turns model errors into a product roadmap. A false alert and a missed event create different user costs, so one accuracy score would hide the decisions that matter.</p></div></div>
-      </section>
-  <nav class="project-nav case-nav" aria-label="Case study navigation"><a href="genai-chatbot.html">← GenAI chatbot</a><a href="usc-parking.html">USC parking →</a></nav>
-</div></main><footer class="colophon" id="contact"><div class="page"><div class="grid footer-grid"><div class="c-4"><p class="label">Brandon Y. Chang</p><p class="colophon-note">Healthcare analytics, product systems, and applied data. San Jose, California.</p><p class="colophon-note">© 2026</p></div><div class="c-4"><p class="label">Contact</p><ul class="colophon-list"><li><a class="link" href="mailto:bychang@alumni.usc.edu">bychang@alumni.usc.edu</a></li></ul></div><div class="c-4"><p class="label">Elsewhere</p><ul class="colophon-list"><li><a class="link" href="https://www.linkedin.com/in/brandonychang" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li></ul></div></div></div></footer></div></body></html>
+    <section class="story-section">
+      <div class="story-heading"><span class="label story-num">03</span><h2>System notes</h2></div>
+      <div class="story-copy"><div class="dog-notes">
+        <article><span>live.py</span><h3>Video ingestion</h3><p>Maintains the camera stream, samples frames, runs pose inference, passes coordinates to the processor, and handles reconnects.</p></article>
+        <article><span>DeepLabCut</span><h3>Pose model</h3><p>A transfer-learned model estimates the three spine and three tail points instead of requiring markers on the animal.</p></article>
+        <article><span>processor.py</span><h3>Behavior logic</h3><p>Computes spine curvature, tail alignment, stationarity, and temporal votes. Borderline frames remain candidates rather than immediate alerts.</p></article>
+        <article><span>event output</span><h3>Map and evidence</h3><p>Records timestamp and location, saves a screenshot or clip, and adds a marker to a locally served cleanup map.</p></article>
+      </div></div>
+    </section>
+
+    <section class="story-section story-close">
+      <div class="story-heading"><span class="label story-num">04</span><h2>What I would test next</h2></div>
+      <div class="story-copy"><div class="decision-grid">
+        <article><p class="label">Generalization</p><h3>Different dogs and yards</h3><p>Build a fixed evaluation set across breeds, coat colors, camera angles, backgrounds, and body proportions.</p></article>
+        <article><p class="label">Failure modes</p><h3>Stretching, sitting, digging</h3><p>Save false alerts with keypoint overlays and feature logs, then add hard-negative examples to the next training cycle.</p></article>
+        <article><p class="label">Robustness</p><h3>Light and occlusion</h3><p>Segment precision and recall by daylight, infrared, partial framing, moving objects, and keypoint confidence.</p></article>
+        <article><p class="label">Productization</p><h3>Privacy and edge deployment</h3><p>Keep processing local, define retention controls, expose alert sensitivity, and separate ingestion, inference, detection, mapping, and notification modules.</p></article>
+      </div><p class="dog-method-note">The interactive numbers above illustrate threshold tradeoffs. They are not reported production performance.</p></div>
+    </section>
+
+    <nav class="project-nav case-nav" aria-label="Case study navigation"><a href="genai-chatbot.html">← GenAI chatbot</a><a href="usc-parking.html">USC parking →</a></nav>
+  </div></main>
+  <footer class="colophon" id="contact"><div class="page"><div class="grid footer-grid"><div class="c-4"><p class="label">Brandon Y. Chang</p><p class="colophon-note">Healthcare analytics, product systems, and applied data. San Jose, California.</p><p class="colophon-note">© 2026</p></div><div class="c-4"><p class="label">Contact</p><ul class="colophon-list"><li><a class="link" href="mailto:bychang@alumni.usc.edu">bychang@alumni.usc.edu</a></li></ul></div><div class="c-4"><p class="label">Elsewhere</p><ul class="colophon-list"><li><a class="link" href="https://www.linkedin.com/in/brandonychang" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li></ul></div></div></div></footer>
+</div></body>
+</html>

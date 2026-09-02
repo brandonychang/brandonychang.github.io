@@ -3,55 +3,86 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A multimodal retrieval experience that combines traffic documents, live conditions, maps, and route context for parking decisions.">
+  <meta name="description" content="An interactive parking recommendation prototype combining policy retrieval, route context, traffic conditions, and user priorities.">
   <title>USC Parking Intelligence | Brandon Y. Chang</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=7">
-  <script src="script.js?v=7" defer></script>
+  <link rel="stylesheet" href="styles.css?v=8">
+  <script src="script.js?v=8" defer></script>
 </head>
-<body class="case-page parking-case"><div class="shell"><header class="masthead-bar"><div class="page"><div class="bar">
+<body class="case-page parking-case"><div class="shell">
+  <header class="masthead-bar"><div class="page"><div class="bar">
     <a href="index.html" class="wordmark">Brandon&nbsp;Y.&nbsp;Chang</a>
     <nav class="nav" aria-label="Primary navigation"><a href="index.html#about" class="nav-item">About</a><a href="index.html#work" class="nav-item">Work</a><a href="index.html#experience" class="nav-item">Experience</a><a href="index.html#contact" class="nav-item">Contact</a></nav>
     <button type="button" class="theme-toggle" aria-label="Switch to light mode" title="Switch to light mode"><span aria-hidden="true">☀</span></button>
     <button type="button" class="burger" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span class="bar-line" aria-hidden="true"></span><span class="bar-line" aria-hidden="true"></span></button>
   </div></div></header>
   <div id="mobile-menu" class="drawer" aria-hidden="true"><div class="page drawer-inner"><a href="index.html" class="drawer-link">Home</a><a href="index.html#about" class="drawer-link">About</a><a href="index.html#work" class="drawer-link">Work</a><a href="index.html#experience" class="drawer-link">Experience</a><a href="index.html#contact" class="drawer-link">Contact</a></div></div>
-<main><div class="page">
-  <section class="case-intro">
-    <div class="case-folio"><a class="label" href="index.html#work">← Selected work</a><span class="label">Case study 08 / 08</span></div>
-    <p class="label headnote">USC / Applied AI product</p>
-    <h1 class="case-title"><span>USC Parking</span><span>Intelligence</span></h1>
-    <p class="case-tagline">A multimodal retrieval concept that turns traffic documents, live conditions, maps, and route context into one parking decision.</p>
-    <dl class="case-credits"><div><dt class="label">Role</dt><dd>Product design · applied machine learning</dd></div><div><dt class="label">Scope</dt><dd>Retrieval · maps · live conditions · recommendations</dd></div><div><dt class="label">Stack</dt><dd>FAISS · language models · document and route data</dd></div></dl>
-  </section>
-  
-      <section class="case-glance"><p class="label">User question</p><p class="case-promise">Where should I park for this destination, under the conditions that exist right now?</p></section><section class="parking-choice"><div class="parking-choice-map"><div class="map-grid"></div><span class="map-destination">USC</span><i class="route-primary"></i><i class="route-alt"></i><button type="button" class="map-pin pin-primary active" data-parking-choice="primary"><b>A</b><span>Structure A</span></button><button type="button" class="map-pin pin-alt" data-parking-choice="alt"><b>B</b><span>Structure B</span></button></div><div class="parking-choice-copy"><p class="label">Compare a route</p><h2 id="parking-choice-title">Structure A</h2><p id="parking-choice-body">Best fit for the destination and current route. Source context supports the recommendation.</p><dl><div><dt>Walk</dt><dd id="parking-walk">6 min</dd></div><div><dt>Traffic</dt><dd id="parking-traffic">Moderate</dd></div><div><dt>Confidence</dt><dd id="parking-confidence">High</dd></div></dl></div></section>
+  <main><div class="page">
+    <section class="case-intro">
+      <div class="case-folio"><a class="label" href="index.html#work">← Selected work</a><span class="label">Case study 08 / 08</span></div>
+      <p class="label headnote">USC / Applied AI product concept</p>
+      <h1 class="case-title"><span>USC Parking</span><span>Intelligence</span></h1>
+      <p class="case-tagline">A decision interface that combines policy passages, route context, traffic signals, and personal priorities instead of returning another list of links.</p>
+      <dl class="case-credits"><div><dt class="label">Role</dt><dd>Product design · applied machine learning</dd></div><div><dt class="label">Inputs</dt><dd>Trip context · retrieved rules · map relationships · conditions</dd></div><div><dt class="label">Stack</dt><dd>FAISS · language models · document and route data</dd></div></dl>
+    </section>
 
-      <section class="story-section">
-        <div class="story-heading"><span class="label story-num">01</span><h2>One decision, scattered evidence</h2></div>
-        <div class="story-copy prose"><p>A parking recommendation depends on more than distance. Traffic instructions, facility rules, current route conditions, maps, and the user's destination live in separate sources. A traditional search experience returns fragments and leaves the user to reconcile them.</p><p>The product brief centered on decision support. Retrieve the relevant evidence, combine it with current context, and present a recommendation a driver understands quickly.</p></div>
-      </section>
+    <section class="case-glance"><p class="label">User question</p><p class="case-promise">Where should I park for this trip, and what changed the recommendation?</p></section>
 
-      <section class="story-section">
-        <div class="story-heading"><span class="label story-num">02</span><h2>Four inputs, one answer</h2></div>
-        <div class="story-copy"><div class="source-orbit" aria-label="Parking recommendation sources"><div class="source-core"><span>Decision</span><strong>Parking recommendation</strong></div><div class="source-node node-a">Traffic documents</div><div class="source-node node-b">Live conditions</div><div class="source-node node-c">Map context</div><div class="source-node node-d">Destination</div></div></div>
-      </section>
+    <section class="route-planner" aria-labelledby="route-planner-title">
+      <div class="route-planner-head"><div><p class="label">Interactive route comparison</p><h2 id="route-planner-title">Change the conditions. Watch the recommendation move.</h2></div><p class="route-disclaimer">Prototype scenario only. Values demonstrate product behavior and do not represent live USC parking availability.</p></div>
+      <div class="route-controls">
+        <fieldset><legend class="label">Trip conditions</legend><div class="route-button-group"><button type="button" class="active" data-parking-condition="normal">Normal weekday</button><button type="button" data-parking-condition="event">Event traffic</button><button type="button" data-parking-condition="late">Late evening</button></div></fieldset>
+        <fieldset><legend class="label">Optimize for</legend><div class="route-button-group"><button type="button" class="active" data-parking-priority="walk">Shortest walk</button><button type="button" data-parking-priority="traffic">Lowest congestion</button><button type="button" data-parking-priority="confidence">Strongest evidence</button></div></fieldset>
+      </div>
+      <div class="parking-choice">
+        <div class="parking-choice-map">
+          <div class="map-grid"></div><span class="map-destination">USC</span>
+          <i class="route-line route-a active" data-route-line="a"></i><i class="route-line route-b" data-route-line="b"></i><i class="route-line route-c" data-route-line="c"></i>
+          <button type="button" class="map-pin pin-a active" data-parking-choice="a"><b>A</b><span>Structure A</span></button>
+          <button type="button" class="map-pin pin-b" data-parking-choice="b"><b>B</b><span>Structure B</span></button>
+          <button type="button" class="map-pin pin-c" data-parking-choice="c"><b>C</b><span>Structure C</span></button>
+          <div class="map-legend"><span><i></i>Recommended route</span><span>Updated from your controls</span></div>
+        </div>
+        <div class="parking-choice-copy" aria-live="polite">
+          <p class="label">Current recommendation</p>
+          <div class="route-rank"><span id="parking-rank">01</span><strong id="parking-score">86</strong></div>
+          <h2 id="parking-choice-title">Structure A</h2>
+          <p id="parking-choice-body">Shortest walk under normal weekday conditions. The recommendation balances route ease with stronger source confidence.</p>
+          <dl><div><dt>Walk</dt><dd id="parking-walk">6 min</dd></div><div><dt>Congestion</dt><dd id="parking-traffic">Moderate</dd></div><div><dt>Source confidence</dt><dd id="parking-confidence">88%</dd></div></dl>
+          <div class="route-score-bars"><div><span>Walk fit</span><i><b id="parking-walk-bar" style="width:88%"></b></i></div><div><span>Traffic fit</span><i><b id="parking-traffic-bar" style="width:62%"></b></i></div><div><span>Evidence</span><i><b id="parking-confidence-bar" style="width:88%"></b></i></div></div>
+        </div>
+      </div>
+      <div class="route-candidates" aria-label="All prototype parking choices">
+        <button type="button" class="active" data-parking-card="a"><span>A</span><strong>Structure A</strong><small>6 min walk · moderate congestion · 88% evidence</small></button>
+        <button type="button" data-parking-card="b"><span>B</span><strong>Structure B</strong><small>11 min walk · light congestion · 74% evidence</small></button>
+        <button type="button" data-parking-card="c"><span>C</span><strong>Structure C</strong><small>8 min walk · variable congestion · 81% evidence</small></button>
+      </div>
+    </section>
 
-      <section class="story-section">
-        <div class="story-heading"><span class="label story-num">03</span><h2>Retrieval before recommendation</h2></div>
-        <div class="story-copy"><ol class="process-list"><li><span>01</span><div><h3>Interpret the trip</h3><p>Capture destination, timing, origin, and constraints from the user's question.</p></div></li><li><span>02</span><div><h3>Retrieve policy context</h3><p>Use FAISS to find the passages that apply to the location and situation.</p></div></li><li><span>03</span><div><h3>Join current signals</h3><p>Pair document context with live traffic and map information.</p></div></li><li><span>04</span><div><h3>Compose the decision card</h3><p>Return a primary choice, route rationale, alternatives, and visible source context.</p></div></li></ol></div>
-      </section>
+    <section class="story-section">
+      <div class="story-heading"><span class="label story-num">01</span><h2>One decision, scattered evidence</h2></div>
+      <div class="story-copy prose"><p>A parking decision depends on more than distance. Traffic instructions, eligibility rules, route conditions, maps, the destination, and a driver’s priorities live in separate systems. Traditional search returns fragments and leaves the user to reconcile them while traveling.</p><p>This prototype reframes search as decision support. The system retrieves relevant evidence, scores alternatives under current trip conditions, and shows why the recommendation changed.</p></div>
+    </section>
 
-      <section class="story-section">
-        <div class="story-heading"><span class="label story-num">04</span><h2>The answer surface</h2></div>
-        <div class="story-copy"><div class="parking-card"><div class="parking-card-head"><span class="label">Recommended</span><strong>Structure near destination</strong></div><div class="parking-route"><span>A</span><i></i><span>B</span></div><dl><div><dt>Why</dt><dd>Best fit for destination and current route</dd></div><div><dt>Watch</dt><dd>Verify posted restrictions on arrival</dd></div><div><dt>Alternative</dt><dd>Secondary option if capacity changes</dd></div></dl></div><div class="prose"><p>The interface should distinguish retrieved facts from model synthesis. A user needs to know which rule, traffic signal, or map relationship shaped the recommendation, especially when live conditions change.</p></div></div>
-      </section>
+    <section class="story-section">
+      <div class="story-heading"><span class="label story-num">02</span><h2>Four inputs, one answer</h2></div>
+      <div class="story-copy"><div class="source-orbit" aria-label="Parking recommendation sources"><div class="source-core"><span>Decision</span><strong>Parking recommendation</strong></div><div class="source-node node-a">Traffic documents</div><div class="source-node node-b">Trip conditions</div><div class="source-node node-c">Map context</div><div class="source-node node-d">User priority</div></div></div>
+    </section>
 
-      <section class="story-section story-close">
-        <div class="story-heading"><span class="label story-num">05</span><h2>Limits and next tests</h2></div>
-        <div class="story-copy"><div class="decision-grid"><article><p class="label">Freshness</p><h3>Conditions expire</h3><p>Show the time of each live signal and degrade gracefully when a source becomes stale.</p></article><article><p class="label">Uncertainty</p><h3>Availability is not guaranteed</h3><p>Frame recommendations as informed choices and keep an alternative visible.</p></article><article><p class="label">Trust</p><h3>Rules need provenance</h3><p>Expose source context for restrictions, closures, and eligibility.</p></article><article><p class="label">Evaluation</p><h3>Test the decision</h3><p>Measure relevance, route usefulness, freshness, and whether users change the recommendation.</p></article></div></div>
-      </section>
-  <nav class="project-nav case-nav" aria-label="Case study navigation"><a href="dog-poop-detector.html">← Behavior detection</a><a href="index.html#work">All selected work →</a></nav>
-</div></main><footer class="colophon" id="contact"><div class="page"><div class="grid footer-grid"><div class="c-4"><p class="label">Brandon Y. Chang</p><p class="colophon-note">Healthcare analytics, product systems, and applied data. San Jose, California.</p><p class="colophon-note">© 2026</p></div><div class="c-4"><p class="label">Contact</p><ul class="colophon-list"><li><a class="link" href="mailto:bychang@alumni.usc.edu">bychang@alumni.usc.edu</a></li></ul></div><div class="c-4"><p class="label">Elsewhere</p><ul class="colophon-list"><li><a class="link" href="https://www.linkedin.com/in/brandonychang" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li></ul></div></div></div></footer></div></body></html>
+    <section class="story-section">
+      <div class="story-heading"><span class="label story-num">03</span><h2>Retrieval before recommendation</h2></div>
+      <div class="story-copy"><ol class="process-list"><li><span>01</span><div><h3>Interpret the trip</h3><p>Capture destination, timing, origin, and the user’s optimization priority.</p></div></li><li><span>02</span><div><h3>Retrieve policy context</h3><p>Use FAISS to find passages that apply to the destination and situation.</p></div></li><li><span>03</span><div><h3>Join route signals</h3><p>Combine retrieved context with map relationships and condition freshness.</p></div></li><li><span>04</span><div><h3>Rank with an explanation</h3><p>Return a primary choice, visible tradeoffs, alternatives, and the evidence behind the score.</p></div></li></ol></div>
+    </section>
+
+    <section class="story-section story-close">
+      <div class="story-heading"><span class="label story-num">04</span><h2>Product limits</h2></div>
+      <div class="story-copy"><div class="decision-grid"><article><p class="label">Freshness</p><h3>Conditions expire</h3><p>Timestamp every live signal and lower confidence when a source becomes stale.</p></article><article><p class="label">Uncertainty</p><h3>Availability is not guaranteed</h3><p>Frame the answer as a recommendation and keep a viable alternative visible.</p></article><article><p class="label">Trust</p><h3>Rules need provenance</h3><p>Separate retrieved facts from model synthesis and link restrictions to source passages.</p></article><article><p class="label">Evaluation</p><h3>Test the decision</h3><p>Measure relevance, route usefulness, freshness, override rate, and whether users understand the rationale.</p></article></div></div>
+    </section>
+
+    <nav class="project-nav case-nav" aria-label="Case study navigation"><a href="dog-poop-detector.html">← Behavior detection</a><a href="index.html#work">All selected work →</a></nav>
+  </div></main>
+  <footer class="colophon" id="contact"><div class="page"><div class="grid footer-grid"><div class="c-4"><p class="label">Brandon Y. Chang</p><p class="colophon-note">Healthcare analytics, product systems, and applied data. San Jose, California.</p><p class="colophon-note">© 2026</p></div><div class="c-4"><p class="label">Contact</p><ul class="colophon-list"><li><a class="link" href="mailto:bychang@alumni.usc.edu">bychang@alumni.usc.edu</a></li></ul></div><div class="c-4"><p class="label">Elsewhere</p><ul class="colophon-list"><li><a class="link" href="https://www.linkedin.com/in/brandonychang" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li></ul></div></div></div></footer>
+</div></body>
+</html>
