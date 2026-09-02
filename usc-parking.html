@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=18">
-  <script src="script.js?v=18" defer></script>
+  <link rel="stylesheet" href="styles.css?v=19">
+  <script src="script.js?v=19" defer></script>
 </head>
 <body class="case-page parking-case"><div class="shell">
   <header class="masthead-bar"><div class="page"><div class="bar">
@@ -33,10 +33,10 @@
       <div class="parking-objective-details"><p><strong>The problem</strong><span>Students were piecing together traffic, parking, safety, walking distance, and crowd information from separate places.</span></p><p><strong>What we designed</strong><span>One comparison flow that changes parking and route recommendations when arrival time, crowd conditions, or accessibility needs change.</span></p><p><strong>What I contributed</strong><span>Interview synthesis, user flows, route-comparison requirements, interface design, and usability-driven revisions to labels, controls, and map hierarchy.</span></p></div>
     </section>
 
-    <section class="case-glance"><p class="label">User question</p><p class="case-promise">Where should I park for this trip, and what changed the recommendation?</p></section>
+    <section class="case-glance"><p class="label">Decision the page supports</p><p class="case-promise">Choose a parking structure and see why the recommendation changed.</p></section>
 
     <section class="route-planner xposition-planner" aria-labelledby="route-planner-title">
-      <div class="route-planner-head"><div><p class="label">Xposition event-day planner</p><h2 id="route-planner-title">Plan a drive to the LA Memorial Coliseum.</h2></div><p class="route-disclaimer">Interactive portfolio prototype based on the original Xposition app. Times, crowd levels, and parking status demonstrate product behavior rather than live USC data.</p></div>
+      <div class="route-planner-head"><div><p class="label">Xposition event-day planner</p><h2 id="route-planner-title">Plan a drive to the LA Memorial Coliseum.</h2></div><p class="route-disclaimer">Interactive portfolio prototype based on the original Xposition app. The map uses sample times, crowd levels, and parking status to demonstrate product behavior.</p></div>
       <div class="route-controls">
         <fieldset><legend class="label">When are you arriving?</legend><div class="route-button-group"><button type="button" class="active" data-parking-condition="normal">Weekday</button><button type="button" data-parking-condition="event">Football event</button><button type="button" data-parking-condition="evening">Evening</button></div></fieldset>
         <fieldset><legend class="label">What matters most?</legend><div class="route-button-group"><button type="button" class="active" data-parking-priority="fastest">Fastest arrival</button><button type="button" data-parking-priority="crowd">Avoid crowds</button><button type="button" data-parking-priority="accessible">Accessible route</button></div></fieldset>
@@ -142,8 +142,8 @@
       <div class="story-copy">
         <div class="xposition-feature-grid" aria-label="Four Xposition product features">
           <article class="feature-mode"><div class="feature-demo"><span class="feature-route selected">Drive <strong>17 min</strong></span><span class="feature-route">Metro <strong>24 min</strong></span><span class="feature-route">Bike <strong>19 min</strong></span></div><p class="label">01 · Compare</p><h3>Travel modes in one view</h3><p>Place total time, walking, cost, and crowd exposure beside each other before the user commits.</p></article>
-          <article class="feature-crowd"><div class="feature-demo crowd-scale" aria-label="Crowd intensity from low to high"><span class="crowd-scale-label">LOW</span><span class="crowd-scale-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span><strong class="crowd-scale-label">HIGH</strong></div><p class="label">02 · Understand</p><h3>Crowding in plain language</h3><p>Translate a heatmap into named crowd levels and explain why a recommendation changes.</p></article>
-          <article class="feature-meet"><div class="feature-demo"><span class="person-dot">A</span><span class="meet-line"></span><b>Gate 4</b><span class="meet-line"></span><span class="person-dot">B</span></div><p class="label">03 · Coordinate</p><h3>Shared meeting points</h3><p>Give friends one recognizable destination after separate routes instead of asking them to interpret pins.</p></article>
+          <article class="feature-crowd"><div class="feature-demo crowd-scale" aria-label="Crowd intensity from low to high"><span class="crowd-scale-label">LOW</span><span class="crowd-scale-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span><strong class="crowd-scale-label">HIGH</strong></div><p class="label">02 · Understand</p><h3>Crowding in plain language</h3><p>Show named crowd levels and explain why the recommended route changes.</p></article>
+          <article class="feature-meet"><div class="feature-demo"><span class="person-dot">A</span><span class="meet-line"></span><b>Gate 4</b><span class="meet-line"></span><span class="person-dot">B</span></div><p class="label">03 · Coordinate</p><h3>Shared meeting points</h3><p>Give friends one recognizable destination after they take separate routes.</p></article>
           <article class="feature-carbon"><div class="feature-demo"><span class="carbon-ring"><strong>−62%</strong><small>CO₂</small></span><p>Metro vs. solo drive</p></div><p class="label">04 · Choose</p><h3>Visible impact badges</h3><p>Show the relative emissions tradeoff without hiding the time and safety needs behind the decision.</p></article>
         </div>
       </div>
@@ -151,7 +151,7 @@
 
     <section class="story-section">
       <div class="story-heading"><span class="label story-num">03</span><h2>From event to route</h2></div>
-      <div class="story-copy"><ol class="process-list"><li><span>01</span><div><h3>Select the event</h3><p>Start with a clearly marked venue and event time instead of an ambiguous map full of identical pins.</p></div></li><li><span>02</span><div><h3>Compare travel modes</h3><p>Show driving, train, and walking time with plain traffic labels and visual color differences.</p></div></li><li><span>03</span><div><h3>Check crowdedness</h3><p>Translate the heatmap into crowd tolerance, density levels, forecasts, and alternate-route suggestions.</p></div></li><li><span>04</span><div><h3>Follow the complete route</h3><p>Connect the recommendation to directions, parking, live-location sharing, and suggested meeting points.</p></div></li></ol></div>
+      <div class="story-copy"><ol class="process-list"><li><span>01</span><div><h3>Select the event</h3><p>Start with a clearly marked venue and event time so the map has one obvious destination.</p></div></li><li><span>02</span><div><h3>Compare travel modes</h3><p>Show driving, train, and walking time with plain traffic labels and visual color differences.</p></div></li><li><span>03</span><div><h3>Check crowd levels</h3><p>Show density zones, expected crowd levels, and alternate routes near the venue.</p></div></li><li><span>04</span><div><h3>Follow the complete route</h3><p>Connect the recommendation to directions, parking, live-location sharing, and suggested meeting points.</p></div></li></ol></div>
     </section>
 
     <section class="story-section story-close">

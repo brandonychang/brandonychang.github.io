@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=18">
-  <script src="script.js?v=18" defer></script>
+  <link rel="stylesheet" href="styles.css?v=19">
+  <script src="script.js?v=19" defer></script>
 </head>
 <body class="case-page aparicio-case"><div class="shell">
   <header class="masthead-bar"><div class="page"><div class="bar">
@@ -33,9 +33,9 @@
     <section class="research-question" aria-labelledby="research-question-title">
       <div><p class="label">The project goal</p><h2 id="research-question-title">Change one DNA-binding feature, then test what changes inside the cell.</h2><p>Forkhead proteins connect DNA recognition with cell-cycle control. My work created a defined HCM1 mutation and a verified yeast strain so later experiments could compare the mutant with the original strain.</p></div>
       <div class="research-thread-grid">
-        <article><span>01</span><strong>Where does the protein bind?</strong><p>DNA sequence and shape determine which sites a Forkhead domain recognizes.</p></article>
-        <article><span>02</span><strong>Which origins start early?</strong><p>Fkh1 and Fkh2 help recruit limiting activation factors to selected origins.</p></article>
-        <article><span>03</span><strong>Did the edit cause the result?</strong><p>PCR, selection, sequencing, and controls separate a true mutation from a failed experiment.</p></article>
+        <article><span>01</span><strong>DNA binding site</strong><p>DNA sequence and shape determine which sites a Forkhead domain recognizes.</p></article>
+        <article><span>02</span><strong>Early origin choice</strong><p>Fkh1 and Fkh2 help recruit limiting activation factors to selected origins.</p></article>
+        <article><span>03</span><strong>Evidence for the edit</strong><p>PCR, selection, sequencing, and controls show whether the strain carries the planned change.</p></article>
       </div>
     </section>
 
@@ -53,7 +53,7 @@
           <div class="origin-dna"><i class="nucleosome nucleosome-left"></i><i class="nucleosome nucleosome-right"></i><span class="ars-label">ARS origin</span><b class="strand strand-top"></b><b class="strand strand-bottom"></b><i class="fork fork-left"></i><i class="fork fork-right"></i></div>
           <div class="machine-caption" id="machine-caption">A nucleosome-free ARS gives ORC access to the origin.</div>
         </div>
-        <article aria-live="polite"><p class="label" id="replication-kicker">Late M / early G1</p><h3 id="replication-stage-title">ORC recognizes an origin.</h3><p id="replication-stage-copy">Yeast origins contain an autonomously replicating sequence, or ARS. A nucleosome-free region gives the Origin Recognition Complex access to this DNA.</p><dl><div><dt>Plain meaning</dt><dd id="replication-plain">ORC marks a place where DNA copying is allowed to begin.</dd></div><div><dt>Why Forkhead matters</dt><dd id="replication-method">Fkh1 and Fkh2 act later, after the origin has been recognized and licensed.</dd></div></dl></article>
+        <article aria-live="polite"><p class="label" id="replication-kicker">Late M / early G1</p><h3 id="replication-stage-title">ORC recognizes an origin.</h3><p id="replication-stage-copy">Yeast origins contain an autonomously replicating sequence, or ARS. A nucleosome-free region gives the Origin Recognition Complex access to this DNA.</p><dl><div><dt>In the cell</dt><dd id="replication-plain">ORC marks a place where DNA copying is allowed to begin.</dd></div><div><dt>Forkhead connection</dt><dd id="replication-method">Fkh1 and Fkh2 act later, after the origin has been recognized and licensed.</dd></div></dl></article>
       </div>
       <div class="factor-legend"><span><b>ORC</b> finds origins</span><span><b>Cdc6 + Cdt1</b> load Mcm2-7</span><span><b>Fkh1/2</b> favor selected early origins</span><span><b>DDK + CDK</b> activate the licensed origin</span><span><b>Cdc45 + Mcm2-7 + GINS</b> form the active CMG helicase</span></div>
     </section>
@@ -77,19 +77,27 @@
       <div class="hcm-stage hcm-stage-detailed">
         <div class="edit-canvas" id="gene-edit-diagram" data-step="design" aria-label="Interactive HCM1 primer, PCR, transformation, recombination, screening, and sequencing diagram">
           <div class="edit-state" data-edit-view="design"><div class="edit-gene-line"><span>upstream DNA</span><strong>HCM1 target</strong><span>downstream DNA</span></div><div class="primer-arrow primer-forward">forward primer →</div><div class="primer-arrow primer-reverse">← reverse primer</div><p>The paired DBM primers carry the planned change on opposite strands.</p></div>
-          <div class="edit-state" data-edit-view="pcr"><div class="pcr-cycle"><span><b>1</b><strong>Separate</strong><small>Open the two DNA strands</small></span><span><b>2</b><strong>Match</strong><small>Primers bind around the target</small></span><span><b>3</b><strong>Copy</strong><small>Polymerase extends new strands</small></span></div><div class="pcr-products"><i></i><i></i><i></i><i></i><i></i><i></i></div><p>Repeated cycles create enough edited DNA for the next step.</p></div>
+          <div class="edit-state" data-edit-view="pcr">
+            <div class="pcr-cycle-visual" aria-label="PCR cycle showing strand separation, primer binding, and DNA extension">
+              <article class="pcr-phase pcr-denature"><header><span>01</span><strong>Separate strands</strong><small>95°C</small></header><div class="pcr-strand-set"><div class="pcr-strand strand-a"><b>5′</b><i></i><b>3′</b></div><div class="pcr-strand strand-b"><b>3′</b><i></i><b>5′</b></div></div><p>Heat breaks the bonds between the two template strands.</p></article>
+              <article class="pcr-phase pcr-anneal"><header><span>02</span><strong>Bind primers</strong><small>about 55°C</small></header><div class="pcr-strand-set"><div class="pcr-strand strand-a"><b>5′</b><i></i><b>3′</b><em class="primer primer-reverse-copy">reverse primer</em></div><div class="pcr-strand strand-b"><b>3′</b><i></i><b>5′</b><em class="primer primer-forward-copy">forward primer</em></div></div><p>The forward and reverse primers attach to matching HCM1 sequences.</p></article>
+              <article class="pcr-phase pcr-extend"><header><span>03</span><strong>Extend new DNA</strong><small>72°C</small></header><div class="pcr-strand-set"><div class="pcr-strand strand-a"><b>5′</b><i></i><b>3′</b><em class="new-dna new-dna-top"></em></div><div class="pcr-strand strand-b"><b>3′</b><i></i><b>5′</b><em class="new-dna new-dna-bottom"></em></div></div><span class="pcr-polymerase-note">DNA polymerase extends from each primer</span><p>Polymerase adds bases from each primer to copy the full edited fragment.</p></article>
+            </div>
+            <div class="pcr-copy-growth" aria-label="PCR copy count after three cycles"><span>Start<strong>1 template</strong></span><i>→</i><span>Cycle 1<strong>2 copies</strong></span><i>→</i><span>Cycle 2<strong>4 copies</strong></span><i>→</i><span>Cycle 3<strong>8 copies</strong></span></div>
+            <p>Repeating these three temperatures produces enough HCM1 DNA for yeast transformation.</p>
+          </div>
           <div class="edit-state" data-edit-view="transform"><div class="transformation-diagram"><span class="dna-fragment">edited DNA</span><i class="transform-arrow">→</i><span class="yeast-cell"><b>yeast</b></span><div><strong>LiAc + PEG</strong><small>helps DNA enter cells</small></div></div><p>Transformation introduces the edited DNA into a population of yeast cells.</p></div>
           <div class="edit-state" data-edit-view="recombine"><div class="alignment-stack"><div><span>left matching region</span><strong>planned HCM1 edit</strong><span>right matching region</span></div><i>aligns with</i><div><span>left genomic DNA</span><strong>original HCM1 region</strong><span>right genomic DNA</span></div></div><div class="recombined-result">homologous recombination → edited genomic locus</div><p>Matching DNA on both sides guides repair to the intended location.</p></div>
           <div class="edit-state" data-edit-view="screen"><div class="screen-diagram"><span class="mini-colony">A</span><span class="mini-colony confirmed">B</span><span class="mini-colony">C</span><i>selection plate</i><div class="gel-lanes"><b></b><b class="band-ok"></b><b></b></div></div><p>Selection finds cells carrying the marker. Colony PCR checks whether the edit sits at the correct locus.</p></div>
-          <div class="edit-state" data-edit-view="sequence"><div class="sequence-alignment"><div><span>Expected edit</span><code>TGGCAA<mark>gc</mark>TTCAATA<mark>gc</mark>A<mark>gc</mark>TAACTTG<mark>gc</mark>T<mark>gc</mark>A</code></div><div><span>Colony read</span><code>TGGCAA<mark>GC</mark>TTCAATA<mark>GC</mark>A<mark>GC</mark>TAACTTG<mark>GC</mark>T<mark>GC</mark>A</code></div><div class="alignment-match">|||||||||||||||||||||||||||||||||||</div></div><p>A matching Sanger read confirms the intended bases instead of relying on colony growth alone.</p></div>
+          <div class="edit-state" data-edit-view="sequence"><div class="sequence-alignment"><div><span>Expected edit</span><code>TGGCAA<mark>gc</mark>TTCAATA<mark>gc</mark>A<mark>gc</mark>TAACTTG<mark>gc</mark>T<mark>gc</mark>A</code></div><div><span>Colony read</span><code>TGGCAA<mark>GC</mark>TTCAATA<mark>GC</mark>A<mark>GC</mark>TAACTTG<mark>GC</mark>T<mark>GC</mark>A</code></div><div class="alignment-match">|||||||||||||||||||||||||||||||||||</div></div><p>A matching Sanger read confirms the intended bases before the strain moves into later experiments.</p></div>
         </div>
-        <article aria-live="polite"><p class="label" id="hcm-step-label">Step 01</p><h3 id="hcm-step-title">Design primers that carry the mutation.</h3><p id="hcm-step-copy">The forward and reverse primers match opposite DNA strands and include the planned HCM1 DNA-binding changes. Their overlap tells PCR exactly which bases to copy.</p><strong id="hcm-step-result">Question answered: what exact sequence are we trying to build?</strong></article>
+        <article aria-live="polite"><p class="label" id="hcm-step-label">Step 01</p><h3 id="hcm-step-title">Design primers that carry the mutation.</h3><p id="hcm-step-copy">The forward and reverse primers match opposite DNA strands and include the planned HCM1 DNA-binding changes. Their overlap tells PCR exactly which bases to copy.</p><strong id="hcm-step-result">Checkpoint: the intended HCM1 sequence is defined base by base.</strong></article>
       </div>
       <div class="primer-board" aria-labelledby="primer-board-title"><div><p class="label">Primer map</p><h3 id="primer-board-title">Two primers build the mutation. Two primers check the result.</h3><p>Lowercase letters mark the designed changes in the supplied DBM primer notes.</p></div><div class="primer-cards"><article><span>Mutation primer · forward</span><code>TGGCAA<mark>gc</mark>TTCAATA<mark>gc</mark>A<mark>gc</mark>TAACTTG<mark>gc</mark>T<mark>gc</mark>A</code><p>Builds the edited sequence on one strand.</p></article><article><span>Mutation primer · reverse</span><code>T<mark>gc</mark>A<mark>gc</mark>CAAGTTA<mark>gc</mark>T<mark>gc</mark>TATTGAA<mark>gc</mark>TTGCCA</code><p>Builds the matching change on the opposite strand.</p></article><article><span>HCM1 upstream primer</span><code>TTCTTCTCCTCCCTTACGGTGCCCTTTG</code><p>Anchors the check before the edited region.</p></article><article><span>HCM1 downstream primer</span><code>GTCGCTTGCAGTGGTTATTTGGTGGTCC</code><p>Anchors the check after the edited region.</p></article></div></div>
     </section>
 
     <section class="colony-explorer" aria-labelledby="colony-title">
-      <div class="colony-head"><div><p class="label">Interactive yeast-colony screen</p><h2 id="colony-title">A colony is a candidate, not proof.</h2></div><p>Change the screen, then select a colony to see what each stage tells the researcher.</p></div>
+      <div class="colony-head"><div><p class="label">Interactive yeast-colony screen</p><h2 id="colony-title">A colony starts the verification process.</h2></div><p>Change the screen, then select a colony to see what each stage establishes.</p></div>
       <div class="colony-controls" role="tablist" aria-label="Choose a colony screening stage"><button type="button" class="active" role="tab" aria-selected="true" data-plate-condition="growth">Growth plate</button><button type="button" role="tab" aria-selected="false" data-plate-condition="selection">Selection plate</button><button type="button" role="tab" aria-selected="false" data-plate-condition="pcr">Colony PCR</button></div>
       <div class="colony-lab">
         <div><div class="yeast-plate" id="yeast-plate" data-condition="growth" aria-label="Interactive diagram of yeast colonies on an agar plate"><span class="plate-label" id="plate-label">Rich growth media</span>
@@ -100,15 +108,138 @@
     </section>
 
     <section class="sequencing-explorer" aria-labelledby="sequencing-title">
-      <div class="sequencing-head"><div><p class="label">From ChIP sample to genome map</p><h2 id="sequencing-title">Sequencing turns pulled-down DNA into locations.</h2></div><p>Choose a stage to follow the sample from protein-bound chromatin to a normalized binding peak.</p></div>
-      <div class="sequencing-steps" role="tablist" aria-label="Choose a ChIP sequencing stage"><button type="button" class="active" role="tab" aria-selected="true" data-seq-stage="crosslink"><span>01</span>Crosslink</button><button type="button" role="tab" aria-selected="false" data-seq-stage="pull"><span>02</span>Pull down</button><button type="button" role="tab" aria-selected="false" data-seq-stage="library"><span>03</span>Build library</button><button type="button" role="tab" aria-selected="false" data-seq-stage="qc"><span>04</span>Check size</button><button type="button" role="tab" aria-selected="false" data-seq-stage="sequence"><span>05</span>Sequence</button><button type="button" role="tab" aria-selected="false" data-seq-stage="align"><span>06</span>Align</button></div>
-      <div class="sequencing-workbench"><div class="seq-visual" id="seq-visual" data-stage="crosslink" aria-label="Interactive ChIP sequencing and alignment diagram"><div class="seq-view" data-seq-view="crosslink"><div class="chromatin-line"><i></i><i></i><i></i><i></i><span class="bound-protein">FLAG-tagged protein</span></div><p>Chemical crosslinking freezes the protein on the DNA site it occupied in the cell.</p></div><div class="seq-view" data-seq-view="pull"><div class="fragment-cloud"><span></span><span class="target-fragment"><b>Y</b></span><span></span><span></span><span></span></div><p>An antibody recognizes the tag and enriches DNA fragments attached to the protein of interest.</p></div><div class="seq-view" data-seq-view="library"><div class="library-fragments"><span><b>A</b>DNA fragment<b>B</b></span><span><b>A</b>DNA fragment<b>B</b></span><span><b>A</b>DNA fragment<b>B</b></span></div><p>Known adapter sequences become bookends. Universal primers copy the unknown DNA between them.</p></div><div class="seq-view" data-seq-view="qc"><div class="bioanalyzer-chart"><i class="primer-dimer"></i><i class="library-smear"></i><span>primer dimers</span><strong>desired library range<br>about 300–500 bp</strong></div><p>A Bioanalyzer checks concentration and fragment size before samples are pooled.</p></div><div class="seq-view" data-seq-view="sequence"><div class="read-grid"><code>GTAAACAT</code><code>TAAACATA</code><code>AAACATAC</code><code>CGAAATGT</code><code>GAAATGTA</code><code>AAATGTAA</code></div><p>The sequencer returns millions of short DNA reads from the enriched library.</p></div><div class="seq-view" data-seq-view="align"><div class="genome-alignment"><div class="reference-track">reference genome</div><span style="--x:14%;--w:28%"></span><span style="--x:22%;--w:31%"></span><span style="--x:36%;--w:24%"></span><span style="--x:43%;--w:29%"></span><i class="binding-peak"></i></div><div class="alignment-actions"><span>align</span><span>sort</span><span>remove repeats</span><span>group into bins</span><span>normalize</span></div><p>Overlapping reads create a peak at a genomic location where the protein was enriched.</p></div></div><article aria-live="polite"><p class="label" id="seq-stage-label">Stage 01</p><h3 id="seq-stage-title">Freeze protein-DNA contacts.</h3><p id="seq-stage-copy">Crosslinking preserves a snapshot of which DNA fragments carried the tagged protein at that moment in the cell cycle.</p><strong id="seq-stage-result">Question answered: what protein-DNA contacts existed in the cells?</strong></article></div>
-      <div class="control-strip"><div><p class="label">Why the internal control mattered</p><h3>A weak signal can come from biology or from the assay.</h3></div><p>A known tagged protein and binding site provided a reference inside the same experiment. Comparing the experimental pull-down with this control helped separate a true binding change from poor antibody recovery, sample loss, or uneven library amplification.</p></div>
+      <div class="sequencing-head">
+<div>
+<p class="label">From ChIP sample to genome map</p>
+<h2 id="sequencing-title">Sequencing locates the DNA attached to a tagged protein.</h2>
+</div>
+<p>Choose a stage to follow the sample from protein-bound chromatin to a normalized binding peak.</p>
+</div>
+      <div class="sequencing-steps" role="tablist" aria-label="Choose a ChIP sequencing stage">
+<button type="button" class="active" role="tab" aria-selected="true" data-seq-stage="crosslink">
+<span>01</span>Crosslink</button>
+<button type="button" role="tab" aria-selected="false" data-seq-stage="pull">
+<span>02</span>Pull down</button>
+<button type="button" role="tab" aria-selected="false" data-seq-stage="library">
+<span>03</span>Build library</button>
+<button type="button" role="tab" aria-selected="false" data-seq-stage="qc">
+<span>04</span>Check size</button>
+<button type="button" role="tab" aria-selected="false" data-seq-stage="sequence">
+<span>05</span>Sequence</button>
+<button type="button" role="tab" aria-selected="false" data-seq-stage="align">
+<span>06</span>Align</button>
+</div>
+      <div class="sequencing-workbench">
+<div class="seq-visual" id="seq-visual" data-stage="crosslink" aria-label="Interactive ChIP sequencing and alignment diagram">
+<div class="seq-view" data-seq-view="crosslink">
+<div class="chromatin-line">
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+<span class="bound-protein">FLAG-tagged protein</span>
+</div>
+<p>Chemical crosslinking freezes the protein on the DNA site it occupied in the cell.</p>
+</div>
+<div class="seq-view" data-seq-view="pull">
+<div class="fragment-cloud">
+<span>
+</span>
+<span class="target-fragment">
+<b>Y</b>
+</span>
+<span>
+</span>
+<span>
+</span>
+<span>
+</span>
+</div>
+<p>An antibody recognizes the tag and enriches DNA fragments attached to the protein of interest.</p>
+</div>
+<div class="seq-view" data-seq-view="library">
+<div class="library-fragments">
+<span>
+<b>A</b>DNA fragment<b>B</b>
+</span>
+<span>
+<b>A</b>DNA fragment<b>B</b>
+</span>
+<span>
+<b>A</b>DNA fragment<b>B</b>
+</span>
+</div>
+<p>Known adapter sequences become bookends. Universal primers copy the unknown DNA between them.</p>
+</div>
+<div class="seq-view" data-seq-view="qc">
+<div class="bioanalyzer-chart">
+<i class="primer-dimer">
+</i>
+<i class="library-smear">
+</i>
+<span>primer dimers</span>
+<strong>desired library range<br>about 300–500 bp</strong>
+</div>
+<p>A Bioanalyzer checks concentration and fragment size before samples are pooled.</p>
+</div>
+<div class="seq-view" data-seq-view="sequence">
+<div class="read-grid">
+<code>GTAAACAT</code>
+<code>TAAACATA</code>
+<code>AAACATAC</code>
+<code>CGAAATGT</code>
+<code>GAAATGTA</code>
+<code>AAATGTAA</code>
+</div>
+<p>The sequencer returns millions of short DNA reads from the enriched library.</p>
+</div>
+<div class="seq-view" data-seq-view="align">
+<div class="genome-alignment">
+<div class="reference-track">reference genome</div>
+<span style="--x:14%;--w:28%">
+</span>
+<span style="--x:22%;--w:31%">
+</span>
+<span style="--x:36%;--w:24%">
+</span>
+<span style="--x:43%;--w:29%">
+</span>
+<i class="binding-peak">
+</i>
+</div>
+<div class="alignment-actions">
+<span>align</span>
+<span>sort</span>
+<span>remove repeats</span>
+<span>group into bins</span>
+<span>normalize</span>
+</div>
+<p>Overlapping reads create a peak at a genomic location where the protein was enriched.</p>
+</div>
+</div>
+<article aria-live="polite">
+<p class="label" id="seq-stage-label">Stage 01</p>
+<h3 id="seq-stage-title">Freeze protein-DNA contacts.</h3>
+<p id="seq-stage-copy">Crosslinking preserves a snapshot of which DNA fragments carried the tagged protein at that moment in the cell cycle.</p>
+<strong id="seq-stage-result">Output: preserved protein-DNA contacts from the cell population.</strong>
+</article>
+</div>
+      <div class="control-strip">
+<div>
+<p class="label">Why the internal control mattered</p>
+<h3>A weak signal can come from biology or from the assay.</h3>
+</div>
+<p>A known tagged protein and binding site provided a reference inside the same experiment. Comparing the experimental pull-down with this control helped separate a true binding change from poor antibody recovery, sample loss, or uneven library amplification.</p>
+</div>
     </section>
 
-    <section class="method-explorer" aria-labelledby="methods-title"><div class="method-head"><div><p class="label">Methods in plain English</p><h2 id="methods-title">One method never answered the whole question.</h2></div><p>Choose a method to see the measurement and the uncertainty it removed.</p></div><div class="method-workbench"><div class="method-buttons" role="tablist" aria-label="Choose a laboratory method"><button type="button" class="active" role="tab" aria-selected="true" data-lab-method="pcr">PCR</button><button type="button" role="tab" aria-selected="false" data-lab-method="chip">ChIP</button><button type="button" role="tab" aria-selected="false" data-lab-method="qpcr">qPCR</button><button type="button" role="tab" aria-selected="false" data-lab-method="facs">FACS</button><button type="button" role="tab" aria-selected="false" data-lab-method="seq">Sequencing</button><button type="button" role="tab" aria-selected="false" data-lab-method="stability">Plasmid stability</button></div><article aria-live="polite"><p class="label" id="method-question">Question: Did the DNA change land in the right place?</p><h3 id="method-name">PCR</h3><p id="method-copy">I copied a chosen DNA region and checked the product size. A band at the expected size supported correct integration, while Sanger sequencing checked the exact bases.</p><div><span>Work included</span><strong id="method-work">Primer design · colony screening · gel checks</strong></div></article></div></section>
+    <section class="method-explorer" aria-labelledby="methods-title"><div class="method-head"><div><p class="label">Methods in plain English</p><h2 id="methods-title">Each method measured a different part of the experiment.</h2></div><p>Choose a method to see its measurement and the work I completed.</p></div><div class="method-workbench"><div class="method-buttons" role="tablist" aria-label="Choose a laboratory method"><button type="button" class="active" role="tab" aria-selected="true" data-lab-method="pcr">PCR</button><button type="button" role="tab" aria-selected="false" data-lab-method="chip">ChIP</button><button type="button" role="tab" aria-selected="false" data-lab-method="qpcr">qPCR</button><button type="button" role="tab" aria-selected="false" data-lab-method="facs">FACS</button><button type="button" role="tab" aria-selected="false" data-lab-method="seq">Sequencing</button><button type="button" role="tab" aria-selected="false" data-lab-method="stability">Plasmid stability</button></div><article aria-live="polite"><p class="label" id="method-question">Measurement: DNA integration at the HCM1 locus</p><h3 id="method-name">PCR</h3><p id="method-copy">I copied a chosen DNA region and checked the product size. A band at the expected size supported correct integration, while Sanger sequencing checked the exact bases.</p><div><span>Work included</span><strong id="method-work">Primer design · colony screening · gel checks</strong></div></article></div></section>
 
-    <section class="aparicio-results"><div><p class="label">What connected the work</p><h2>Build a specific change, verify it, then measure its effect.</h2></div><div class="aparicio-result-grid"><article><span>01</span><h3>Forkhead proteins act before DNA copying begins</h3><p>Fkh1 and Fkh2 bind selected origins in G1 and help those origins recruit limiting activation factors.</p></article><article><span>02</span><h3>DNA outside the core motif matters</h3><p>Fkh1 helix H3 reads the core sequence. Wing 1 and Wing 2 contact the flanking minor grooves and strengthen recognition.</p></article><article><span>03</span><h3>Verification protects the conclusion</h3><p>Selection finds candidates. Colony PCR checks location. Sequencing confirms the exact bases. Controls check assay quality.</p></article></div><div class="stability-benchmark"><div><p class="label">A separate plasmid-stability study</p><h3>CTF19 helped reveal whether a Forkhead-activated origin could support plasmid inheritance.</h3><p>The assay compared growth with and without selection to estimate how often yeast cells lost a test plasmid.</p></div><div class="stability-bars" aria-label="Expected plasmid loss rates"><div><span>Wild type</span><i><b style="width:15%"></b></i><strong>about 3% expected loss</strong></div><div><span>ctf19Δ</span><i><b style="width:100%"></b></i><strong>about 20% expected loss</strong></div></div></div></section>
+    <section class="aparicio-results"><div><p class="label">What connected the work</p><h2>Build a specific change, verify it, then measure its effect.</h2></div><div class="aparicio-result-grid"><article><span>01</span><h3>Forkhead proteins act before DNA copying begins</h3><p>Fkh1 and Fkh2 bind selected origins in G1 and help those origins recruit limiting activation factors.</p></article><article><span>02</span><h3>DNA outside the core motif matters</h3><p>Fkh1 helix H3 reads the core sequence, while Wing 1 and Wing 2 contact the flanking minor grooves and strengthen recognition.</p></article><article><span>03</span><h3>Verification protects the conclusion</h3><p>Selection identifies candidates, colony PCR checks the locus, sequencing confirms the bases, and controls check assay quality.</p></article></div><div class="stability-benchmark"><div><p class="label">A separate plasmid-stability study</p><h3>CTF19 helped reveal whether a Forkhead-activated origin could support plasmid inheritance.</h3><p>The assay compared growth with and without selection to estimate how often yeast cells lost a test plasmid.</p></div><div class="stability-bars" aria-label="Expected plasmid loss rates"><div><span>Wild type</span><i><b style="width:15%"></b></i><strong>about 3% expected loss</strong></div><div><span>ctf19Δ</span><i><b style="width:100%"></b></i><strong>about 20% expected loss</strong></div></div></div></section>
 
     <nav class="project-nav case-nav" aria-label="Case study navigation"><a href="usc-parking.html">← USC mobility</a><a href="index.html#work">All selected work →</a></nav>
   </div></main>

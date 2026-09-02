@@ -23,4 +23,4 @@ Keep every extracted file in the repository's top level. Google hosts the Figtre
 4. Choose **Commit changes**. You do not need to change the Pages settings again.
 5. Wait one or two minutes, then open `https://brandonychang.github.io` and hard-refresh the page (`Ctrl+Shift+R` on Windows or `Command+Shift+R` on Mac).
 
-The CSS and JavaScript links use version `18`, so browsers request the corrected files instead of reusing the earlier cached layout.
+The CSS and JavaScript links use version `19`, so browsers request the corrected files instead of reusing the earlier cached layout.

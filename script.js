@@ -104,9 +104,11 @@ function renderEncodingReadout(row) {
   setText("#encoding-aa, #encoding-v2-aa", aa);
   setText("#encoding-name, #encoding-v2-name", info[0]);
   setText("#encoding-position, #encoding-v2-position", `Position ${String(index).padStart(2, "0")} of the 20-class alphabet · ${info[1]}`);
-  setText("#encoding-copy, #encoding-v2-copy", `${info[0]} turns on feature ${index}. One-hot encoding preserves the residue identity without pretending that ${aa} is numerically closer to one amino acid than another.`);
+  setText("#encoding-copy, #encoding-v2-copy", `The row contains a 1 at position ${index} and a 0 in the other 19 positions. This gives the model a consistent numeric record for ${info[0].toLowerCase()}.`);
   setText("#encoding-vector-value, #encoding-v2-vector-value", `[${vector.join(", ")}]`);
   setText("#encoding-shape, #encoding-v2-shape", "1 × 20");
+  setText("#encoding-v2-summary", `${info[0]} activates position ${index}`);
+  setText("#encoding-v2-readout-title", `${info[0]} uses position ${index}.`);
   document.querySelectorAll(".matrix-row").forEach((item) => item.classList.toggle("selected", item === row));
 }
 
@@ -223,37 +225,37 @@ const hcmSteps = {
     label: "Step 01",
     title: "Design primers that carry the mutation.",
     copy: "The forward and reverse primers match opposite DNA strands and include the planned HCM1 DNA-binding changes. Their overlap tells PCR exactly which bases to copy.",
-    result: "Question answered: what exact sequence are we trying to build?",
+    result: "Checkpoint: the intended HCM1 sequence is defined base by base.",
   },
   pcr: {
     label: "Step 02",
     title: "Copy the edited DNA with PCR.",
     copy: "Each PCR cycle separates the strands, lets the primers bind, and extends new DNA. Repeating the cycle produces enough edited fragment for transformation.",
-    result: "Question answered: did we make enough DNA carrying the planned edit?",
+    result: "Checkpoint: PCR produced enough edited HCM1 DNA for transformation.",
   },
   transform: {
     label: "Step 03",
     title: "Move the DNA into yeast.",
     copy: "Lithium acetate and PEG help the PCR fragment enter yeast cells. Each surviving colony begins from a cell that may have taken up the DNA.",
-    result: "Question answered: which cells received material from the experiment?",
+    result: "Checkpoint: transformed cells received material from the experiment.",
   },
   recombine: {
     label: "Step 04",
     title: "Let matching DNA guide the edit.",
     copy: "The fragment aligns with matching genomic DNA on both sides of HCM1. Yeast repair machinery uses those matching regions to replace the original sequence.",
-    result: "Question answered: how does the edit reach the intended genomic location?",
+    result: "Checkpoint: matching DNA guides the fragment to the HCM1 locus.",
   },
   screen: {
     label: "Step 05",
     title: "Screen the colonies.",
     copy: "Selection removes many cells that did not take up the marker. Colony PCR then uses primers around HCM1 to check for a product at the expected size.",
-    result: "Question answered: which colonies are strong candidates for the correct edit?",
+    result: "Checkpoint: colony PCR identifies the strongest candidates for sequencing.",
   },
   sequence: {
     label: "Step 06",
     title: "Read the exact DNA letters.",
     copy: "Sanger sequencing aligns each colony read with the expected HCM1 sequence. Matching peaks at the designed bases provide the final confirmation.",
-    result: "Question answered: does the strain contain the exact intended mutation?",
+    result: "Checkpoint: the sequencing read matches the intended mutation.",
   },
 };
 
@@ -318,12 +320,12 @@ document.querySelectorAll("[data-forkhead-contact]").forEach((button) => {
 });
 
 const sequencingStages = {
-  crosslink: { label: "Stage 01", title: "Freeze protein-DNA contacts.", copy: "Crosslinking preserves a snapshot of which DNA fragments carried the tagged protein at that moment in the cell cycle.", result: "Question answered: what protein-DNA contacts existed in the cells?" },
-  pull: { label: "Stage 02", title: "Pull down the tagged protein.", copy: "An antibody catches the FLAG tag. The attached DNA comes with it, while most unrelated fragments wash away.", result: "Question answered: which DNA was attached to the protein of interest?" },
-  library: { label: "Stage 03", title: "Add adapters and copy the library.", copy: "Known adapter sequences attach to both ends of each fragment. Universal primers then copy the unknown DNA between those adapters.", result: "Question answered: is the purified DNA ready for the sequencer?" },
-  qc: { label: "Stage 04", title: "Check library size and concentration.", copy: "A Bioanalyzer reveals the fragment-size range and unwanted primer dimers. Only clean, balanced libraries move into the final pool.", result: "Question answered: is this sample strong enough to sequence and compare?" },
-  sequence: { label: "Stage 05", title: "Read millions of short fragments.", copy: "The sequencer converts each library molecule into a short string of DNA letters. Each read still needs a genomic address.", result: "Question answered: what DNA sequences were enriched in the sample?" },
-  align: { label: "Stage 06", title: "Align reads and find binding peaks.", copy: "Software maps reads to the yeast genome, sorts them, removes repeated copies, groups signal into 50-base bins, and normalizes samples.", result: "Question answered: where did the protein bind more strongly than the control?" },
+  crosslink: { label: "Stage 01", title: "Freeze protein-DNA contacts.", copy: "Crosslinking preserves a snapshot of which DNA fragments carried the tagged protein at that moment in the cell cycle.", result: "Output: preserved protein-DNA contacts from the cell population." },
+  pull: { label: "Stage 02", title: "Pull down the tagged protein.", copy: "An antibody catches the FLAG tag. The attached DNA comes with it, while most unrelated fragments wash away.", result: "Output: DNA enriched for fragments attached to the tagged protein." },
+  library: { label: "Stage 03", title: "Add adapters and copy the library.", copy: "Known adapter sequences attach to both ends of each fragment. Universal primers then copy the unknown DNA between those adapters.", result: "Output: adapter-linked DNA that the sequencer can read." },
+  qc: { label: "Stage 04", title: "Check library size and concentration.", copy: "A Bioanalyzer reveals the fragment-size range and unwanted primer dimers. Clean, balanced libraries move into the final pool.", result: "Output: a concentration and fragment-size check for every sample." },
+  sequence: { label: "Stage 05", title: "Read millions of short fragments.", copy: "The sequencer converts each library molecule into a short string of DNA letters. Each read still needs a genomic address.", result: "Output: short DNA reads from the enriched sample." },
+  align: { label: "Stage 06", title: "Align reads and find binding peaks.", copy: "Software maps reads to the yeast genome, sorts them, removes repeated copies, groups signal into 50-base bins, and normalizes samples.", result: "Output: genomic peaks showing where protein binding was enriched." },
 };
 
 function renderSequencingStage(stageName) {
@@ -414,12 +416,12 @@ document.querySelectorAll(".yeast-colony").forEach((colony) => {
 });
 
 const labMethods = {
-  pcr: { question: "Question: Did the DNA change land in the right place?", name: "PCR", copy: "I copied a chosen DNA region and checked the product size. A band at the expected size supported successful integration.", work: "Primer design · colony screening · gel checks" },
-  chip: { question: "Question: Where did a protein bind to DNA?", name: "ChIP", copy: "I fixed proteins to DNA, pulled down one tagged protein, and purified the attached DNA. Sequencing or qPCR then showed where the protein had bound.", work: "Cell fixation · antibody pull-down · DNA cleanup · controls" },
-  qpcr: { question: "Question: How much target DNA was present?", name: "qPCR", copy: "I measured selected DNA regions across samples and controls. This helped compare protein binding or DNA enrichment at known sites.", work: "Primer checks · replicate comparison · normalized signals" },
-  facs: { question: "Question: Were the cells at the same cell-cycle stage?", name: "FACS", copy: "A fluorescent dye measured the amount of DNA in each cell. A strong G1 peak showed the culture had stopped before DNA copying began.", work: "Cell synchronization · DNA staining · peak review" },
-  seq: { question: "Question: Was the intended sequence present?", name: "Sequencing", copy: "Sequencing checked the exact DNA letters in edited strains and mapped ChIP DNA fragments back to the yeast genome.", work: "Library preparation · quality checks · alignment · review" },
-  stability: { question: "Question: How often did cells lose a test plasmid?", name: "Plasmid stability assay", copy: "I compared colony growth with and without selection. The difference estimated how often cells lost a plasmid during growth.", work: "Replica plating · colony counts · wild-type and mutant comparison" },
+  pcr: { question: "Measurement: DNA integration at the HCM1 locus", name: "PCR", copy: "I copied a chosen DNA region and checked the product size. A band at the expected size supported successful integration.", work: "Primer design · colony screening · gel checks" },
+  chip: { question: "Measurement: protein binding at specific DNA sites", name: "ChIP", copy: "I fixed proteins to DNA, pulled down one tagged protein, and purified the attached DNA. Sequencing or qPCR then showed where the protein had bound.", work: "Cell fixation · antibody pull-down · DNA cleanup · controls" },
+  qpcr: { question: "Measurement: target DNA enrichment", name: "qPCR", copy: "I measured selected DNA regions across samples and controls. This helped compare protein binding or DNA enrichment at known sites.", work: "Primer checks · replicate comparison · normalized signals" },
+  facs: { question: "Measurement: DNA content across the cell population", name: "FACS", copy: "A fluorescent dye measured the amount of DNA in each cell. A strong G1 peak showed the culture had stopped before DNA copying began.", work: "Cell synchronization · DNA staining · peak review" },
+  seq: { question: "Measurement: exact DNA bases and genomic locations", name: "Sequencing", copy: "Sequencing checked the exact DNA letters in edited strains and mapped ChIP DNA fragments back to the yeast genome.", work: "Library preparation · quality checks · alignment · review" },
+  stability: { question: "Measurement: plasmid loss during cell growth", name: "Plasmid stability assay", copy: "I compared colony growth with and without selection. The difference estimated how often cells lost a plasmid during growth.", work: "Replica plating · colony counts · wild-type and mutant comparison" },
 };
 
 function renderLabMethod(methodName) {
@@ -507,7 +509,7 @@ const aiRoleDetails = {
   leaders: {
     name: "Field leaders",
     task: "Get role-specific guidance without leaving the flow of work.",
-    copy: "Clinic leaders needed concise answers on mobile and in the browser, not another destination requiring extra context switching.",
+    copy: "Clinic leaders needed concise answers on mobile and in the browser. A separate destination would have added another step to their work.",
     barrier: "Workflow friction and uncertainty about which sources applied",
     response: "Role-specific entry points, browser access, and guidance grounded in the approved knowledge set",
     signal: "87% daily active use across three pilot clinics",
@@ -538,9 +540,9 @@ const adoptionStages = {
   diagnose: {
     kicker: "Initial signal",
     metric: "<20%",
-    title: "Access did not create confidence.",
-    copy: "Fewer than one in five invited users tried the assistant. Feedback identified privacy anxiety and confidently wrong answers as the largest barriers.",
-    details: ["40% of negative feedback cited privacy concerns", "35% cited confidently wrong answers", "The team treated refusal as product evidence, not user resistance"],
+    title: "Fewer than 20% tried the tool.",
+    copy: "Feedback identified privacy concerns and confidently wrong answers as the largest barriers.",
+    details: ["40% of negative feedback cited privacy concerns", "35% cited confidently wrong answers", "Low trial was recorded as a product problem for the team to solve"],
   },
   rebuild: {
     kicker: "Product response",
@@ -795,7 +797,7 @@ const poseFrames = {
     tail: "34%",
     motion: "High",
     decision: "Below the 75% match threshold",
-    note: "The crouched body looks similar, but weak tail confidence and visible movement keep this photo below the alert threshold.",
+    note: "The crouched body looks similar. Weak tail confidence and visible movement keep this photo below the alert threshold.",
   },
 };
 
