@@ -609,7 +609,7 @@ function renderParking(preferredChoice) {
   const map = document.querySelector("#xposition-map");
   map.classList.remove("condition-normal", "condition-event", "condition-evening");
   map.classList.add(`condition-${parkingState.condition}`);
-  map.style.setProperty("--heat-opacity", String(0.62 - (parkingState.tolerance - 1) * 0.09));
+  map.style.setProperty("--heat-opacity", String({ normal: 0.72, event: 1, evening: 0.68 }[parkingState.condition]));
 
   title.textContent = selected.item.title;
   document.querySelector("#parking-choice-body").textContent = selected.key === best.key
@@ -757,12 +757,9 @@ const poseFrames = {
   },
 };
 
-let activePoseFrame = "yard";
-
 function renderPoseFrame(frameName) {
   const frame = poseFrames[frameName];
   if (!frame) return;
-  activePoseFrame = frameName;
   document.querySelectorAll("[data-pose-frame]").forEach((card) => {
     const active = card.dataset.poseFrame === frameName;
     card.classList.toggle("active", active);
@@ -802,24 +799,6 @@ document.querySelectorAll("[data-pose-layer]").forEach((button) => {
         : `${visibleLayers} of 3 views shown`;
   });
 });
-
-const poseRun = document.querySelector("#pose-run");
-if (poseRun) {
-  poseRun.addEventListener("click", () => {
-    const grid = document.querySelector("#pose-image-grid");
-    grid.classList.remove("inference-complete");
-      grid.classList.add("inference-running");
-      poseRun.disabled = true;
-      poseRun.textContent = "Analyzing photo...";
-    window.setTimeout(() => {
-      grid.classList.remove("inference-running");
-      grid.classList.add("inference-complete");
-      renderPoseFrame(activePoseFrame);
-      poseRun.disabled = false;
-      poseRun.textContent = "Analyze again";
-    }, 1150);
-  });
-}
 
 const lossChart = document.querySelector("#loss-chart");
 if (lossChart) {

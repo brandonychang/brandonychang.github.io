@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=12">
-  <script src="script.js?v=12" defer></script>
+  <link rel="stylesheet" href="styles.css?v=13">
+  <script src="script.js?v=13" defer></script>
 </head>
 <body class="case-page parking-case"><div class="shell">
   <header class="masthead-bar"><div class="page"><div class="bar">
@@ -66,8 +66,25 @@
               <text x="20" y="217">EXPOSITION BLVD</text><text x="600" y="86" transform="rotate(90 600 86)">FIGUEROA ST</text><text x="765" y="86" transform="rotate(90 765 86)">FLOWER ST</text>
             </g>
             <g class="crowd-heatmap" aria-hidden="true">
-              <circle cx="230" cy="380" r="128"></circle>
-              <text x="230" y="485">CROWD ZONE AROUND VENUE</text>
+              <g class="crowd-hotspot hotspot-venue">
+                <circle class="heat-outer" cx="230" cy="380" r="122"></circle><circle class="heat-mid" cx="230" cy="380" r="78"></circle><circle class="heat-core" cx="230" cy="380" r="42"></circle>
+              </g>
+              <g class="crowd-hotspot hotspot-expo-gate">
+                <circle class="heat-outer" cx="355" cy="278" r="70"></circle><circle class="heat-mid" cx="355" cy="278" r="44"></circle><circle class="heat-core" cx="355" cy="278" r="20"></circle>
+              </g>
+              <g class="crowd-hotspot hotspot-fig-crossing">
+                <circle class="heat-outer" cx="580" cy="235" r="68"></circle><circle class="heat-mid" cx="580" cy="235" r="42"></circle><circle class="heat-core" cx="580" cy="235" r="18"></circle>
+              </g>
+              <g class="crowd-hotspot hotspot-flower-crossing">
+                <circle class="heat-outer" cx="745" cy="235" r="56"></circle><circle class="heat-mid" cx="745" cy="235" r="34"></circle><circle class="heat-core" cx="745" cy="235" r="15"></circle>
+              </g>
+              <g class="crowd-hotspot hotspot-blue-approach">
+                <circle class="heat-outer" cx="610" cy="330" r="50"></circle><circle class="heat-mid" cx="610" cy="330" r="30"></circle><circle class="heat-core" cx="610" cy="330" r="13"></circle>
+              </g>
+              <g class="crowd-hotspot hotspot-royal-approach">
+                <circle class="heat-outer" cx="420" cy="145" r="44"></circle><circle class="heat-mid" cx="420" cy="145" r="27"></circle><circle class="heat-core" cx="420" cy="145" r="12"></circle>
+              </g>
+              <g class="crowd-map-label" transform="translate(112 456)"><rect width="232" height="28" rx="14"></rect><text x="116" y="19">HIGHEST CROWD NEAR VENUE GATES</text></g>
             </g>
             <g class="map-landmark">
               <ellipse cx="230" cy="380" rx="145" ry="92"></ellipse>
@@ -89,7 +106,7 @@
             <g class="structure-pin" data-parking-choice="royal" role="button" tabindex="0" aria-label="Select Royal Street Structure" transform="translate(420 145)"><rect x="-86" y="-25" width="172" height="50" rx="10"></rect><text y="6">Royal Street</text><circle class="structure-anchor" cy="32" r="7"></circle></g>
             <g class="map-compass" transform="translate(842 438)"><circle r="29"></circle><path d="M0-18L9 7 0 2-9 7Z"></path><text y="20">N</text></g>
           </svg>
-          <div class="map-legend xposition-legend"><span><i></i>Selected route</span><span class="legend-crowd"><i></i>Venue crowd zone</span><span id="map-change-summary">No closures</span></div>
+          <div class="map-legend xposition-legend"><span><i></i>Selected route</span><span class="legend-crowd"><i></i>Crowd concentration</span><span id="map-change-summary">No closures</span></div>
         </div>
 
         <aside class="parking-choice-copy" aria-live="polite">

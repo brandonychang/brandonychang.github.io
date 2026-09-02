@@ -4172,3 +4172,134 @@ a.index-row:hover .index-arrow {
   .pose-image-card { width: min(100%, 25rem); }
   [data-pose-frame="indoor"] { width: min(100%, 19rem); }
 }
+
+/* V13 crowd heatmap, pose comparison, and HPLC sample clarity */
+
+.crowd-heatmap {
+  opacity: var(--heat-opacity);
+  transition: opacity .35s ease;
+}
+
+.crowd-hotspot { transition: opacity .35s ease; }
+.crowd-hotspot circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: fill .35s ease, opacity .35s ease, transform .35s ease;
+}
+.crowd-hotspot .heat-outer { fill: #ff8b55; opacity: .22; }
+.crowd-hotspot .heat-mid { fill: #f45b45; opacity: .34; }
+.crowd-hotspot .heat-core { fill: #c92838; opacity: .72; }
+.hotspot-venue { opacity: 1; }
+.hotspot-expo-gate { opacity: .82; }
+.hotspot-fig-crossing { opacity: .74; }
+.hotspot-flower-crossing { opacity: .58; }
+.hotspot-blue-approach { opacity: .52; }
+.hotspot-royal-approach { opacity: .44; }
+
+.condition-event .hotspot-venue circle { transform: scale(1.12); }
+.condition-event .hotspot-expo-gate circle { transform: scale(1.34); }
+.condition-event .hotspot-fig-crossing circle { transform: scale(1.28); }
+.condition-event .hotspot-flower-crossing circle { transform: scale(1.18); }
+.condition-event .hotspot-blue-approach circle { transform: scale(1.3); }
+.condition-event .hotspot-royal-approach circle { transform: scale(1.18); }
+.condition-event .crowd-hotspot { opacity: 1; }
+
+.condition-evening .crowd-hotspot .heat-outer { fill: #9f7aea; opacity: .2; }
+.condition-evening .crowd-hotspot .heat-mid { fill: #8460c7; opacity: .34; }
+.condition-evening .crowd-hotspot .heat-core { fill: #6f45ad; opacity: .7; }
+.condition-evening .hotspot-venue circle { transform: scale(.84); }
+.condition-evening .hotspot-expo-gate circle,
+.condition-evening .hotspot-fig-crossing circle { transform: scale(.74); }
+.condition-evening .hotspot-flower-crossing circle,
+.condition-evening .hotspot-blue-approach circle,
+.condition-evening .hotspot-royal-approach circle { transform: scale(.66); }
+
+.crowd-map-label rect { fill: rgba(36, 24, 22, .9); stroke: rgba(255,255,255,.75); stroke-width: 1; }
+.crowd-map-label text { fill: #fff; font-family: var(--font-grotesk); font-size: 10px; font-weight: 600; letter-spacing: .55px; text-anchor: middle; }
+.condition-event .crowd-map-label rect { fill: #b92d3b; }
+.condition-evening .crowd-map-label rect { fill: #644294; }
+.xposition-legend .legend-crowd i { background: radial-gradient(circle, #c92838 0 28%, #f45b45 29% 58%, rgba(255,139,85,.38) 59% 100%); height: .9rem; opacity: 1; width: .9rem; }
+.condition-evening + .xposition-legend .legend-crowd i { background: #8460c7; }
+
+.pose-image-grid {
+  align-items: stretch;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.pose-image-card,
+[data-pose-frame="indoor"] {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  margin: 0;
+  width: 100%;
+}
+
+.pose-image-wrap,
+[data-pose-frame="indoor"] .pose-image-wrap {
+  aspect-ratio: 5 / 4;
+  max-width: none;
+  width: 100%;
+}
+
+.pose-image-wrap img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+.pose-image-card > div:last-child {
+  align-content: start;
+  grid-template-rows: auto auto 1fr;
+  min-width: 0;
+  padding: var(--u2);
+}
+
+.pose-image-card > div:last-child > small { min-height: 3.1rem; }
+.pose-point-key { grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+.pose-point-key li {
+  gap: .45rem;
+  grid-template-columns: 1.75rem minmax(0, 1fr) auto;
+  min-width: 0;
+  padding: .5rem;
+}
+.pose-point-key b { font-size: .8rem; height: 1.55rem; width: 1.55rem; }
+.pose-point-key span { font-size: .8rem; line-height: 1.2; min-width: 0; }
+.pose-point-key em { font-size: .78rem; }
+[data-pose-frame="indoor"] .pose-keypoint { transform: scale(.76); transform-box: fill-box; transform-origin: center; }
+.pose-decision { grid-template-columns: 1fr .65fr; }
+
+.sample-vial {
+  aspect-ratio: auto;
+  min-height: 31rem;
+  padding: var(--u4);
+}
+.sample-vial .vial-cap { height: 2.7rem; width: 8.6rem; }
+.sample-vial .vial-glass { border-radius: 0 0 2rem 2rem; height: 14rem; width: 8.6rem; }
+.sample-vial .vial-glass span {
+  bottom: 1.1rem;
+  color: var(--ink);
+  font-size: .7rem;
+  left: 50%;
+  letter-spacing: .04em;
+  line-height: 1.2;
+  text-align: center;
+  transform: translateX(-50%);
+  width: 86%;
+}
+.vial-content-label { display: grid; gap: .4rem; margin-top: var(--u2); max-width: 24rem; text-align: center; }
+.vial-content-label strong { font-family: var(--font-grotesk); font-size: var(--t-1); font-weight: 500; }
+.vial-content-label small { color: var(--case-accent); font-family: var(--font-grotesk); font-size: .82rem; margin-top: 0; }
+.vial-content-label p { color: var(--ink-muted); font-size: .86rem; line-height: 1.45; }
+
+@media (max-width: 900px) {
+  .pose-image-grid { grid-template-columns: 1fr; }
+  .pose-image-card,
+  [data-pose-frame="indoor"] { margin-inline: auto; max-width: 36rem; }
+}
+
+@media (max-width: 540px) {
+  .pose-point-key { grid-template-columns: 1fr; }
+  .pose-decision { grid-template-columns: 1fr; }
+  .sample-vial { min-height: 29rem; }
+}

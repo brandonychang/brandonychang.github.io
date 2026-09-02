@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=12">
-  <script src="script.js?v=12" defer></script>
+  <link rel="stylesheet" href="styles.css?v=13">
+  <script src="script.js?v=13" defer></script>
 </head>
 <body class="case-page detector-case"><div class="shell">
   <header class="masthead-bar"><div class="page"><div class="bar">
@@ -77,15 +77,14 @@
       <div class="story-copy">
         <div class="pose-inspector">
           <div class="pose-inspector-head">
-            <div><p class="label">Two frames, two model decisions</p><h3>See how six body points become a decision.</h3><p>Choose a photo, switch visible layers on or off, then run the simulated frame analysis.</p></div>
+            <div><p class="label">Two frames, two model decisions</p><h3>See how six body points become a decision.</h3><p>Choose either photo. The confidence and posture results update immediately.</p></div>
             <div><div class="pose-layer-controls" aria-label="Photo views"><button type="button" class="active" aria-pressed="true" data-pose-layer="keypoints">Body points</button><button type="button" class="active" aria-pressed="true" data-pose-layer="geometry">Posture lines</button><button type="button" class="active" aria-pressed="true" data-pose-layer="confidence">Confidence table</button></div><p class="pose-layer-status" id="pose-layer-status" aria-live="polite">All 3 views shown</p></div>
           </div>
           <div class="pose-image-grid" id="pose-image-grid">
             <article class="pose-image-card active" tabindex="0" role="button" aria-pressed="true" data-pose-frame="yard">
               <div class="pose-image-wrap">
                 <img src="dog-pose-yard.jpg" alt="Large golden dog crouching on artificial grass outdoors">
-                <span class="pose-scan" aria-hidden="true"></span>
-                <svg class="pose-overlay" viewBox="0 0 1536 1218" aria-label="Six numbered DeepLabCut body points over the yard frame">
+                <svg class="pose-overlay" viewBox="0 0 1536 1218" preserveAspectRatio="xMidYMid slice" aria-label="Six numbered DeepLabCut body points over the yard frame">
                   <polyline class="pose-geometry pose-spine-line" points="660,646 799,572 937,585"></polyline><line class="pose-geometry pose-joint-line" x1="937" y1="585" x2="970" y2="565"></line><polyline class="pose-geometry pose-tail-line" points="970,565 1075,512 1183,451"></polyline><path class="pose-geometry pose-angle" d="M660 646 Q799 510 937 585"></path>
                   <g class="pose-keypoint spine-point" tabindex="0"><circle cx="660" cy="646" r="32"></circle><text class="point-number" x="660" y="658">1</text><g class="pose-confidence-label" transform="translate(602 675)"><rect width="116" height="38" rx="10"></rect><text x="58" y="26">S1 · 96%</text></g><title>Spine point 1, 96 percent confidence</title></g>
                   <g class="pose-keypoint spine-point" tabindex="0"><circle cx="799" cy="572" r="32"></circle><text class="point-number" x="799" y="584">2</text><g class="pose-confidence-label" transform="translate(742 510)"><rect width="114" height="38" rx="10"></rect><text x="57" y="26">S2 · 94%</text></g><title>Spine point 2, 94 percent confidence</title></g>
@@ -102,8 +101,7 @@
             <article class="pose-image-card" tabindex="0" role="button" aria-pressed="false" data-pose-frame="indoor">
               <div class="pose-image-wrap">
                 <img src="dog-pose-indoor.jpg" alt="Small tan dog sitting on a gray sofa indoors">
-                <span class="pose-scan" aria-hidden="true"></span>
-                <svg class="pose-overlay" viewBox="0 0 959 1280" aria-label="Six numbered DeepLabCut body points over the indoor frame">
+                <svg class="pose-overlay" viewBox="0 0 959 1280" preserveAspectRatio="xMidYMid slice" aria-label="Six numbered DeepLabCut body points over the indoor frame">
                   <polyline class="pose-geometry pose-spine-line" points="278,755 374,678 480,640"></polyline><line class="pose-geometry pose-joint-line" x1="278" y1="755" x2="258" y2="760"></line><polyline class="pose-geometry pose-tail-line low-confidence-line" points="258,760 220,781 173,806"></polyline><path class="pose-geometry pose-angle" d="M278 755 Q374 620 480 640"></path>
                   <g class="pose-keypoint spine-point" tabindex="0"><circle cx="278" cy="755" r="26"></circle><text class="point-number" x="278" y="765">1</text><g class="pose-confidence-label" transform="translate(286 780)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">S1 · 90%</text></g><title>Spine point 1, 90 percent confidence</title></g>
                   <g class="pose-keypoint spine-point" tabindex="0"><circle cx="374" cy="678" r="26"></circle><text class="point-number" x="374" y="688">2</text><g class="pose-confidence-label" transform="translate(335 620)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">S2 · 93%</text></g><title>Spine point 2, 93 percent confidence</title></g>
@@ -119,7 +117,7 @@
           </div>
 
           <div class="pose-confidence-summary" aria-live="polite"><div><span>Spine-point confidence</span><strong id="pose-spine-confidence">94%</strong></div><div><span>Tail-point confidence</span><strong id="pose-tail-confidence">89%</strong></div><div><span>Body motion</span><strong id="pose-motion">Low</strong></div></div>
-          <div class="pose-decision" aria-live="polite"><div><p class="label">Selected photo</p><h3 id="pose-frame-title">Yard frame</h3><p id="pose-frame-note">The spine and tail points match the target posture. The system still checks several nearby frames before confirming the event.</p></div><div class="pose-score"><span>Recent frames matching the target posture</span><strong id="pose-frame-score">81%</strong><i><b id="pose-frame-bar" style="width:81%"></b></i><small id="pose-frame-decision">Above the 75% match threshold</small></div><button type="button" class="dog-run-button" id="pose-run">Analyze selected photo</button></div>
+          <div class="pose-decision" aria-live="polite"><div><p class="label">Selected photo</p><h3 id="pose-frame-title">Yard frame</h3><p id="pose-frame-note">The spine and tail points match the target posture. The system still checks several nearby frames before confirming the event.</p></div><div class="pose-score"><span>Recent frames matching the target posture</span><strong id="pose-frame-score">81%</strong><i><b id="pose-frame-bar" style="width:81%"></b></i><small id="pose-frame-decision">Above the 75% match threshold</small></div></div>
           <p class="dog-method-note">The overlays show how the six-point system reads each photo. The percentages demonstrate the interface and do not represent measured production results.</p>
         </div>
         <div class="state-track"><div><span>01</span><strong>Watch</strong><small>Read one camera frame</small></div><div><span>02</span><strong>Mark</strong><small>Find six body points</small></div><div><span>03</span><strong>Compare</strong><small>Check the posture across frames</small></div><div><span>04</span><strong>Save</strong><small>Log the time and location</small></div></div>
