@@ -122,26 +122,37 @@ document.querySelectorAll("[data-release-orbit]").forEach((button) => {
 });
 
 const replicationStages = {
+  recognize: {
+    kicker: "Late M / early G1",
+    title: "ORC recognizes an origin.",
+    copy: "Yeast origins contain an autonomously replicating sequence, or ARS. A nucleosome-free region gives the Origin Recognition Complex access to this DNA.",
+    plain: "ORC marks a place where DNA copying is allowed to begin.",
+    method: "Fkh1 and Fkh2 act later, after the origin has been recognized and licensed.",
+    caption: "A nucleosome-free ARS gives ORC access to the origin.",
+  },
   license: {
     kicker: "G1 phase",
-    title: "Prepare the DNA starting points.",
-    copy: "The cell loads an inactive Mcm2-7 helicase at replication origins. This prepares the DNA for one controlled round of copying.",
-    plain: "Set up the places where copying will begin.",
-    method: "Synchronized yeast cells in G1 and compared protein binding at selected origins.",
+    title: "Cdc6 and Cdt1 load the helicase.",
+    copy: "Cdc6 joins ORC, while Cdt1 brings Mcm2-7 to the origin. Two Mcm2-7 rings load head-to-head around the DNA and remain inactive until S phase.",
+    plain: "The cell installs an inactive DNA-unwinding motor before copying starts.",
+    method: "Licensing happens once per cycle so the genome is copied once, not repeatedly.",
+    caption: "Cdc6 and Cdt1 load an inactive Mcm2-7 double hexamer around the DNA.",
+  },
+  recruit: {
+    kicker: "Late G1",
+    title: "Forkhead proteins favor selected early origins.",
+    copy: "Fkh1 and Fkh2 bind DNA near some licensed origins, interact with ORC, and help those origins gather limiting activation factors such as Dbf4-Cdc7 and Cdc45.",
+    plain: "Forkhead proteins help flag which prepared origins should start early.",
+    method: "Changing Forkhead binding or Dbf4 recruitment tests whether an origin loses its early timing.",
+    caption: "Forkhead proteins help selected origins collect limiting activation factors.",
   },
   fire: {
-    kicker: "Early S phase",
-    title: "Turn selected starting points on.",
-    copy: "Cell-cycle signals activate prepared origins. Fkh1 and Fkh2 help some origins recruit proteins such as Dbf4 and Cdc45 so copying begins earlier.",
-    plain: "Choose which prepared starting points begin first.",
-    method: "Compared origin activity after changing Forkhead proteins or their binding partners.",
-  },
-  measure: {
-    kicker: "S phase measurement",
-    title: "Measure where and when copying happened.",
-    copy: "BrdU labeling, ChIP, qPCR, and sequencing reveal which DNA regions were copied or bound by a protein of interest.",
-    plain: "Track the DNA regions that copied early, late, or not as expected.",
-    method: "Used internal controls and synchronized samples so differences reflected biology instead of sample noise.",
+    kicker: "S phase",
+    title: "The active helicase opens two copying forks.",
+    copy: "DDK and S-CDK trigger activation. Cdc45 and GINS join Mcm2-7 to form the CMG helicase. CMG opens the duplex while DNA polymerases build new strands in opposite directions.",
+    plain: "The inactive motor turns on, opens the DNA, and sends two copying teams outward.",
+    method: "BrdU sequencing tracks newly copied DNA, while FACS checks that cell-cycle timing stayed comparable.",
+    caption: "CMG unwinds DNA while polymerases build new strands at two moving forks.",
   },
 };
 
@@ -159,6 +170,8 @@ function renderReplicationStage(stageName) {
   document.querySelector("#replication-stage-copy").textContent = stage.copy;
   document.querySelector("#replication-plain").textContent = stage.plain;
   document.querySelector("#replication-method").textContent = stage.method;
+  const caption = document.querySelector("#machine-caption");
+  if (caption) caption.textContent = stage.caption;
 }
 
 document.querySelectorAll("[data-replication-stage]").forEach((button) => {
@@ -168,31 +181,39 @@ document.querySelectorAll("[data-replication-stage]").forEach((button) => {
 const hcmSteps = {
   design: {
     label: "Step 01",
-    title: "Design primers around the target.",
-    copy: "Each primer contains a region matching HCM1 and a region used to build the edit. The matching ends guide the new DNA to the correct place in the yeast genome.",
-    result: "Output: a precise DNA-editing plan",
-    action: "Primers add matching DNA around the planned HCM1 change.",
+    title: "Design primers that carry the mutation.",
+    copy: "The forward and reverse primers match opposite DNA strands and include the planned HCM1 DNA-binding changes. Their overlap tells PCR exactly which bases to copy.",
+    result: "Question answered: what exact sequence are we trying to build?",
   },
-  build: {
+  pcr: {
     label: "Step 02",
-    title: "Build the editing DNA with PCR.",
-    copy: "PCR copies the mutation and selection marker into one DNA fragment. Template modules make deletion, tagging, and promoter changes possible without cloning the whole gene first.",
-    result: "Output: a concentrated DNA fragment for transformation",
-    action: "PCR joins the HCM1 change, selection marker, and matching DNA arms.",
+    title: "Copy the edited DNA with PCR.",
+    copy: "Each PCR cycle separates the strands, lets the primers bind, and extends new DNA. Repeating the cycle produces enough edited fragment for transformation.",
+    result: "Question answered: did we make enough DNA carrying the planned edit?",
   },
   transform: {
     label: "Step 03",
-    title: "Place the DNA into yeast cells.",
-    copy: "A lithium acetate transformation helps yeast take up the PCR fragment. The cell uses matching DNA on both ends to place the change at HCM1.",
-    result: "Output: colonies that might carry the edit",
-    action: "Homologous recombination places the designed fragment into the genome.",
+    title: "Move the DNA into yeast.",
+    copy: "Lithium acetate and PEG help the PCR fragment enter yeast cells. Each surviving colony begins from a cell that may have taken up the DNA.",
+    result: "Question answered: which cells received material from the experiment?",
   },
-  confirm: {
+  recombine: {
     label: "Step 04",
-    title: "Confirm the right change in the right place.",
-    copy: "Selection narrows the candidates. Colony PCR checks the integration site, and sequencing verifies the intended HCM1 sequence.",
-    result: "Output: a verified HCM1 mutant strain",
-    action: "PCR and sequencing separate confirmed edits from false positives.",
+    title: "Let matching DNA guide the edit.",
+    copy: "The fragment aligns with matching genomic DNA on both sides of HCM1. Yeast repair machinery uses those matching regions to replace the original sequence.",
+    result: "Question answered: how does the edit reach the intended genomic location?",
+  },
+  screen: {
+    label: "Step 05",
+    title: "Screen the colonies.",
+    copy: "Selection removes many cells that did not take up the marker. Colony PCR then uses primers around HCM1 to check for a product at the expected size.",
+    result: "Question answered: which colonies are strong candidates for the correct edit?",
+  },
+  sequence: {
+    label: "Step 06",
+    title: "Read the exact DNA letters.",
+    copy: "Sanger sequencing aligns each colony read with the expected HCM1 sequence. Matching peaks at the designed bases provide the final confirmation.",
+    result: "Question answered: does the strain contain the exact intended mutation?",
   },
 };
 
@@ -209,11 +230,80 @@ function renderHcmStep(stepName) {
   document.querySelector("#hcm-step-title").textContent = step.title;
   document.querySelector("#hcm-step-copy").textContent = step.copy;
   document.querySelector("#hcm-step-result").textContent = step.result;
-  document.querySelector("#gene-action").textContent = step.action;
 }
 
 document.querySelectorAll("[data-hcm-step]").forEach((button) => {
   button.addEventListener("click", () => renderHcmStep(button.dataset.hcmStep));
+});
+
+const forkheadContacts = {
+  core: {
+    label: "Core recognition",
+    title: "Helix H3 reads the main DNA sequence.",
+    copy: "H3 sits in the DNA major groove and makes base-specific contacts with the GTAAACA core motif. This provides the main sequence-recognition step.",
+    result: "Main idea: the core motif tells Fkh1 where to bind.",
+  },
+  wing1: {
+    label: "3′ flanking contact",
+    title: "Wing 1 checks the DNA beside the core.",
+    copy: "Wing 1 reaches into the 3′ flanking minor groove. Lysine 373 helps anchor this contact, so the protein reads more than the seven-base core motif.",
+    result: "Main idea: neighboring DNA helps steady the protein-DNA complex.",
+  },
+  wing2: {
+    label: "5′ flanking contact",
+    title: "The extended Wing 2 grips the opposite flank.",
+    copy: "The unusually long Wing 2 reaches the 5′ flanking minor groove. Arginines 400 and 401 support this contact, while helices H5 and H6 stabilize the wing.",
+    result: "Main idea: Fkh1 reads DNA shape and sequence on both sides of the core.",
+  },
+};
+
+function renderForkheadContact(contactName) {
+  const contact = forkheadContacts[contactName];
+  const visual = document.querySelector("#forkhead-visual");
+  if (!contact || !visual) return;
+  document.querySelectorAll("[data-forkhead-contact]").forEach((button) => {
+    const active = button.dataset.forkheadContact === contactName;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-selected", String(active));
+  });
+  visual.dataset.contact = contactName;
+  document.querySelector("#forkhead-contact-label").textContent = contact.label;
+  document.querySelector("#forkhead-contact-title").textContent = contact.title;
+  document.querySelector("#forkhead-contact-copy").textContent = contact.copy;
+  document.querySelector("#forkhead-contact-result").textContent = contact.result;
+}
+
+document.querySelectorAll("[data-forkhead-contact]").forEach((button) => {
+  button.addEventListener("click", () => renderForkheadContact(button.dataset.forkheadContact));
+});
+
+const sequencingStages = {
+  crosslink: { label: "Stage 01", title: "Freeze protein-DNA contacts.", copy: "Crosslinking preserves a snapshot of which DNA fragments carried the tagged protein at that moment in the cell cycle.", result: "Question answered: what protein-DNA contacts existed in the cells?" },
+  pull: { label: "Stage 02", title: "Pull down the tagged protein.", copy: "An antibody catches the FLAG tag. The attached DNA comes with it, while most unrelated fragments wash away.", result: "Question answered: which DNA was attached to the protein of interest?" },
+  library: { label: "Stage 03", title: "Add adapters and copy the library.", copy: "Known adapter sequences attach to both ends of each fragment. Universal primers then copy the unknown DNA between those adapters.", result: "Question answered: is the purified DNA ready for the sequencer?" },
+  qc: { label: "Stage 04", title: "Check library size and concentration.", copy: "A Bioanalyzer reveals the fragment-size range and unwanted primer dimers. Only clean, balanced libraries move into the final pool.", result: "Question answered: is this sample strong enough to sequence and compare?" },
+  sequence: { label: "Stage 05", title: "Read millions of short fragments.", copy: "The sequencer converts each library molecule into a short string of DNA letters. Each read still needs a genomic address.", result: "Question answered: what DNA sequences were enriched in the sample?" },
+  align: { label: "Stage 06", title: "Align reads and find binding peaks.", copy: "Software maps reads to the yeast genome, sorts them, removes repeated copies, groups signal into 50-base bins, and normalizes samples.", result: "Question answered: where did the protein bind more strongly than the control?" },
+};
+
+function renderSequencingStage(stageName) {
+  const stage = sequencingStages[stageName];
+  const visual = document.querySelector("#seq-visual");
+  if (!stage || !visual) return;
+  document.querySelectorAll("[data-seq-stage]").forEach((button) => {
+    const active = button.dataset.seqStage === stageName;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-selected", String(active));
+  });
+  visual.dataset.stage = stageName;
+  document.querySelector("#seq-stage-label").textContent = stage.label;
+  document.querySelector("#seq-stage-title").textContent = stage.title;
+  document.querySelector("#seq-stage-copy").textContent = stage.copy;
+  document.querySelector("#seq-stage-result").textContent = stage.result;
+}
+
+document.querySelectorAll("[data-seq-stage]").forEach((button) => {
+  button.addEventListener("click", () => renderSequencingStage(button.dataset.seqStage));
 });
 
 const plateStages = {
