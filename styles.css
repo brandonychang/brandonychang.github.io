@@ -4356,3 +4356,59 @@ a.index-row:hover .index-arrow {
   .xposition-surface .route-score-bars { grid-template-columns: 1fr; }
   .encoding-facts { gap: .5rem; }
 }
+
+/* V15 accessibility and interaction pass */
+
+/* Keep the illustrative first matrix in the markup for graceful fallback, while the clearer sidecar is the primary view. */
+.protein-lab-page > .encoding-section,
+.protein-lab-page > .encoding-explainer { display: none; }
+
+.encoding-lab-v2 {
+  background: #19181c;
+  color: #f2edf5;
+  display: grid;
+  gap: var(--u8);
+  margin-inline: calc(var(--margin) * -1);
+  padding: var(--u10) var(--margin);
+}
+.encoding-v2-intro { display: grid; gap: var(--u2); max-width: 48rem; }
+.encoding-v2-intro h2 { color: #f2edf5; font-family: var(--font-grotesk); font-size: clamp(var(--t-3), 4vw, var(--t-5)); font-weight: 500; letter-spacing: var(--tr-display); line-height: 1.05; }
+.encoding-v2-intro > p:not(.label) { color: #b8b2bb; font-size: var(--t-0); line-height: 1.55; max-width: 43rem; }
+.encoding-v2-key { display: flex; flex-wrap: wrap; gap: .8rem 1.5rem; margin-top: var(--u2); }
+.encoding-v2-key span { align-items: center; color: #cbc5ce; display: inline-flex; font-family: var(--font-grotesk); font-size: .75rem; gap: .45rem; }
+.encoding-v2-key i { border: 1px solid #514957; display: inline-block; height: .8rem; width: .8rem; }
+.encoding-v2-key .key-on { background: var(--case-accent); border-color: var(--case-accent); }
+.encoding-v2-key .key-off { background: #242127; }
+.encoding-v2-grid { align-items: start; display: grid; gap: var(--u5); grid-template-columns: minmax(0, 1.22fr) minmax(19rem, .78fr); }
+.encoding-matrix-v2 { min-width: 0; overflow-x: auto; padding-bottom: .25rem; }
+.encoding-matrix-v2 .matrix-axis { align-items: center; color: #8e8791; display: grid; font-family: var(--font-grotesk); font-size: .66rem; grid-template-columns: 2.25rem minmax(18rem, 1fr) 9.5rem; gap: .5rem; letter-spacing: .07em; padding: 0 .75rem .45rem; text-transform: uppercase; }
+.encoding-matrix-v2 .matrix-axis span:nth-child(2) { text-align: center; }
+.encoding-matrix-v2 .matrix-row { min-width: 31rem; }
+.encoding-v2-readout { align-self: start; border-top: 0; min-width: 0; }
+.encoding-v2-readout .encoding-vector code { font-size: .68rem; }
+
+.xposition-surface .parking-choice-copy h2 { font-size: clamp(1.18rem, 2vw, 2rem); letter-spacing: -.05em; white-space: nowrap; }
+.feature-crowd .feature-demo { padding-inline: var(--u4); }
+.feature-crowd .feature-demo span:first-child { margin-right: .75rem; }
+.feature-crowd .feature-demo strong { margin-left: .75rem; }
+
+/* Preserve the map's coordinate system so hotspots remain round while the aside matches its full height. */
+.xposition-map-wrap { align-self: stretch; display: flex; flex-direction: column; min-height: 0; }
+.xposition-map { flex: 0 0 auto; height: auto; min-height: 0; }
+.xposition-map-wrap .xposition-legend { flex: 0 0 auto; }
+
+@media (max-width: 860px) {
+  .encoding-v2-grid { grid-template-columns: 1fr; }
+  .encoding-v2-readout { width: min(100%, 42rem); }
+}
+
+@media (max-width: 800px) {
+  .xposition-map-wrap { min-height: 0; }
+}
+
+@media (max-width: 560px) {
+  .encoding-lab-v2 { padding-inline: var(--margin); }
+  .encoding-matrix-v2 .matrix-axis { grid-template-columns: 2.25rem minmax(18rem, 1fr) 8rem; }
+  .xposition-surface .parking-choice-copy h2 { white-space: normal; }
+  .feature-crowd .feature-demo { padding-inline: var(--u2); }
+}

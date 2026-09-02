@@ -97,15 +97,16 @@ const aminoAcidInfo = {
 function renderEncodingReadout(row) {
   const aa = row?.querySelector("strong")?.textContent.trim();
   const info = aminoAcidInfo[aa];
-  if (!aa || !info || !document.querySelector("#encoding-aa")) return;
+  if (!aa || !info) return;
   const index = Object.keys(aminoAcidInfo).indexOf(aa) + 1;
   const vector = Array.from({ length: 20 }, (_, i) => i === index - 1 ? 1 : 0);
-  document.querySelector("#encoding-aa").textContent = aa;
-  document.querySelector("#encoding-name").textContent = info[0];
-  document.querySelector("#encoding-position").textContent = `Position ${String(index).padStart(2, "0")} of the 20-class alphabet · ${info[1]}`;
-  document.querySelector("#encoding-copy").textContent = `${info[0]} turns on feature ${index}. One-hot encoding preserves the residue identity without pretending that ${aa} is numerically closer to one amino acid than another.`;
-  document.querySelector("#encoding-vector-value").textContent = `[${vector.join(", ")}]`;
-  document.querySelector("#encoding-shape").textContent = "1 × 20";
+  const setText = (selector, value) => document.querySelectorAll(selector).forEach((node) => { node.textContent = value; });
+  setText("#encoding-aa, #encoding-v2-aa", aa);
+  setText("#encoding-name, #encoding-v2-name", info[0]);
+  setText("#encoding-position, #encoding-v2-position", `Position ${String(index).padStart(2, "0")} of the 20-class alphabet · ${info[1]}`);
+  setText("#encoding-copy, #encoding-v2-copy", `${info[0]} turns on feature ${index}. One-hot encoding preserves the residue identity without pretending that ${aa} is numerically closer to one amino acid than another.`);
+  setText("#encoding-vector-value, #encoding-v2-vector-value", `[${vector.join(", ")}]`);
+  setText("#encoding-shape, #encoding-v2-shape", "1 × 20");
   document.querySelectorAll(".matrix-row").forEach((item) => item.classList.toggle("selected", item === row));
 }
 
