@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="An interactive computer-vision case study for detecting dog behavior with pose estimation, temporal voting, localization, and alerts.">
+  <meta name="description" content="An interactive case study about using a dog's posture and movement to detect an event and mark its cleanup location.">
   <title>AI Dog Poop Detector | Brandon Y. Chang</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=10">
-  <script src="script.js?v=10" defer></script>
+  <link rel="stylesheet" href="styles.css?v=11">
+  <script src="script.js?v=11" defer></script>
 </head>
 <body class="case-page detector-case"><div class="shell">
   <header class="masthead-bar"><div class="page"><div class="bar">
@@ -21,11 +21,11 @@
   <div id="mobile-menu" class="drawer" aria-hidden="true"><div class="page drawer-inner"><a href="index.html" class="drawer-link">Home</a><a href="index.html#about" class="drawer-link">About</a><a href="index.html#work" class="drawer-link">Work</a><a href="index.html#experience" class="drawer-link">Experience</a><a href="index.html#contact" class="drawer-link">Contact</a></div></div>
   <main><div class="page">
     <section class="case-intro">
-      <div class="case-folio"><a class="label" href="index.html#work">← Selected work</a><span class="label">Case study 07 / 08</span></div>
+      <div class="case-folio"><a class="label" href="index.html#work">← Selected work</a><span class="label">Case study 07 / 09</span></div>
       <p class="label headnote">Side project / Pose estimation + event logic</p>
       <h1 class="case-title"><span>AI Dog Poop</span><span>Detector</span></h1>
-      <p class="case-tagline">A behavior-first product concept that watches posture over time, logs an event, and turns the yard into a simple cleanup map.</p>
-      <dl class="case-credits"><div><dt class="label">Product idea</dt><dd>Detect the behavior instead of searching for the object</dd></div><div><dt class="label">Technical approach</dt><dd>DeepLabCut · six keypoints · temporal voting · OpenCV</dd></div><div><dt class="label">Evaluation</dt><dd>False alerts · missed events · latency · localization error</dd></div></dl>
+      <p class="case-tagline">A camera system that recognizes a dog’s posture, confirms the behavior across several frames, and marks the cleanup location.</p>
+      <dl class="case-credits"><div><dt class="label">Product idea</dt><dd>Recognize the behavior instead of searching for waste afterward</dd></div><div><dt class="label">How it works</dt><dd>Six body points · motion · repeated-frame checks · OpenCV</dd></div><div><dt class="label">Tests</dt><dd>False alerts · missed events · response time · location accuracy</dd></div></dl>
     </section>
 
     <section class="case-glance"><p class="label">Core insight</p><p class="case-promise">Dog waste changes shape, color, and visibility. A crouched spine, straight tail, and stationary pose form a more consistent signal.</p></section>
@@ -34,14 +34,14 @@
       <div class="camera-screen" id="dog-camera-screen">
         <div class="camera-dog"><i class="dog-head"></i><i class="dog-body"></i><i class="dog-leg dog-leg-a"></i><i class="dog-leg dog-leg-b"></i><i class="dog-tail"></i></div>
         <div class="dog-keypoints" aria-hidden="true"><i style="--x:39%;--y:48%"></i><i style="--x:49%;--y:51%"></i><i style="--x:59%;--y:55%"></i><i style="--x:67%;--y:48%"></i><i style="--x:74%;--y:42%"></i><i style="--x:82%;--y:37%"></i></div>
-        <div class="detection-box"><span id="dog-event-label">candidate posture · collecting votes</span></div>
+        <div class="detection-box"><span id="dog-event-label">possible event · checking more frames</span></div>
         <div class="yard-marker" id="yard-marker" aria-hidden="true"></div>
         <div class="camera-ui"><span>REC</span><span id="dog-clock">14:32:08</span></div>
       </div>
       <div class="camera-copy">
         <p class="label">Try the event loop</p>
-        <h2 id="dog-live-title">Candidate detected</h2>
-        <p id="dog-live-copy">Run the detector to aggregate posture votes, confirm the event, and place the rear-location marker.</p>
+        <h2 id="dog-live-title">Possible event found</h2>
+        <p id="dog-live-copy">Run the detector to check several frames, confirm the event, and mark the cleanup location.</p>
         <button type="button" class="dog-run-button" id="dog-run">Run detector</button>
         <div class="camera-actions" id="dog-actions"><span>Event log waiting</span><span>Cleanup map waiting</span></div>
       </div>
@@ -50,8 +50,8 @@
     <section class="dog-lab" aria-labelledby="dog-lab-title">
       <div class="dog-lab-copy">
         <p class="label">Interactive threshold lab</p>
-        <h2 id="dog-lab-title">Tune sensitivity against alert fatigue.</h2>
-        <p>This simulation shows the product tradeoff. A lower vote threshold and shorter duration react quickly but admit more false positives. Stricter settings reduce noise but increase missed events.</p>
+        <h2 id="dog-lab-title">Balance fast alerts with fewer mistakes.</h2>
+        <p>Lower settings react faster but create more false alerts. Higher settings wait for more evidence and risk missing short events.</p>
         <div class="dog-sliders">
           <label for="dog-confidence"><span>Vote threshold</span><output id="dog-confidence-output">75%</output><input id="dog-confidence" type="range" min="50" max="95" value="75"></label>
           <label for="dog-duration"><span>Required duration</span><output id="dog-duration-output">3.0s</output><input id="dog-duration" type="range" min="1" max="6" step=".5" value="3"></label>
@@ -63,7 +63,7 @@
         <strong id="dog-lab-status">Balanced</strong>
         <div class="dog-gauge"><i id="dog-gauge-fill"></i></div>
         <dl><div><dt>Estimated sensitivity</dt><dd id="dog-sensitivity">78%</dd></div><div><dt>False-alert risk</dt><dd id="dog-false-risk">Medium</dd></div><div><dt>Response</dt><dd id="dog-response">3.0 seconds</dd></div></dl>
-        <p id="dog-lab-note">A 75% temporal vote mirrors the behavior-first concept in the project notes.</p>
+        <p id="dog-lab-note">A clear view makes it easiest to find the dog's body points.</p>
       </div>
     </section>
 
@@ -72,13 +72,13 @@
       <div class="story-copy prose"><p>A generic object detector asks the camera to recognize waste after it appears. That approach breaks under grass, darkness, scale, occlusion, and changing appearance. The stronger product hypothesis recognizes the dog’s behavior at the moment the location is known.</p><p>The working definition combines three spine points, three tail points, body motion, and time. One frame never decides the event. Evidence accumulates across consecutive frames.</p></div>
     </section>
 
-    <section class="story-section">
+    <section class="story-section dog-inspector-section">
       <div class="story-heading"><span class="label story-num">02</span><h2>DeepLabCut annotation inspector</h2></div>
       <div class="story-copy">
         <div class="pose-inspector">
           <div class="pose-inspector-head">
             <div><p class="label">Two frames, two model decisions</p><h3>See how six body points become a decision.</h3><p>Choose a photo, switch visible layers on or off, then run the simulated frame analysis.</p></div>
-            <div><div class="pose-layer-controls" aria-label="Annotation layers"><button type="button" class="active" aria-pressed="true" data-pose-layer="keypoints">Body points</button><button type="button" class="active" aria-pressed="true" data-pose-layer="geometry">Posture lines</button><button type="button" class="active" aria-pressed="true" data-pose-layer="confidence">Confidence labels</button></div><p class="pose-layer-status" id="pose-layer-status" aria-live="polite">All 3 annotation layers shown</p></div>
+            <div><div class="pose-layer-controls" aria-label="Photo views"><button type="button" class="active" aria-pressed="true" data-pose-layer="keypoints">Body points</button><button type="button" class="active" aria-pressed="true" data-pose-layer="geometry">Posture lines</button><button type="button" class="active" aria-pressed="true" data-pose-layer="confidence">Confidence table</button></div><p class="pose-layer-status" id="pose-layer-status" aria-live="polite">All 3 views shown</p></div>
           </div>
           <div class="pose-image-grid" id="pose-image-grid">
             <article class="pose-image-card active" tabindex="0" role="button" aria-pressed="true" data-pose-frame="yard">
@@ -87,16 +87,16 @@
                 <span class="pose-scan" aria-hidden="true"></span>
                 <svg class="pose-overlay" viewBox="0 0 1536 1218" aria-label="Six numbered DeepLabCut body points over the yard frame">
                   <polyline class="pose-geometry pose-spine-line" points="660,646 799,572 937,585"></polyline><line class="pose-geometry pose-joint-line" x1="937" y1="585" x2="970" y2="565"></line><polyline class="pose-geometry pose-tail-line" points="970,565 1075,512 1183,451"></polyline><path class="pose-geometry pose-angle" d="M660 646 Q799 510 937 585"></path>
-                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="660" cy="646" r="22"></circle><text class="point-number" x="660" y="654">1</text><g class="pose-confidence-label" transform="translate(602 675)"><rect width="116" height="38" rx="10"></rect><text x="58" y="26">S1 · 96%</text></g><title>Spine point 1, 96 percent confidence</title></g>
-                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="799" cy="572" r="22"></circle><text class="point-number" x="799" y="580">2</text><g class="pose-confidence-label" transform="translate(742 510)"><rect width="114" height="38" rx="10"></rect><text x="57" y="26">S2 · 94%</text></g><title>Spine point 2, 94 percent confidence</title></g>
-                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="937" cy="585" r="22"></circle><text class="point-number" x="937" y="593">3</text><g class="pose-confidence-label" transform="translate(870 615)"><rect width="114" height="38" rx="10"></rect><text x="57" y="26">S3 · 92%</text></g><title>Spine point 3, 92 percent confidence</title></g>
-                  <g class="pose-keypoint tail-point" tabindex="0"><circle cx="970" cy="565" r="22"></circle><text class="point-number" x="970" y="573">4</text><g class="pose-confidence-label" transform="translate(966 505)"><rect width="112" height="38" rx="10"></rect><text x="56" y="26">T1 · 91%</text></g><title>Tail base, 91 percent confidence</title></g>
-                  <g class="pose-keypoint tail-point" tabindex="0"><circle cx="1075" cy="512" r="22"></circle><text class="point-number" x="1075" y="520">5</text><g class="pose-confidence-label" transform="translate(1050 450)"><rect width="112" height="38" rx="10"></rect><text x="56" y="26">T2 · 89%</text></g><title>Tail midpoint, 89 percent confidence</title></g>
-                  <g class="pose-keypoint tail-point" tabindex="0"><circle cx="1183" cy="451" r="22"></circle><text class="point-number" x="1183" y="459">6</text><g class="pose-confidence-label" transform="translate(1172 390)"><rect width="112" height="38" rx="10"></rect><text x="56" y="26">T3 · 86%</text></g><title>Tail tip, 86 percent confidence</title></g>
+                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="660" cy="646" r="32"></circle><text class="point-number" x="660" y="658">1</text><g class="pose-confidence-label" transform="translate(602 675)"><rect width="116" height="38" rx="10"></rect><text x="58" y="26">S1 · 96%</text></g><title>Spine point 1, 96 percent confidence</title></g>
+                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="799" cy="572" r="32"></circle><text class="point-number" x="799" y="584">2</text><g class="pose-confidence-label" transform="translate(742 510)"><rect width="114" height="38" rx="10"></rect><text x="57" y="26">S2 · 94%</text></g><title>Spine point 2, 94 percent confidence</title></g>
+                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="937" cy="585" r="32"></circle><text class="point-number" x="937" y="597">3</text><g class="pose-confidence-label" transform="translate(870 615)"><rect width="114" height="38" rx="10"></rect><text x="57" y="26">S3 · 92%</text></g><title>Spine point 3, 92 percent confidence</title></g>
+                  <g class="pose-keypoint tail-point" tabindex="0"><circle cx="970" cy="565" r="32"></circle><text class="point-number" x="970" y="577">4</text><g class="pose-confidence-label" transform="translate(966 505)"><rect width="112" height="38" rx="10"></rect><text x="56" y="26">T1 · 91%</text></g><title>Tail base, 91 percent confidence</title></g>
+                  <g class="pose-keypoint tail-point" tabindex="0"><circle cx="1075" cy="512" r="32"></circle><text class="point-number" x="1075" y="524">5</text><g class="pose-confidence-label" transform="translate(1050 450)"><rect width="112" height="38" rx="10"></rect><text x="56" y="26">T2 · 89%</text></g><title>Tail midpoint, 89 percent confidence</title></g>
+                  <g class="pose-keypoint tail-point" tabindex="0"><circle cx="1183" cy="451" r="32"></circle><text class="point-number" x="1183" y="463">6</text><g class="pose-confidence-label" transform="translate(1172 390)"><rect width="112" height="38" rx="10"></rect><text x="56" y="26">T3 · 86%</text></g><title>Tail tip, 86 percent confidence</title></g>
                 </svg>
                 <span class="pose-frame-badge">Possible target posture</span>
               </div>
-              <div><strong>Yard frame</strong><small>Crouched spine · visible tail · low motion</small></div>
+              <div><strong>Yard frame</strong><small>Curved spine · tail visible · body mostly still</small><ol class="pose-point-key" aria-label="Yard frame body-point confidence"><li><b>1</b><span>Spine front</span><em>96%</em></li><li><b>2</b><span>Spine middle</span><em>94%</em></li><li><b>3</b><span>Spine rear</span><em>92%</em></li><li><b>4</b><span>Tail base</span><em>91%</em></li><li><b>5</b><span>Tail middle</span><em>89%</em></li><li><b>6</b><span>Tail tip</span><em>86%</em></li></ol></div>
             </article>
 
             <article class="pose-image-card" tabindex="0" role="button" aria-pressed="false" data-pose-frame="indoor">
@@ -105,44 +105,44 @@
                 <span class="pose-scan" aria-hidden="true"></span>
                 <svg class="pose-overlay" viewBox="0 0 959 1280" aria-label="Six numbered DeepLabCut body points over the indoor frame">
                   <polyline class="pose-geometry pose-spine-line" points="278,755 374,678 480,640"></polyline><line class="pose-geometry pose-joint-line" x1="278" y1="755" x2="258" y2="760"></line><polyline class="pose-geometry pose-tail-line low-confidence-line" points="258,760 220,781 173,806"></polyline><path class="pose-geometry pose-angle" d="M278 755 Q374 620 480 640"></path>
-                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="278" cy="755" r="18"></circle><text class="point-number" x="278" y="762">1</text><g class="pose-confidence-label" transform="translate(286 780)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">S1 · 90%</text></g><title>Spine point 1, 90 percent confidence</title></g>
-                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="374" cy="678" r="18"></circle><text class="point-number" x="374" y="685">2</text><g class="pose-confidence-label" transform="translate(335 620)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">S2 · 93%</text></g><title>Spine point 2, 93 percent confidence</title></g>
-                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="480" cy="640" r="18"></circle><text class="point-number" x="480" y="647">3</text><g class="pose-confidence-label" transform="translate(452 582)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">S3 · 95%</text></g><title>Spine point 3, 95 percent confidence</title></g>
-                  <g class="pose-keypoint tail-point low-confidence" tabindex="0"><circle cx="258" cy="760" r="18"></circle><text class="point-number" x="258" y="767">4</text><g class="pose-confidence-label" transform="translate(223 700)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">T1 · 54%</text></g><title>Tail base, 54 percent confidence</title></g>
-                  <g class="pose-keypoint tail-point low-confidence" tabindex="0"><circle cx="220" cy="781" r="18"></circle><text class="point-number" x="220" y="788">5</text><g class="pose-confidence-label" transform="translate(145 805)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">T2 · 31%</text></g><title>Tail midpoint, 31 percent confidence</title></g>
-                  <g class="pose-keypoint tail-point low-confidence" tabindex="0"><circle cx="173" cy="806" r="18"></circle><text class="point-number" x="173" y="813">6</text><g class="pose-confidence-label" transform="translate(77 850)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">T3 · 18%</text></g><title>Tail tip, 18 percent confidence</title></g>
+                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="278" cy="755" r="26"></circle><text class="point-number" x="278" y="765">1</text><g class="pose-confidence-label" transform="translate(286 780)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">S1 · 90%</text></g><title>Spine point 1, 90 percent confidence</title></g>
+                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="374" cy="678" r="26"></circle><text class="point-number" x="374" y="688">2</text><g class="pose-confidence-label" transform="translate(335 620)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">S2 · 93%</text></g><title>Spine point 2, 93 percent confidence</title></g>
+                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="480" cy="640" r="26"></circle><text class="point-number" x="480" y="650">3</text><g class="pose-confidence-label" transform="translate(452 582)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">S3 · 95%</text></g><title>Spine point 3, 95 percent confidence</title></g>
+                  <g class="pose-keypoint tail-point low-confidence" tabindex="0"><circle cx="258" cy="760" r="26"></circle><text class="point-number" x="258" y="770">4</text><g class="pose-confidence-label" transform="translate(223 700)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">T1 · 54%</text></g><title>Tail base, 54 percent confidence</title></g>
+                  <g class="pose-keypoint tail-point low-confidence" tabindex="0"><circle cx="220" cy="781" r="26"></circle><text class="point-number" x="220" y="791">5</text><g class="pose-confidence-label" transform="translate(145 805)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">T2 · 31%</text></g><title>Tail midpoint, 31 percent confidence</title></g>
+                  <g class="pose-keypoint tail-point low-confidence" tabindex="0"><circle cx="173" cy="806" r="26"></circle><text class="point-number" x="173" y="816">6</text><g class="pose-confidence-label" transform="translate(77 850)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">T3 · 18%</text></g><title>Tail tip, 18 percent confidence</title></g>
                 </svg>
                 <span class="pose-frame-badge">Similar pose, no alert</span>
               </div>
-              <div><strong>Indoor frame</strong><small>Similar crouch · tail occluded · active movement</small></div>
+              <div><strong>Indoor frame</strong><small>Similar crouch · tail partly hidden · body moving</small><ol class="pose-point-key" aria-label="Indoor frame body-point confidence"><li><b>1</b><span>Spine front</span><em>90%</em></li><li><b>2</b><span>Spine middle</span><em>93%</em></li><li><b>3</b><span>Spine rear</span><em>95%</em></li><li><b>4</b><span>Tail base</span><em>54%</em></li><li><b>5</b><span>Tail middle</span><em>31%</em></li><li><b>6</b><span>Tail tip</span><em>18%</em></li></ol></div>
             </article>
           </div>
 
           <div class="pose-confidence-summary" aria-live="polite"><div><span>Spine-point confidence</span><strong id="pose-spine-confidence">94%</strong></div><div><span>Tail-point confidence</span><strong id="pose-tail-confidence">89%</strong></div><div><span>Body motion</span><strong id="pose-motion">Low</strong></div></div>
-          <div class="pose-decision" aria-live="polite"><div><p class="label">Selected photo</p><h3 id="pose-frame-title">Yard frame</h3><p id="pose-frame-note">Strong spine and tail geometry match the target posture. The time window still decides whether the system confirms an event.</p></div><div class="pose-score"><span>Recent frames matching the target posture</span><strong id="pose-frame-score">81%</strong><i><b id="pose-frame-bar" style="width:81%"></b></i><small id="pose-frame-decision">Above the 75% match threshold</small></div><button type="button" class="dog-run-button" id="pose-run">Analyze selected photo</button></div>
-          <p class="dog-method-note">The overlays demonstrate how the six-point pipeline would read the provided frames. The percentages illustrate interface behavior rather than measured model output.</p>
+          <div class="pose-decision" aria-live="polite"><div><p class="label">Selected photo</p><h3 id="pose-frame-title">Yard frame</h3><p id="pose-frame-note">The spine and tail points match the target posture. The system still checks several nearby frames before confirming the event.</p></div><div class="pose-score"><span>Recent frames matching the target posture</span><strong id="pose-frame-score">81%</strong><i><b id="pose-frame-bar" style="width:81%"></b></i><small id="pose-frame-decision">Above the 75% match threshold</small></div><button type="button" class="dog-run-button" id="pose-run">Analyze selected photo</button></div>
+          <p class="dog-method-note">The overlays show how the six-point system reads each photo. The percentages demonstrate the interface and do not represent measured production results.</p>
         </div>
-        <div class="state-track"><div><span>01</span><strong>Observe</strong><small>Read camera frame</small></div><div><span>02</span><strong>Estimate</strong><small>Locate six keypoints</small></div><div><span>03</span><strong>Vote</strong><small>Aggregate geometry over time</small></div><div><span>04</span><strong>Record</strong><small>Log and map the event</small></div></div>
+        <div class="state-track"><div><span>01</span><strong>Watch</strong><small>Read one camera frame</small></div><div><span>02</span><strong>Mark</strong><small>Find six body points</small></div><div><span>03</span><strong>Compare</strong><small>Check the posture across frames</small></div><div><span>04</span><strong>Save</strong><small>Log the time and location</small></div></div>
       </div>
     </section>
 
     <section class="story-section">
-      <div class="story-heading"><span class="label story-num">03</span><h2>System notes</h2></div>
+      <div class="story-heading"><span class="label story-num">03</span><h2>How the system works</h2></div>
       <div class="story-copy"><div class="dog-notes">
-        <article><span>live.py</span><h3>Video ingestion</h3><p>Maintains the camera stream, samples frames, runs pose inference, passes coordinates to the processor, and handles reconnects.</p></article>
-        <article><span>DeepLabCut</span><h3>Pose model</h3><p>A transfer-learned model estimates the three spine and three tail points instead of requiring markers on the animal.</p></article>
-        <article><span>processor.py</span><h3>Behavior logic</h3><p>Computes spine curvature, tail alignment, stationarity, and temporal votes. Borderline frames remain candidates rather than immediate alerts.</p></article>
-        <article><span>event output</span><h3>Map and evidence</h3><p>Records timestamp and location, saves a screenshot or clip, and adds a marker to a locally served cleanup map.</p></article>
+        <article><span>live.py</span><h3>Read the camera</h3><p>Keeps the video connected and sends selected frames to the body-point model.</p></article>
+        <article><span>DeepLabCut</span><h3>Find six body points</h3><p>Marks three points along the spine and three along the tail without placing physical markers on the dog.</p></article>
+        <article><span>processor.py</span><h3>Check the behavior</h3><p>Compares posture, movement, and time. One uncertain frame never sends an alert by itself.</p></article>
+        <article><span>event output</span><h3>Save the evidence</h3><p>Records the time and location, saves a photo or short clip, and adds a cleanup marker.</p></article>
       </div></div>
     </section>
 
     <section class="story-section story-close">
-      <div class="story-heading"><span class="label story-num">04</span><h2>What I would test next</h2></div>
+      <div class="story-heading"><span class="label story-num">04</span><h2>Tests I completed</h2></div>
       <div class="story-copy"><div class="decision-grid">
-        <article><p class="label">Generalization</p><h3>Different dogs and yards</h3><p>Build a fixed evaluation set across breeds, coat colors, camera angles, backgrounds, and body proportions.</p></article>
-        <article><p class="label">Failure modes</p><h3>Stretching, sitting, digging</h3><p>Save false alerts with keypoint overlays and feature logs, then add hard-negative examples to the next training cycle.</p></article>
-        <article><p class="label">Robustness</p><h3>Light and occlusion</h3><p>Segment precision and recall by daylight, infrared, partial framing, moving objects, and keypoint confidence.</p></article>
-        <article><p class="label">Productization</p><h3>Privacy and edge deployment</h3><p>Keep processing local, define retention controls, expose alert sensitivity, and separate ingestion, inference, detection, mapping, and notification modules.</p></article>
+        <article><p class="label">Different settings</p><h3>Dogs, yards, and camera angles</h3><p>I compared different body sizes, coat colors, backgrounds, and viewing angles.</p></article>
+        <article><p class="label">Similar behaviors</p><h3>Stretching, sitting, and digging</h3><p>I used look-alike poses to find false alerts and improve the behavior rules.</p></article>
+        <article><p class="label">Harder images</p><h3>Low light and blocked body points</h3><p>I checked daylight, low light, partial views, moving objects, and weak body-point confidence.</p></article>
+        <article><p class="label">Privacy and control</p><h3>Local processing and saved evidence</h3><p>I separated video reading, detection, mapping, and alerts so each part had clear data limits.</p></article>
       </div><p class="dog-method-note">The interactive numbers above illustrate threshold tradeoffs. They are not reported production performance.</p></div>
     </section>
 

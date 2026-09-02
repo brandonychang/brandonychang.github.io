@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=10">
-  <script src="script.js?v=10" defer></script>
+  <link rel="stylesheet" href="styles.css?v=11">
+  <script src="script.js?v=11" defer></script>
 </head>
 <body class="home-page">
   <div class="shell">
@@ -58,7 +58,6 @@
               <span class="portrait-corner" aria-hidden="true">Product × Data × Biology</span>
             </figure>
           </div>
-          <p class="caption scroll-cue">Scroll <span aria-hidden="true">↓</span></p>
         </section>
 
         <section class="section" id="about">
@@ -86,10 +85,12 @@
 
           <div class="toolkit">
             <p class="label">Platforms &amp; methods</p>
-            <ul class="tool-row" aria-label="Platforms and methods">
-              <li>Python</li><li>SQL</li><li>Tableau</li><li>Power BI</li><li>Alteryx</li><li>Salesforce</li><li>Figma</li><li>PyTorch</li>
-            </ul>
-            <p class="caption tool-hint">Scroll →</p>
+            <div class="tool-groups">
+              <article><span>Languages</span><p>Python · C++ · Java · SQL · R</p></article>
+              <article><span>Product</span><p>Product metrics · Analytics · A/B testing · PRDs · Requirements</p></article>
+              <article><span>Data &amp; systems</span><p>ETL/ELT pipelines · APIs · System design · Git · Linux/Bash</p></article>
+              <article><span>Cloud &amp; platforms</span><p>AWS · GCP · Azure · Tableau · Looker · Power BI · Jira · Excel · MATLAB</p></article>
+            </div>
           </div>
         </section>
 
@@ -98,13 +99,14 @@
           <h2 class="title section-title">Projects<br>with a point</h2>
           <div class="index">
             <a class="index-row" href="healthcare-analytics.html"><span class="index-num">01</span><span class="index-name">Healthcare Product Portfolio</span><span class="index-desc">Six named releases spanning AI knowledge search, safety, employee retention, clinical reporting, quality control, and request operations.</span><span class="index-meta">DaVita · Product &amp; analytics</span><span class="index-arrow" aria-hidden="true">→</span></a>
-            <a class="index-row" href="email-ticket-automation.html"><span class="index-num">02</span><span class="index-name">Healthcare Analytics Request Tracker</span><span class="index-desc">An Outlook email-to-ticket platform that turns a shared analytics inbox into classified, deduplicated requests with owners, SLAs, and leadership reporting.</span><span class="index-meta">Python · Excel · Operations</span><span class="index-arrow" aria-hidden="true">→</span></a>
-            <a class="index-row" href="glean-ai-rollout.html"><span class="index-num">03</span><span class="index-name">Enterprise AI Search Rollout</span><span class="index-desc">A product-adoption and trust program for enterprise AI search across fragmented healthcare knowledge systems.</span><span class="index-meta">Glean · Product strategy · Analytics</span><span class="index-arrow" aria-hidden="true">→</span></a>
-            <a class="index-row" href="chatdb.html"><span class="index-num">04</span><span class="index-name">ChatDB</span><span class="index-desc">A schema-aware SQL and NoSQL learning platform that generates typed examples and executes them against live databases.</span><span class="index-meta">Flask · MySQL · MongoDB</span><span class="index-arrow" aria-hidden="true">→</span></a>
-            <a class="index-row" href="protein-binding.html"><span class="index-num">05</span><span class="index-name">Protein Binding Prediction</span><span class="index-desc">A structural biology pipeline trained across 967 PDB complexes, with parsing safeguards for difficult edge cases.</span><span class="index-meta">PyTorch · RDKit · Bioinformatics</span><span class="index-arrow" aria-hidden="true">→</span></a>
-            <a class="index-row" href="genai-chatbot.html"><span class="index-num">06</span><span class="index-name">GenAI Chatbot Prototype</span><span class="index-desc">A RAG-powered customer-support experience grounded in company knowledge with tool-assisted workflows.</span><span class="index-meta">RAG · Retrieval · Product delivery</span><span class="index-arrow" aria-hidden="true">→</span></a>
+            <a class="index-row" href="email-ticket-automation.html"><span class="index-num">02</span><span class="index-name">Healthcare Analytics Request Tracker</span><span class="index-desc">A Python system that turns ordinary Outlook emails into assigned requests with deadlines, updates, and leadership reporting.</span><span class="index-meta">Python · Excel · Operations</span><span class="index-arrow" aria-hidden="true">→</span></a>
+            <a class="index-row" href="glean-ai-rollout.html"><span class="index-num">03</span><span class="index-name">Enterprise AI Search Rollout</span><span class="index-desc">A rollout program that helped healthcare teams find trusted answers across disconnected company systems.</span><span class="index-meta">Glean · Product strategy · Analytics</span><span class="index-arrow" aria-hidden="true">→</span></a>
+            <a class="index-row" href="chatdb.html"><span class="index-num">04</span><span class="index-name">ChatDB</span><span class="index-desc">A learning tool that builds and runs SQL or MongoDB examples against practice data, then shows the results.</span><span class="index-meta">Flask · MySQL · MongoDB</span><span class="index-arrow" aria-hidden="true">→</span></a>
+            <a class="index-row" href="protein-binding.html"><span class="index-num">05</span><span class="index-name">Protein Binding Prediction</span><span class="index-desc">A machine-learning pipeline that turns protein structures into numeric features and predicts how strongly molecules bind.</span><span class="index-meta">PyTorch · RDKit · Bioinformatics</span><span class="index-arrow" aria-hidden="true">→</span></a>
+            <a class="index-row" href="genai-chatbot.html"><span class="index-num">06</span><span class="index-name">GenAI Chatbot Prototype</span><span class="index-desc">A support chatbot that answers from company documents, completes approved tasks, and hands uncertain questions to a person.</span><span class="index-meta">RAG · Retrieval · Product delivery</span><span class="index-arrow" aria-hidden="true">→</span></a>
             <a class="index-row" href="dog-poop-detector.html"><span class="index-num">07</span><span class="index-name">Dog Poop Detector</span><span class="index-desc">A real-time behavior-detection product for recognizing events, capturing video evidence, and sending mobile alerts.</span><span class="index-meta">Computer vision · Product definition</span><span class="index-arrow" aria-hidden="true">→</span></a>
             <a class="index-row" href="usc-parking.html"><span class="index-num">08</span><span class="index-name">Xposition USC Mobility</span><span class="index-desc">An event-day transportation app for comparing commute modes, parking choices, crowd density, alternate routes, and meeting points near Exposition Boulevard.</span><span class="index-meta">Figma · User research · Product design</span><span class="index-arrow" aria-hidden="true">→</span></a>
+            <a class="index-row" href="aparicio-lab.html"><span class="index-num">09</span><span class="index-name">Yeast DNA Replication Research</span><span class="index-desc">An interactive research story about editing yeast genes, screening colonies, and measuring how cells control the start of DNA replication.</span><span class="index-meta">USC Aparicio Lab · Molecular biology</span><span class="index-arrow" aria-hidden="true">→</span></a>
           </div>
         </section>
 
@@ -115,7 +117,7 @@
             <a class="index-row experience-row" href="healthcare-analytics.html"><span class="index-num">01</span><span class="index-name">DaVita</span><span class="index-desc">Own analytics products from problem framing through release and adoption. The work connects clinical operations, finance, field teams, and technical partners around reliable data and simpler decisions.</span><span class="index-meta">2025–Now<br>Healthcare analytics, product delivery &amp; operational systems</span></a>
             <a class="index-row experience-row" href="protein-binding.html"><span class="index-num">02</span><span class="index-name">Salve Therapeutics</span><span class="index-desc">Built graph-based models and end-to-end ML pipelines for molecular and protein data, then developed evaluation and monitoring workflows for research iteration.</span><span class="index-meta">2024<br>Machine learning engineer intern</span></a>
             <article class="index-row experience-row"><span class="index-num">03</span><span class="index-name">ProductSC</span><span class="index-desc">Led product case competitions and applied MVP scoping, user segmentation, market sizing, funnel metrics, and A/B testing to evaluate product direction.</span><span class="index-meta">2022–2024<br>Product manager intern</span></article>
-            <article class="index-row experience-row"><span class="index-num">04</span><span class="index-name">USC Aparicio Lab</span><span class="index-desc">Studied DNA replication in S. cerevisiae using ChIP, qPCR, sequencing analysis, yeast transformation, plasmid stability assays, and carefully controlled experimental workflows.</span><span class="index-meta">2022–2025<br>DNA replication research assistant</span></article>
+            <a class="index-row experience-row" href="aparicio-lab.html"><span class="index-num">04</span><span class="index-name">USC Aparicio Lab</span><span class="index-desc">Studied how yeast cells start DNA replication, built gene-edited strains, screened colonies, and checked results with PCR, sequencing, and controlled comparisons.</span><span class="index-meta">2022–2025<br>DNA replication research assistant</span></a>
             <a class="index-row experience-row" href="iff-biofuels.html"><span class="index-num">05</span><span class="index-name">International Flavors &amp; Fragrances</span><span class="index-desc">Automated fermentation time-series pipelines in Python and connected cellulosic-composition analysis with HPLC, calibration, and yield modeling.</span><span class="index-meta">2020<br>Data science intern</span></a>
           </div>
         </section>

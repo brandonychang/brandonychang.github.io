@@ -81,6 +81,7 @@ const projectPeeks = {
   "genai-chatbot.html": ["retrieve → ground → act", [25, 52, 77, 91]],
   "dog-poop-detector.html": ["camera → clip → alert", [33, 48, 86, 66]],
   "usc-parking.html": ["routes + crowds + event traffic", [72, 38, 57, 88]],
+  "aparicio-lab.html": ["edit → grow → screen → confirm", [24, 51, 73, 96]],
 };
 
 const releaseOrbitData = [
@@ -118,6 +119,195 @@ document.querySelectorAll("[data-release-orbit]").forEach((button) => {
     tile?.classList.add("orbit-linked");
     window.setTimeout(() => tile?.classList.remove("orbit-linked"), 1200);
   });
+});
+
+const replicationStages = {
+  license: {
+    kicker: "G1 phase",
+    title: "Prepare the DNA starting points.",
+    copy: "The cell loads an inactive Mcm2-7 helicase at replication origins. This prepares the DNA for one controlled round of copying.",
+    plain: "Set up the places where copying will begin.",
+    method: "Synchronized yeast cells in G1 and compared protein binding at selected origins.",
+  },
+  fire: {
+    kicker: "Early S phase",
+    title: "Turn selected starting points on.",
+    copy: "Cell-cycle signals activate prepared origins. Fkh1 and Fkh2 help some origins recruit proteins such as Dbf4 and Cdc45 so copying begins earlier.",
+    plain: "Choose which prepared starting points begin first.",
+    method: "Compared origin activity after changing Forkhead proteins or their binding partners.",
+  },
+  measure: {
+    kicker: "S phase measurement",
+    title: "Measure where and when copying happened.",
+    copy: "BrdU labeling, ChIP, qPCR, and sequencing reveal which DNA regions were copied or bound by a protein of interest.",
+    plain: "Track the DNA regions that copied early, late, or not as expected.",
+    method: "Used internal controls and synchronized samples so differences reflected biology instead of sample noise.",
+  },
+};
+
+function renderReplicationStage(stageName) {
+  const stage = replicationStages[stageName];
+  if (!stage || !document.querySelector("#replication-stage-title")) return;
+  document.querySelectorAll("[data-replication-stage]").forEach((button) => {
+    const active = button.dataset.replicationStage === stageName;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-selected", String(active));
+  });
+  document.querySelector("#replication-diagram").dataset.stage = stageName;
+  document.querySelector("#replication-kicker").textContent = stage.kicker;
+  document.querySelector("#replication-stage-title").textContent = stage.title;
+  document.querySelector("#replication-stage-copy").textContent = stage.copy;
+  document.querySelector("#replication-plain").textContent = stage.plain;
+  document.querySelector("#replication-method").textContent = stage.method;
+}
+
+document.querySelectorAll("[data-replication-stage]").forEach((button) => {
+  button.addEventListener("click", () => renderReplicationStage(button.dataset.replicationStage));
+});
+
+const hcmSteps = {
+  design: {
+    label: "Step 01",
+    title: "Design primers around the target.",
+    copy: "Each primer contains a region matching HCM1 and a region used to build the edit. The matching ends guide the new DNA to the correct place in the yeast genome.",
+    result: "Output: a precise DNA-editing plan",
+    action: "Primers add matching DNA around the planned HCM1 change.",
+  },
+  build: {
+    label: "Step 02",
+    title: "Build the editing DNA with PCR.",
+    copy: "PCR copies the mutation and selection marker into one DNA fragment. Template modules make deletion, tagging, and promoter changes possible without cloning the whole gene first.",
+    result: "Output: a concentrated DNA fragment for transformation",
+    action: "PCR joins the HCM1 change, selection marker, and matching DNA arms.",
+  },
+  transform: {
+    label: "Step 03",
+    title: "Place the DNA into yeast cells.",
+    copy: "A lithium acetate transformation helps yeast take up the PCR fragment. The cell uses matching DNA on both ends to place the change at HCM1.",
+    result: "Output: colonies that might carry the edit",
+    action: "Homologous recombination places the designed fragment into the genome.",
+  },
+  confirm: {
+    label: "Step 04",
+    title: "Confirm the right change in the right place.",
+    copy: "Selection narrows the candidates. Colony PCR checks the integration site, and sequencing verifies the intended HCM1 sequence.",
+    result: "Output: a verified HCM1 mutant strain",
+    action: "PCR and sequencing separate confirmed edits from false positives.",
+  },
+};
+
+function renderHcmStep(stepName) {
+  const step = hcmSteps[stepName];
+  if (!step || !document.querySelector("#hcm-step-title")) return;
+  document.querySelectorAll("[data-hcm-step]").forEach((button) => {
+    const active = button.dataset.hcmStep === stepName;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-selected", String(active));
+  });
+  document.querySelector("#gene-edit-diagram").dataset.step = stepName;
+  document.querySelector("#hcm-step-label").textContent = step.label;
+  document.querySelector("#hcm-step-title").textContent = step.title;
+  document.querySelector("#hcm-step-copy").textContent = step.copy;
+  document.querySelector("#hcm-step-result").textContent = step.result;
+  document.querySelector("#gene-action").textContent = step.action;
+}
+
+document.querySelectorAll("[data-hcm-step]").forEach((button) => {
+  button.addEventListener("click", () => renderHcmStep(button.dataset.hcmStep));
+});
+
+const plateStages = {
+  growth: {
+    label: "Stage 01 · Growth",
+    plate: "Rich growth media",
+    title: "First, let transformed cells grow.",
+    copy: "Growth shows which cells formed colonies. It does not prove the HCM1 edit yet.",
+  },
+  selection: {
+    label: "Stage 02 · Selection",
+    plate: "Selection media",
+    title: "Keep colonies with the selection marker.",
+    copy: "Only colonies carrying the selectable marker stay visible. These colonies move to the DNA check.",
+  },
+  pcr: {
+    label: "Stage 03 · PCR check",
+    plate: "Colony PCR screen",
+    title: "Check the edit at the HCM1 location.",
+    copy: "A correctly sized PCR band supports the planned integration. Unclear colonies get checked again or removed.",
+  },
+};
+
+let activePlateStage = "growth";
+
+function renderPlateStage(stageName) {
+  const stage = plateStages[stageName];
+  if (!stage || !document.querySelector("#yeast-plate")) return;
+  activePlateStage = stageName;
+  document.querySelectorAll("[data-plate-condition]").forEach((button) => {
+    const active = button.dataset.plateCondition === stageName;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-selected", String(active));
+  });
+  const plate = document.querySelector("#yeast-plate");
+  plate.dataset.condition = stageName;
+  document.querySelector("#plate-label").textContent = stage.plate;
+  document.querySelector("#plate-stage-label").textContent = stage.label;
+  document.querySelector("#plate-stage-title").textContent = stage.title;
+  document.querySelector("#plate-stage-copy").textContent = stage.copy;
+  document.querySelector("#selected-colony-id").textContent = "Choose a dot";
+  document.querySelector("#selected-colony-copy").textContent = "Select any visible colony to see what this stage tells you.";
+  document.querySelectorAll(".yeast-colony").forEach((colony) => {
+    const survives = colony.dataset.select === "yes";
+    colony.classList.remove("active", "confirmed", "recheck", "dimmed");
+    if (stageName !== "growth" && !survives) colony.classList.add("dimmed");
+    if (stageName === "pcr" && survives) colony.classList.add(colony.dataset.pcr === "confirmed" ? "confirmed" : "recheck");
+  });
+}
+
+document.querySelectorAll("[data-plate-condition]").forEach((button) => {
+  button.addEventListener("click", () => renderPlateStage(button.dataset.plateCondition));
+});
+
+document.querySelectorAll(".yeast-colony").forEach((colony) => {
+  colony.addEventListener("click", () => {
+    if (colony.classList.contains("dimmed")) return;
+    document.querySelectorAll(".yeast-colony").forEach((item) => item.classList.remove("active"));
+    colony.classList.add("active");
+    document.querySelector("#selected-colony-id").textContent = `Colony ${colony.dataset.colony}`;
+    const messages = {
+      growth: "This colony grew on rich media. Growth alone does not confirm the edit.",
+      selection: "This colony survived selection, so it moves to the PCR screen.",
+      pcr: colony.dataset.pcr === "confirmed" ? "The expected PCR result supports the planned HCM1 edit." : "The PCR result needs another check before this strain is used.",
+    };
+    document.querySelector("#selected-colony-copy").textContent = messages[activePlateStage];
+  });
+});
+
+const labMethods = {
+  pcr: { question: "Question: Did the DNA change land in the right place?", name: "PCR", copy: "I copied a chosen DNA region and checked the product size. A band at the expected size supported successful integration.", work: "Primer design · colony screening · gel checks" },
+  chip: { question: "Question: Where did a protein bind to DNA?", name: "ChIP", copy: "I fixed proteins to DNA, pulled down one tagged protein, and purified the attached DNA. Sequencing or qPCR then showed where the protein had bound.", work: "Cell fixation · antibody pull-down · DNA cleanup · controls" },
+  qpcr: { question: "Question: How much target DNA was present?", name: "qPCR", copy: "I measured selected DNA regions across samples and controls. This helped compare protein binding or DNA enrichment at known sites.", work: "Primer checks · replicate comparison · normalized signals" },
+  facs: { question: "Question: Were the cells at the same cell-cycle stage?", name: "FACS", copy: "A fluorescent dye measured the amount of DNA in each cell. A strong G1 peak showed the culture had stopped before DNA copying began.", work: "Cell synchronization · DNA staining · peak review" },
+  seq: { question: "Question: Was the intended sequence present?", name: "Sequencing", copy: "Sequencing checked the exact DNA letters in edited strains and mapped ChIP DNA fragments back to the yeast genome.", work: "Library preparation · quality checks · alignment · review" },
+  stability: { question: "Question: How often did cells lose a test plasmid?", name: "Plasmid stability assay", copy: "I compared colony growth with and without selection. The difference estimated how often cells lost a plasmid during growth.", work: "Replica plating · colony counts · wild-type and mutant comparison" },
+};
+
+function renderLabMethod(methodName) {
+  const method = labMethods[methodName];
+  if (!method || !document.querySelector("#method-name")) return;
+  document.querySelectorAll("[data-lab-method]").forEach((button) => {
+    const active = button.dataset.labMethod === methodName;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-selected", String(active));
+  });
+  document.querySelector("#method-question").textContent = method.question;
+  document.querySelector("#method-name").textContent = method.name;
+  document.querySelector("#method-copy").textContent = method.copy;
+  document.querySelector("#method-work").textContent = method.work;
+}
+
+document.querySelectorAll("[data-lab-method]").forEach((button) => {
+  button.addEventListener("click", () => renderLabMethod(button.dataset.labMethod));
 });
 
 document.querySelectorAll("#work .index-row[href]").forEach((row) => {
@@ -412,10 +602,10 @@ function renderDogLab() {
   const falseRisk = falseScore > 65 ? "High" : falseScore > 38 ? "Medium" : "Low";
   const status = falseRisk === "High" ? "Fast, noisy" : sensitivity < 60 ? "Conservative" : "Balanced";
   const notes = {
-    clear: "Clear framing provides the cleanest keypoint geometry.",
-    dark: "Low light lowers keypoint confidence and makes temporal evidence more important.",
-    occluded: "Partial framing increases missed-event risk when spine or tail points disappear.",
-    stretch: "A similar pose is the hardest false-positive test; longer duration and stronger voting help.",
+    clear: "A clear view makes it easiest to find the dog's body points.",
+    dark: "Low light makes body points less certain, so the system waits for more matching frames.",
+    occluded: "When part of the dog is blocked, the system may miss the event.",
+    stretch: "Stretching can look similar. Requiring the pose to continue for longer helps avoid a false alert.",
   };
   document.querySelector("#dog-confidence-output").textContent = `${threshold}%`;
   document.querySelector("#dog-duration-output").textContent = `${duration.toFixed(1)}s`;
@@ -444,11 +634,11 @@ if (dogRun) {
     const demo = document.querySelector(".dog-live-demo");
     const running = !demo.classList.contains("dog-confirmed");
     demo.classList.toggle("dog-confirmed", running);
-    document.querySelector("#dog-event-label").textContent = running ? "event confirmed · 81% temporal vote" : "candidate posture · collecting votes";
-    document.querySelector("#dog-live-title").textContent = running ? "Event logged" : "Candidate detected";
+    document.querySelector("#dog-event-label").textContent = running ? "event confirmed · 81% match" : "possible event · checking more frames";
+    document.querySelector("#dog-live-title").textContent = running ? "Event saved" : "Possible event found";
     document.querySelector("#dog-live-copy").textContent = running
-      ? "The state machine crossed its vote threshold, saved the event context, and placed a cleanup marker."
-      : "Run the detector to aggregate posture votes, confirm the event, and place the rear-location marker.";
+      ? "Enough frames matched, so the system saved the time and placed a cleanup marker."
+      : "Run the detector to check several frames, confirm the event, and mark the cleanup location.";
     document.querySelector("#dog-actions").innerHTML = running
       ? "<span>Screenshot + timestamp saved</span><span>Cleanup map marker added</span>"
       : "<span>Event log waiting</span><span>Cleanup map waiting</span>";
@@ -464,7 +654,7 @@ const poseFrames = {
     tail: "89%",
     motion: "Low",
     decision: "Above the 75% match threshold",
-    note: "Strong spine and tail geometry match the target posture. The time window still decides whether the system confirms an event.",
+    note: "The spine and tail points match the target posture. The system still checks several nearby frames before confirming the event.",
   },
   indoor: {
     title: "Indoor frame",
@@ -516,10 +706,10 @@ document.querySelectorAll("[data-pose-layer]").forEach((button) => {
     document.querySelector(".pose-inspector").classList.toggle(`hide-${button.dataset.poseLayer}`, !active);
     const visibleLayers = [...document.querySelectorAll("[data-pose-layer]")].filter((item) => item.classList.contains("active")).length;
     document.querySelector("#pose-layer-status").textContent = visibleLayers === 3
-      ? "All 3 annotation layers shown"
+      ? "All 3 views shown"
       : visibleLayers === 0
-        ? "No annotation layers shown"
-        : `${visibleLayers} of 3 annotation layers shown`;
+        ? "All views hidden"
+        : `${visibleLayers} of 3 views shown`;
   });
 });
 
