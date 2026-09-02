@@ -84,6 +84,35 @@ const projectPeeks = {
   "aparicio-lab.html": ["edit → grow → screen → confirm", [24, 51, 73, 96]],
 };
 
+const aminoAcidInfo = {
+  A: ["Alanine", "small hydrophobic residue"], C: ["Cysteine", "sulfur-containing residue"], D: ["Aspartic acid", "negatively charged residue"],
+  E: ["Glutamic acid", "negatively charged residue"], F: ["Phenylalanine", "aromatic hydrophobic residue"], G: ["Glycine", "small flexible residue"],
+  H: ["Histidine", "ionizable residue"], I: ["Isoleucine", "branched hydrophobic residue"], K: ["Lysine", "positively charged residue"],
+  L: ["Leucine", "hydrophobic residue"], M: ["Methionine", "sulfur-containing residue"], N: ["Asparagine", "polar residue"],
+  P: ["Proline", "rigid ring residue"], Q: ["Glutamine", "polar residue"], R: ["Arginine", "positively charged residue"],
+  S: ["Serine", "polar residue"], T: ["Threonine", "polar residue"], V: ["Valine", "branched hydrophobic residue"],
+  W: ["Tryptophan", "aromatic hydrophobic residue"], Y: ["Tyrosine", "aromatic polar residue"],
+};
+
+function renderEncodingReadout(row) {
+  const aa = row?.querySelector("strong")?.textContent.trim();
+  const info = aminoAcidInfo[aa];
+  if (!aa || !info || !document.querySelector("#encoding-aa")) return;
+  const index = Object.keys(aminoAcidInfo).indexOf(aa) + 1;
+  const vector = Array.from({ length: 20 }, (_, i) => i === index - 1 ? 1 : 0);
+  document.querySelector("#encoding-aa").textContent = aa;
+  document.querySelector("#encoding-name").textContent = info[0];
+  document.querySelector("#encoding-position").textContent = `Position ${String(index).padStart(2, "0")} of the 20-class alphabet · ${info[1]}`;
+  document.querySelector("#encoding-copy").textContent = `${info[0]} turns on feature ${index}. One-hot encoding preserves the residue identity without pretending that ${aa} is numerically closer to one amino acid than another.`;
+  document.querySelector("#encoding-vector-value").textContent = `[${vector.join(", ")}]`;
+  document.querySelector("#encoding-shape").textContent = "1 × 20";
+  document.querySelectorAll(".matrix-row").forEach((item) => item.classList.toggle("selected", item === row));
+}
+
+document.querySelectorAll(".matrix-row").forEach((row) => {
+  ["mouseenter", "focus", "click"].forEach((eventName) => row.addEventListener(eventName, () => renderEncodingReadout(row)));
+});
+
 const releaseOrbitData = [
   { number: "01", product: "Glean AI", outcome: "87% daily active use" },
   { number: "02", product: "Safety Dashboard", outcome: "35% to 80%+ adoption" },
@@ -609,7 +638,9 @@ function renderParking(preferredChoice) {
   const map = document.querySelector("#xposition-map");
   map.classList.remove("condition-normal", "condition-event", "condition-evening");
   map.classList.add(`condition-${parkingState.condition}`);
-  map.style.setProperty("--heat-opacity", String({ normal: 0.72, event: 1, evening: 0.68 }[parkingState.condition]));
+  const crowdBase = { normal: 0.72, event: 1, evening: 0.68 }[parkingState.condition];
+  const crowdEmphasis = 1.1 - parkingState.tolerance * 0.12;
+  map.style.setProperty("--heat-opacity", String(crowdBase * crowdEmphasis));
 
   title.textContent = selected.item.title;
   document.querySelector("#parking-choice-body").textContent = selected.key === best.key
