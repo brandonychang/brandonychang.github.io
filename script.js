@@ -649,9 +649,9 @@ function renderParking(preferredChoice) {
   const map = document.querySelector("#xposition-map");
   map.classList.remove("condition-normal", "condition-event", "condition-evening");
   map.classList.add(`condition-${parkingState.condition}`);
-  const crowdBase = { normal: 0.95, event: 1, evening: 0.82 }[parkingState.condition];
-  const toleranceOpacity = 1 - ((parkingState.tolerance - 1) / 4) * 0.72;
-  map.style.setProperty("--heat-opacity", String(Math.max(0.22, crowdBase * toleranceOpacity)));
+  const crowdBase = { normal: 0.92, event: 1, evening: 0.86 }[parkingState.condition];
+  const toleranceOpacity = { 1: 1, 2: 0.78, 3: 0.5, 4: 0.22, 5: 0.05 }[parkingState.tolerance];
+  map.style.setProperty("--heat-opacity", String(crowdBase * toleranceOpacity));
 
   title.textContent = selected.item.title;
   document.querySelector("#parking-choice-body").textContent = selected.key === best.key
@@ -714,7 +714,7 @@ document.querySelectorAll("[data-parking-choice], [data-parking-card]").forEach(
 const crowdTolerance = document.querySelector("#crowd-tolerance");
 crowdTolerance?.addEventListener("input", () => {
   parkingState.tolerance = Number(crowdTolerance.value);
-  document.querySelector("#crowd-tolerance-output").textContent = ["", "Very low", "Low", "Medium", "High", "Very high"][parkingState.tolerance];
+  document.querySelector("#crowd-tolerance-output").textContent = ["", "Very low · zones strongest", "Low · zones bold", "Medium · balanced view", "High · zones soft", "Very high · zones faint"][parkingState.tolerance];
   renderParking();
 });
 

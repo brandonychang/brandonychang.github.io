@@ -14,3 +14,13 @@ This folder is ready for GitHub Pages at `https://brandonychang.github.io`.
 8. After GitHub finishes publishing, visit `https://brandonychang.github.io`.
 
 Keep every extracted file in the repository's top level. Google hosts the Figtree, Newsreader, and Aboreto fonts used by the design.
+
+## Update an existing GitHub Pages site
+
+1. Extract the new ZIP on your computer.
+2. In the `brandonychang.github.io` repository, choose **Add file** → **Upload files**.
+3. Select all 18 files inside the extracted folder at once and upload them. GitHub will mark files such as `index.html`, `styles.css`, and `script.js` as replacements.
+4. Choose **Commit changes**. You do not need to change the Pages settings again.
+5. Wait one or two minutes, then open `https://brandonychang.github.io` and hard-refresh the page (`Ctrl+Shift+R` on Windows or `Command+Shift+R` on Mac).
+
+The CSS and JavaScript links use version `18`, so browsers request the corrected files instead of reusing the earlier cached layout.
