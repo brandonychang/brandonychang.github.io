@@ -114,6 +114,16 @@ document.querySelectorAll(".matrix-row").forEach((row) => {
   ["mouseenter", "focus", "click"].forEach((eventName) => row.addEventListener(eventName, () => renderEncodingReadout(row)));
 });
 
+document.querySelectorAll(".encoding-matrix-v2 .matrix-row").forEach((row) => {
+  const readout = row.querySelector(":scope > span");
+  let cells = row.querySelectorAll(":scope > i").length;
+  while (cells < 20) {
+    const cell = document.createElement("i");
+    row.insertBefore(cell, readout);
+    cells += 1;
+  }
+});
+
 const releaseOrbitData = [
   { number: "01", product: "Glean AI", outcome: "87% daily active use" },
   { number: "02", product: "Safety Dashboard", outcome: "35% to 80%+ adoption" },
@@ -639,9 +649,9 @@ function renderParking(preferredChoice) {
   const map = document.querySelector("#xposition-map");
   map.classList.remove("condition-normal", "condition-event", "condition-evening");
   map.classList.add(`condition-${parkingState.condition}`);
-  const crowdBase = { normal: 0.72, event: 1, evening: 0.68 }[parkingState.condition];
-  const crowdEmphasis = 1.1 - parkingState.tolerance * 0.12;
-  map.style.setProperty("--heat-opacity", String(crowdBase * crowdEmphasis));
+  const crowdBase = { normal: 0.95, event: 1, evening: 0.82 }[parkingState.condition];
+  const toleranceOpacity = 1 - ((parkingState.tolerance - 1) / 4) * 0.72;
+  map.style.setProperty("--heat-opacity", String(Math.max(0.22, crowdBase * toleranceOpacity)));
 
   title.textContent = selected.item.title;
   document.querySelector("#parking-choice-body").textContent = selected.key === best.key

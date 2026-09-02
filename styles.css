@@ -3221,7 +3221,7 @@ a.index-row:hover .index-arrow {
 .xposition-map .map-landmark text { fill: #44383b; font-family: var(--font-grotesk); font-size: 19px; font-weight: 600; letter-spacing: .5px; paint-order: stroke; stroke: rgba(255,255,255,.7); stroke-width: 3px; text-anchor: middle; }
 
 .crowd-heatmap {
-  opacity: calc(var(--heat-opacity) * .58);
+  opacity: var(--heat-opacity);
   transition: opacity .35s ease, fill .35s ease;
 }
 .crowd-heatmap circle { fill: #f05d58; }
@@ -4187,9 +4187,9 @@ a.index-row:hover .index-arrow {
   transform-origin: center;
   transition: fill .35s ease, opacity .35s ease, transform .35s ease;
 }
-.crowd-hotspot .heat-outer { fill: #ff8b55; opacity: .22; }
-.crowd-hotspot .heat-mid { fill: #f45b45; opacity: .34; }
-.crowd-hotspot .heat-core { fill: #c92838; opacity: .72; }
+.crowd-hotspot .heat-outer { fill: #ff8b55; opacity: .34; }
+.crowd-hotspot .heat-mid { fill: #f45b45; opacity: .56; }
+.crowd-hotspot .heat-core { fill: #c92838; opacity: .92; }
 .hotspot-venue { opacity: 1; }
 .hotspot-expo-gate { opacity: .82; }
 .hotspot-fig-crossing { opacity: .74; }
@@ -4381,7 +4381,7 @@ a.index-row:hover .index-arrow {
 .encoding-v2-key .key-off { background: #242127; }
 .encoding-v2-grid { align-items: start; display: grid; gap: var(--u5); grid-template-columns: minmax(0, 1.22fr) minmax(19rem, .78fr); }
 .encoding-matrix-v2 { min-width: 0; overflow-x: auto; padding-bottom: .25rem; }
-.encoding-matrix-v2 .matrix-axis { align-items: center; color: #8e8791; display: grid; font-family: var(--font-grotesk); font-size: .66rem; grid-template-columns: 2.25rem minmax(18rem, 1fr) 9.5rem; gap: .5rem; letter-spacing: .07em; padding: 0 .75rem .45rem; text-transform: uppercase; }
+.encoding-matrix-v2 .matrix-axis { align-items: center; color: #8e8791; display: grid; font-family: var(--font-grotesk); font-size: .66rem; grid-template-columns: 2.25rem minmax(0, 1fr) 9.5rem; gap: .5rem; letter-spacing: .07em; padding: 0 .75rem .45rem; text-transform: uppercase; }
 .encoding-matrix-v2 .matrix-axis span:nth-child(2) { text-align: center; }
 .encoding-matrix-v2 .matrix-row { min-width: 31rem; }
 .encoding-v2-readout { align-self: start; border-top: 0; min-width: 0; }
@@ -4391,6 +4391,47 @@ a.index-row:hover .index-arrow {
 .feature-crowd .feature-demo { padding-inline: var(--u4); }
 .feature-crowd .feature-demo span:first-child { margin-right: .75rem; }
 .feature-crowd .feature-demo strong { margin-left: .75rem; }
+
+/* Keep the crowd key inside its card at every width. */
+.feature-crowd .feature-demo {
+  display: grid;
+  gap: .4rem;
+  grid-template-columns: auto repeat(4, minmax(1.8rem, 1fr)) auto;
+  justify-content: stretch;
+  overflow: hidden;
+  width: 100%;
+}
+.feature-crowd .feature-demo span:first-child,
+.feature-crowd .feature-demo strong { margin: 0; white-space: nowrap; }
+.feature-crowd .feature-demo i { justify-self: center; }
+
+/* Prevent long recommendation copy and metric labels from escaping the parking card. */
+.xposition-surface .parking-choice-copy,
+.xposition-surface .parking-choice-copy > *,
+.xposition-surface .parking-choice-copy dl,
+.xposition-surface .parking-choice-copy dl > div { min-width: 0; }
+.xposition-surface .parking-choice-copy > p:not(.label),
+.xposition-surface .parking-choice-copy .route-source,
+.xposition-surface .parking-choice-copy dt,
+.xposition-surface .parking-choice-copy dd { max-width: 100%; overflow-wrap: anywhere; }
+.xposition-surface .parking-choice-copy dl > div { gap: .55rem; }
+.route-planner-head > *,
+.route-controls > *,
+.route-button-group { min-width: 0; }
+.route-disclaimer,
+.map-status strong { overflow-wrap: anywhere; }
+
+/* Give the matrix one consistent 20-cell track and keep the sidecar within the viewport. */
+.encoding-lab-v2,
+.encoding-v2-grid,
+.encoding-matrix-v2,
+.encoding-v2-readout { min-width: 0; max-width: 100%; }
+.encoding-matrix-v2 .matrix-row { grid-template-columns: 2rem repeat(20, minmax(0, 1fr)) minmax(8rem, 9.5rem); min-width: 0; width: 100%; }
+.encoding-matrix-v2 .matrix-row > i { min-width: 0; }
+.encoding-matrix-v2 .matrix-row > span { background: transparent; color: #b8b2bb; max-width: 9.5rem; opacity: 1; overflow-wrap: anywhere; padding: 0; pointer-events: auto; position: static; text-align: right; transform: none; white-space: normal; }
+.encoding-matrix-v2 .matrix-row:hover > span,
+.encoding-matrix-v2 .matrix-row:focus > span { color: var(--case-accent); opacity: 1; transform: none; }
+.encoding-v2-readout { overflow: hidden; }
 
 /* Preserve the map's coordinate system so hotspots remain round while the aside matches its full height. */
 .xposition-map-wrap { align-self: stretch; display: flex; flex-direction: column; min-height: 0; }
