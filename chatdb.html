@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=5">
-  <script src="script.js?v=5" defer></script>
+  <link rel="stylesheet" href="styles.css?v=7">
+  <script src="script.js?v=7" defer></script>
 </head>
 <body class="case-page chatdb-case"><div class="shell"><header class="masthead-bar"><div class="page"><div class="bar">
     <a href="index.html" class="wordmark">Brandon&nbsp;Y.&nbsp;Chang</a>
@@ -28,11 +28,9 @@
   </section>
   
       <figure class="case-media case-media-hero">
-        <div class="case-media-frame case-media-light"><img src="assets/chatdb-interface.png" alt="ChatDB browser interface showing database, dataset, and query-type controls with a generated SQL statement"></div>
+        <div class="case-media-frame case-media-light"><img src="chatdb-interface.png" alt="ChatDB browser interface showing database, dataset, and query-type controls with a generated SQL statement"></div>
         <figcaption class="caption">The browser prototype lets a learner choose a database, dataset, and query mode before ChatDB writes a plain-language request and executable query.</figcaption>
-      </figure>
-
-      <section class="case-glance" aria-label="Project at a glance">
+      </figure><section class="query-playground interactive-surface"><div class="query-controls"><p class="label">Try the interaction model</p><h2>Build a query without leaving the case study.</h2><div class="query-buttons"><button type="button" class="active" data-query="group">GROUP BY</button><button type="button" data-query="where">WHERE</button><button type="button" data-query="order">ORDER BY</button></div></div><div class="query-output"><p id="query-intent">Sum transaction quantity by store location.</p><code id="query-code">SELECT store_location, SUM(transaction_qty)<br>FROM coffee_shop_sales<br>GROUP BY store_location;</code><span>Generated from known fields</span></div></section><section class="case-glance" aria-label="Project at a glance">
         <p class="label">At a glance</p>
         <div class="case-stat-grid">
           <div class="case-stat"><strong>2</strong><span>database paradigms</span></div>
