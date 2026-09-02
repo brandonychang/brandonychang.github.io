@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=9">
-  <script src="script.js?v=9" defer></script>
+  <link rel="stylesheet" href="styles.css?v=10">
+  <script src="script.js?v=10" defer></script>
 </head>
 <body class="case-page detector-case"><div class="shell">
   <header class="masthead-bar"><div class="page"><div class="bar">
@@ -77,30 +77,24 @@
       <div class="story-copy">
         <div class="pose-inspector">
           <div class="pose-inspector-head">
-            <div><p class="label">Two frames, two model decisions</p><h3>Inspect the six-point pose geometry.</h3><p>Select a frame, toggle annotation layers, then run the simulated inference pass.</p></div>
-            <div class="pose-layer-controls" aria-label="Annotation layers">
-              <button type="button" class="active" aria-pressed="true" data-pose-layer="keypoints">Keypoints</button>
-              <button type="button" class="active" aria-pressed="true" data-pose-layer="geometry">Geometry</button>
-              <button type="button" class="active" aria-pressed="true" data-pose-layer="confidence">Confidence</button>
-            </div>
+            <div><p class="label">Two frames, two model decisions</p><h3>See how six body points become a decision.</h3><p>Choose a photo, switch visible layers on or off, then run the simulated frame analysis.</p></div>
+            <div><div class="pose-layer-controls" aria-label="Annotation layers"><button type="button" class="active" aria-pressed="true" data-pose-layer="keypoints">Body points</button><button type="button" class="active" aria-pressed="true" data-pose-layer="geometry">Posture lines</button><button type="button" class="active" aria-pressed="true" data-pose-layer="confidence">Confidence labels</button></div><p class="pose-layer-status" id="pose-layer-status" aria-live="polite">All 3 annotation layers shown</p></div>
           </div>
           <div class="pose-image-grid" id="pose-image-grid">
             <article class="pose-image-card active" tabindex="0" role="button" aria-pressed="true" data-pose-frame="yard">
               <div class="pose-image-wrap">
                 <img src="dog-pose-yard.jpg" alt="Large golden dog crouching on artificial grass outdoors">
                 <span class="pose-scan" aria-hidden="true"></span>
-                <svg class="pose-overlay" viewBox="0 0 100 100" preserveAspectRatio="none" aria-label="Six DeepLabCut keypoints over the yard frame">
-                  <polyline class="pose-geometry pose-spine-line" points="43,53 52,47 61,48"></polyline>
-                  <polyline class="pose-geometry pose-tail-line" points="61,48 70,42 77,37"></polyline>
-                  <path class="pose-geometry pose-angle" d="M43 53 Q52 42 61 48"></path>
-                  <g class="pose-keypoint" tabindex="0"><circle cx="43" cy="53" r="1.8"></circle><text x="43" y="49">S1 · 96%</text><title>Spine point 1, 96 percent confidence</title></g>
-                  <g class="pose-keypoint" tabindex="0"><circle cx="52" cy="47" r="1.8"></circle><text x="52" y="43">S2 · 94%</text><title>Spine point 2, 94 percent confidence</title></g>
-                  <g class="pose-keypoint" tabindex="0"><circle cx="61" cy="48" r="1.8"></circle><text x="61" y="44">S3 · 92%</text><title>Spine point 3, 92 percent confidence</title></g>
-                  <g class="pose-keypoint tail-point" tabindex="0"><circle cx="61" cy="48" r="1.8"></circle><text x="64" y="52">T1 · 91%</text><title>Tail base, 91 percent confidence</title></g>
-                  <g class="pose-keypoint tail-point" tabindex="0"><circle cx="70" cy="42" r="1.8"></circle><text x="70" y="38">T2 · 89%</text><title>Tail midpoint, 89 percent confidence</title></g>
-                  <g class="pose-keypoint tail-point" tabindex="0"><circle cx="77" cy="37" r="1.8"></circle><text x="77" y="33">T3 · 86%</text><title>Tail tip, 86 percent confidence</title></g>
+                <svg class="pose-overlay" viewBox="0 0 1536 1218" aria-label="Six numbered DeepLabCut body points over the yard frame">
+                  <polyline class="pose-geometry pose-spine-line" points="660,646 799,572 937,585"></polyline><line class="pose-geometry pose-joint-line" x1="937" y1="585" x2="970" y2="565"></line><polyline class="pose-geometry pose-tail-line" points="970,565 1075,512 1183,451"></polyline><path class="pose-geometry pose-angle" d="M660 646 Q799 510 937 585"></path>
+                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="660" cy="646" r="22"></circle><text class="point-number" x="660" y="654">1</text><g class="pose-confidence-label" transform="translate(602 675)"><rect width="116" height="38" rx="10"></rect><text x="58" y="26">S1 · 96%</text></g><title>Spine point 1, 96 percent confidence</title></g>
+                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="799" cy="572" r="22"></circle><text class="point-number" x="799" y="580">2</text><g class="pose-confidence-label" transform="translate(742 510)"><rect width="114" height="38" rx="10"></rect><text x="57" y="26">S2 · 94%</text></g><title>Spine point 2, 94 percent confidence</title></g>
+                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="937" cy="585" r="22"></circle><text class="point-number" x="937" y="593">3</text><g class="pose-confidence-label" transform="translate(870 615)"><rect width="114" height="38" rx="10"></rect><text x="57" y="26">S3 · 92%</text></g><title>Spine point 3, 92 percent confidence</title></g>
+                  <g class="pose-keypoint tail-point" tabindex="0"><circle cx="970" cy="565" r="22"></circle><text class="point-number" x="970" y="573">4</text><g class="pose-confidence-label" transform="translate(966 505)"><rect width="112" height="38" rx="10"></rect><text x="56" y="26">T1 · 91%</text></g><title>Tail base, 91 percent confidence</title></g>
+                  <g class="pose-keypoint tail-point" tabindex="0"><circle cx="1075" cy="512" r="22"></circle><text class="point-number" x="1075" y="520">5</text><g class="pose-confidence-label" transform="translate(1050 450)"><rect width="112" height="38" rx="10"></rect><text x="56" y="26">T2 · 89%</text></g><title>Tail midpoint, 89 percent confidence</title></g>
+                  <g class="pose-keypoint tail-point" tabindex="0"><circle cx="1183" cy="451" r="22"></circle><text class="point-number" x="1183" y="459">6</text><g class="pose-confidence-label" transform="translate(1172 390)"><rect width="112" height="38" rx="10"></rect><text x="56" y="26">T3 · 86%</text></g><title>Tail tip, 86 percent confidence</title></g>
                 </svg>
-                <span class="pose-frame-badge">Candidate event</span>
+                <span class="pose-frame-badge">Possible target posture</span>
               </div>
               <div><strong>Yard frame</strong><small>Crouched spine · visible tail · low motion</small></div>
             </article>
@@ -109,28 +103,23 @@
               <div class="pose-image-wrap">
                 <img src="dog-pose-indoor.jpg" alt="Small tan dog sitting on a gray sofa indoors">
                 <span class="pose-scan" aria-hidden="true"></span>
-                <svg class="pose-overlay" viewBox="0 0 100 100" preserveAspectRatio="none" aria-label="Six DeepLabCut keypoints over the indoor frame">
-                  <polyline class="pose-geometry pose-spine-line" points="29,59 39,53 50,50"></polyline>
-                  <polyline class="pose-geometry pose-tail-line low-confidence-line" points="29,59 23,61 18,63"></polyline>
-                  <path class="pose-geometry pose-angle" d="M29 59 Q39 48 50 50"></path>
-                  <g class="pose-keypoint" tabindex="0"><circle cx="29" cy="59" r="1.8"></circle><text x="29" y="55">S1 · 90%</text><title>Spine point 1, 90 percent confidence</title></g>
-                  <g class="pose-keypoint" tabindex="0"><circle cx="39" cy="53" r="1.8"></circle><text x="39" y="49">S2 · 93%</text><title>Spine point 2, 93 percent confidence</title></g>
-                  <g class="pose-keypoint" tabindex="0"><circle cx="50" cy="50" r="1.8"></circle><text x="50" y="46">S3 · 95%</text><title>Spine point 3, 95 percent confidence</title></g>
-                  <g class="pose-keypoint tail-point low-confidence" tabindex="0"><circle cx="29" cy="59" r="1.8"></circle><text x="31" y="64">T1 · 54%</text><title>Tail base, 54 percent confidence</title></g>
-                  <g class="pose-keypoint tail-point low-confidence" tabindex="0"><circle cx="23" cy="61" r="1.8"></circle><text x="23" y="57">T2 · 31%</text><title>Tail midpoint, 31 percent confidence</title></g>
-                  <g class="pose-keypoint tail-point low-confidence" tabindex="0"><circle cx="18" cy="63" r="1.8"></circle><text x="18" y="69">T3 · 18%</text><title>Tail tip, 18 percent confidence</title></g>
+                <svg class="pose-overlay" viewBox="0 0 959 1280" aria-label="Six numbered DeepLabCut body points over the indoor frame">
+                  <polyline class="pose-geometry pose-spine-line" points="278,755 374,678 480,640"></polyline><line class="pose-geometry pose-joint-line" x1="278" y1="755" x2="258" y2="760"></line><polyline class="pose-geometry pose-tail-line low-confidence-line" points="258,760 220,781 173,806"></polyline><path class="pose-geometry pose-angle" d="M278 755 Q374 620 480 640"></path>
+                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="278" cy="755" r="18"></circle><text class="point-number" x="278" y="762">1</text><g class="pose-confidence-label" transform="translate(286 780)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">S1 · 90%</text></g><title>Spine point 1, 90 percent confidence</title></g>
+                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="374" cy="678" r="18"></circle><text class="point-number" x="374" y="685">2</text><g class="pose-confidence-label" transform="translate(335 620)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">S2 · 93%</text></g><title>Spine point 2, 93 percent confidence</title></g>
+                  <g class="pose-keypoint spine-point" tabindex="0"><circle cx="480" cy="640" r="18"></circle><text class="point-number" x="480" y="647">3</text><g class="pose-confidence-label" transform="translate(452 582)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">S3 · 95%</text></g><title>Spine point 3, 95 percent confidence</title></g>
+                  <g class="pose-keypoint tail-point low-confidence" tabindex="0"><circle cx="258" cy="760" r="18"></circle><text class="point-number" x="258" y="767">4</text><g class="pose-confidence-label" transform="translate(223 700)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">T1 · 54%</text></g><title>Tail base, 54 percent confidence</title></g>
+                  <g class="pose-keypoint tail-point low-confidence" tabindex="0"><circle cx="220" cy="781" r="18"></circle><text class="point-number" x="220" y="788">5</text><g class="pose-confidence-label" transform="translate(145 805)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">T2 · 31%</text></g><title>Tail midpoint, 31 percent confidence</title></g>
+                  <g class="pose-keypoint tail-point low-confidence" tabindex="0"><circle cx="173" cy="806" r="18"></circle><text class="point-number" x="173" y="813">6</text><g class="pose-confidence-label" transform="translate(77 850)"><rect width="102" height="34" rx="9"></rect><text x="51" y="23">T3 · 18%</text></g><title>Tail tip, 18 percent confidence</title></g>
                 </svg>
-                <span class="pose-frame-badge">Hard negative</span>
+                <span class="pose-frame-badge">Similar pose, no alert</span>
               </div>
               <div><strong>Indoor frame</strong><small>Similar crouch · tail occluded · active movement</small></div>
             </article>
           </div>
 
-          <div class="pose-decision" aria-live="polite">
-            <div><p class="label">Selected frame</p><h3 id="pose-frame-title">Yard frame</h3><p id="pose-frame-note">Strong spine and tail geometry produce a candidate vote. The time window still decides whether the event becomes confirmed.</p></div>
-            <div class="pose-score"><span>Temporal vote</span><strong id="pose-frame-score">81%</strong><i><b id="pose-frame-bar" style="width:81%"></b></i><small id="pose-frame-decision">Candidate above 75% threshold</small></div>
-            <button type="button" class="dog-run-button" id="pose-run">Run inference</button>
-          </div>
+          <div class="pose-confidence-summary" aria-live="polite"><div><span>Spine-point confidence</span><strong id="pose-spine-confidence">94%</strong></div><div><span>Tail-point confidence</span><strong id="pose-tail-confidence">89%</strong></div><div><span>Body motion</span><strong id="pose-motion">Low</strong></div></div>
+          <div class="pose-decision" aria-live="polite"><div><p class="label">Selected photo</p><h3 id="pose-frame-title">Yard frame</h3><p id="pose-frame-note">Strong spine and tail geometry match the target posture. The time window still decides whether the system confirms an event.</p></div><div class="pose-score"><span>Recent frames matching the target posture</span><strong id="pose-frame-score">81%</strong><i><b id="pose-frame-bar" style="width:81%"></b></i><small id="pose-frame-decision">Above the 75% match threshold</small></div><button type="button" class="dog-run-button" id="pose-run">Analyze selected photo</button></div>
           <p class="dog-method-note">The overlays demonstrate how the six-point pipeline would read the provided frames. The percentages illustrate interface behavior rather than measured model output.</p>
         </div>
         <div class="state-track"><div><span>01</span><strong>Observe</strong><small>Read camera frame</small></div><div><span>02</span><strong>Estimate</strong><small>Locate six keypoints</small></div><div><span>03</span><strong>Vote</strong><small>Aggregate geometry over time</small></div><div><span>04</span><strong>Record</strong><small>Log and map the event</small></div></div>

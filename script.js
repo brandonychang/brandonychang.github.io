@@ -167,6 +167,101 @@ document.querySelectorAll("[data-model-tab]").forEach((button) => {
   });
 });
 
+const aiRoleDetails = {
+  knowledge: {
+    name: "Knowledge workers",
+    task: "Find authoritative answers across disconnected systems.",
+    copy: "The product needed to retrieve and synthesize source material without asking users to remember which repository held the answer.",
+    barrier: "Unclear citations and inconsistent coverage",
+    response: "Grounded answers, visible sources, and feedback tied to repeatable defects",
+    signal: "A useful answer followed by repeat use",
+  },
+  support: {
+    name: "Support teams",
+    task: "Resolve questions quickly without inventing policy guidance.",
+    copy: "Support staff needed short, source-backed answers they could verify before using them in a case or sharing them with a clinic.",
+    barrier: "Confidently wrong answers created operational risk",
+    response: "Curated policy sources, prebuilt prompts, UAT, and a clear fallback when evidence was weak",
+    signal: "Faster resolution with zero incorrect policy instructions during the validation month",
+  },
+  leaders: {
+    name: "Field leaders",
+    task: "Get role-specific guidance without leaving the flow of work.",
+    copy: "Clinic leaders needed concise answers on mobile and in the browser, not another destination requiring extra context switching.",
+    barrier: "Workflow friction and uncertainty about which sources applied",
+    response: "Role-specific entry points, browser access, and guidance grounded in the approved knowledge set",
+    signal: "87% daily active use across three pilot clinics",
+  },
+};
+
+function renderAIRole(roleName) {
+  const role = aiRoleDetails[roleName];
+  if (!role || !document.querySelector("#ai-role-name")) return;
+  document.querySelectorAll("[data-ai-role]").forEach((button) => {
+    const active = button.dataset.aiRole === roleName;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-selected", String(active));
+  });
+  document.querySelector("#ai-role-name").textContent = role.name;
+  document.querySelector("#ai-role-task").textContent = role.task;
+  document.querySelector("#ai-role-copy").textContent = role.copy;
+  document.querySelector("#ai-role-barrier").textContent = role.barrier;
+  document.querySelector("#ai-role-response").textContent = role.response;
+  document.querySelector("#ai-role-signal").textContent = role.signal;
+}
+
+document.querySelectorAll("[data-ai-role]").forEach((button) => {
+  button.addEventListener("click", () => renderAIRole(button.dataset.aiRole));
+});
+
+const adoptionStages = {
+  diagnose: {
+    kicker: "Initial signal",
+    metric: "<20%",
+    title: "Access did not create confidence.",
+    copy: "Fewer than one in five invited users tried the assistant. Feedback identified privacy anxiety and confidently wrong answers as the largest barriers.",
+    details: ["40% of negative feedback cited privacy concerns", "35% cited confidently wrong answers", "The team treated refusal as product evidence, not user resistance"],
+  },
+  rebuild: {
+    kicker: "Product response",
+    metric: "3 clinics",
+    title: "The pilot rebuilt trust around real workflows.",
+    copy: "The team narrowed the rollout, cleaned the source library, created prebuilt prompts, and added UAT plus a clear fallback when the system lacked evidence.",
+    details: ["Authoritative content replaced fragmented or stale sources", "Prompts matched common clinic questions", "Feedback became a quality backlog with owners and retests"],
+  },
+  validate: {
+    kicker: "Validated outcome",
+    metric: "87%",
+    title: "Daily use became the proof of trust.",
+    copy: "The redesigned pilot reached 87% daily active use across three clinics while avoiding incorrect policy instructions for one month.",
+    details: ["Zero incorrect policy instructions during the validation month", "About four hours saved per user each week", "Evidence supported leadership alignment and $1M in program funding"],
+  },
+};
+
+function renderAdoptionStage(stageName) {
+  const stage = adoptionStages[stageName];
+  if (!stage || !document.querySelector("#adoption-stage-title")) return;
+  document.querySelectorAll("[data-adoption-stage]").forEach((button) => {
+    const active = button.dataset.adoptionStage === stageName;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-selected", String(active));
+  });
+  document.querySelector("#adoption-stage-kicker").textContent = stage.kicker;
+  document.querySelector("#adoption-stage-metric").textContent = stage.metric;
+  document.querySelector("#adoption-stage-title").textContent = stage.title;
+  document.querySelector("#adoption-stage-copy").textContent = stage.copy;
+  const list = document.querySelector("#adoption-stage-details");
+  list.replaceChildren(...stage.details.map((detail) => {
+    const item = document.createElement("li");
+    item.textContent = detail;
+    return item;
+  }));
+}
+
+document.querySelectorAll("[data-adoption-stage]").forEach((button) => {
+  button.addEventListener("click", () => renderAdoptionStage(button.dataset.adoptionStage));
+});
+
 const parkingData = {
   blue: {
     title: "Blue Structure", walk: 7, access: 90,
@@ -365,14 +460,20 @@ const poseFrames = {
   yard: {
     title: "Yard frame",
     score: 81,
-    decision: "Candidate above 75% threshold",
-    note: "Strong spine and tail geometry produce a candidate vote. The time window still decides whether the event becomes confirmed.",
+    spine: "94%",
+    tail: "89%",
+    motion: "Low",
+    decision: "Above the 75% match threshold",
+    note: "Strong spine and tail geometry match the target posture. The time window still decides whether the system confirms an event.",
   },
   indoor: {
     title: "Indoor frame",
     score: 34,
-    decision: "Hard negative below threshold",
-    note: "The crouched body resembles the target posture, but weak tail confidence and visible movement keep the frame below the event threshold.",
+    spine: "93%",
+    tail: "34%",
+    motion: "High",
+    decision: "Below the 75% match threshold",
+    note: "The crouched body looks similar, but weak tail confidence and visible movement keep this photo below the alert threshold.",
   },
 };
 
@@ -392,6 +493,9 @@ function renderPoseFrame(frameName) {
   document.querySelector("#pose-frame-bar").style.width = `${frame.score}%`;
   document.querySelector("#pose-frame-decision").textContent = frame.decision;
   document.querySelector("#pose-frame-note").textContent = frame.note;
+  document.querySelector("#pose-spine-confidence").textContent = frame.spine;
+  document.querySelector("#pose-tail-confidence").textContent = frame.tail;
+  document.querySelector("#pose-motion").textContent = frame.motion;
 }
 
 document.querySelectorAll("[data-pose-frame]").forEach((card) => {
@@ -409,7 +513,13 @@ document.querySelectorAll("[data-pose-layer]").forEach((button) => {
     const active = !button.classList.contains("active");
     button.classList.toggle("active", active);
     button.setAttribute("aria-pressed", String(active));
-    document.querySelector("#pose-image-grid").classList.toggle(`hide-${button.dataset.poseLayer}`, !active);
+    document.querySelector(".pose-inspector").classList.toggle(`hide-${button.dataset.poseLayer}`, !active);
+    const visibleLayers = [...document.querySelectorAll("[data-pose-layer]")].filter((item) => item.classList.contains("active")).length;
+    document.querySelector("#pose-layer-status").textContent = visibleLayers === 3
+      ? "All 3 annotation layers shown"
+      : visibleLayers === 0
+        ? "No annotation layers shown"
+        : `${visibleLayers} of 3 annotation layers shown`;
   });
 });
 
@@ -418,15 +528,15 @@ if (poseRun) {
   poseRun.addEventListener("click", () => {
     const grid = document.querySelector("#pose-image-grid");
     grid.classList.remove("inference-complete");
-    grid.classList.add("inference-running");
-    poseRun.disabled = true;
-    poseRun.textContent = "Reading frame...";
+      grid.classList.add("inference-running");
+      poseRun.disabled = true;
+      poseRun.textContent = "Analyzing photo...";
     window.setTimeout(() => {
       grid.classList.remove("inference-running");
       grid.classList.add("inference-complete");
       renderPoseFrame(activePoseFrame);
       poseRun.disabled = false;
-      poseRun.textContent = "Run again";
+      poseRun.textContent = "Analyze again";
     }, 1150);
   });
 }
