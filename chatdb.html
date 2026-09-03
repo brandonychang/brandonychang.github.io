@@ -9,6 +9,145 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=19">
+  <style>
+    /* ChatDB project goal layout */
+    .chatdb-case .chatdb-mission,
+    .chatdb-case .chatdb-mission * {
+      box-sizing: border-box;
+      min-width: 0;
+    }
+
+    .chatdb-case .chatdb-mission {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(22rem, 0.95fr);
+      gap: 0;
+      width: 100%;
+      margin-top: clamp(3.5rem, 7vw, 7rem);
+      padding: 0;
+      overflow: hidden;
+      background: #202428;
+      color: #f5f5f3;
+      border: 1px solid rgba(245, 245, 243, 0.18);
+    }
+
+    .chatdb-case .chatdb-mission-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(2.25rem, 5vw, 5rem);
+    }
+
+    .chatdb-case .chatdb-mission-copy .label {
+      margin: 0;
+    }
+
+    .chatdb-case .chatdb-mission h2 {
+      max-width: 13ch;
+      margin: 1rem 0 1.75rem;
+      font-size: clamp(2.65rem, 4.7vw, 5.25rem);
+      line-height: 0.99;
+      letter-spacing: -0.045em;
+      overflow-wrap: break-word;
+    }
+
+    .chatdb-case .chatdb-mission-copy > p:last-child {
+      max-width: 38rem;
+      margin: 0;
+      font-size: clamp(1.05rem, 1.25vw, 1.25rem);
+      line-height: 1.65;
+      color: rgba(245, 245, 243, 0.72);
+    }
+
+    .chatdb-case .chatdb-mission ol {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-left: 1px solid rgba(245, 245, 243, 0.14);
+    }
+
+    .chatdb-case .chatdb-mission li {
+      display: grid;
+      grid-template-columns: 3.25rem minmax(0, 1fr);
+      align-content: center;
+      column-gap: 1.25rem;
+      min-height: 12.5rem;
+      margin: 0;
+      padding: clamp(1.75rem, 3vw, 3rem);
+      list-style: none;
+      background: #171a1d;
+      border-bottom: 1px solid rgba(245, 245, 243, 0.14);
+    }
+
+    .chatdb-case .chatdb-mission li:last-child {
+      border-bottom: 0;
+    }
+
+    .chatdb-case .chatdb-mission li > span {
+      grid-row: 1 / span 2;
+      align-self: start;
+      padding-top: 0.2rem;
+      color: #9da7af;
+      font-family: "Figtree", sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+    }
+
+    .chatdb-case .chatdb-mission li > strong {
+      display: block;
+      margin: 0 0 0.7rem;
+      font-family: "Figtree", sans-serif;
+      font-size: clamp(1.2rem, 1.6vw, 1.55rem);
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    .chatdb-case .chatdb-mission li > p {
+      max-width: 34rem;
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.55;
+      color: rgba(245, 245, 243, 0.68);
+    }
+
+    @media (max-width: 900px) {
+      .chatdb-case .chatdb-mission {
+        grid-template-columns: 1fr;
+      }
+
+      .chatdb-case .chatdb-mission h2 {
+        max-width: 15ch;
+        font-size: clamp(2.5rem, 9vw, 4.5rem);
+      }
+
+      .chatdb-case .chatdb-mission ol {
+        border-top: 1px solid rgba(245, 245, 243, 0.14);
+        border-left: 0;
+      }
+
+      .chatdb-case .chatdb-mission li {
+        min-height: 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .chatdb-case .chatdb-mission-copy {
+        padding: 2rem 1.4rem 2.25rem;
+      }
+
+      .chatdb-case .chatdb-mission h2 {
+        margin-bottom: 1.25rem;
+        font-size: clamp(2.35rem, 12vw, 3.35rem);
+      }
+
+      .chatdb-case .chatdb-mission li {
+        grid-template-columns: 2.5rem minmax(0, 1fr);
+        column-gap: 0.8rem;
+        padding: 1.6rem 1.4rem;
+      }
+    }
+  </style>
   <script src="script.js?v=19" defer></script>
 </head>
 <body class="case-page chatdb-case"><div class="shell"><header class="masthead-bar"><div class="page"><div class="bar">
@@ -28,7 +167,7 @@
   </section>
 
   <section class="chatdb-mission" aria-labelledby="chatdb-mission-title">
-    <div><p class="label">Project goal</p><h2 id="chatdb-mission-title">Make the step between “I know what I want” and “I can write the query” visible.</h2><p>ChatDB was built for learners who could read a finished SQL example but struggled to create one from a real database schema.</p></div>
+    <div class="chatdb-mission-copy"><p class="label">Project goal</p><h2 id="chatdb-mission-title">Make the step between “I know what I want” and “I can write the query” visible.</h2><p>ChatDB was built for learners who could read a finished SQL example but struggled to create one from a real database schema.</p></div>
     <ol><li><span>01</span><strong>Ground the example</strong><p>Use the selected database, table, field names, and data types so the query is valid for the practice dataset.</p></li><li><span>02</span><strong>Explain the intent</strong><p>Show the plain-language request beside the generated SQL or MongoDB operation.</p></li><li><span>03</span><strong>Run it</strong><p>Execute the query and return its result so the learner can connect syntax with behavior.</p></li></ol>
   </section>
   
