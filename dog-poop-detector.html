@@ -10,6 +10,169 @@
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=19">
   <script src="script.js?v=19" defer></script>
+  <style>
+    .detector-case .dog-origin-story,
+    .detector-case .dog-origin-story * { box-sizing: border-box; min-width: 0; }
+    .detector-case .dog-origin-story { display: block; overflow: hidden; }
+    .detector-case .dog-origin-story > .dog-mission-story {
+      display: grid;
+      gap: clamp(2rem, 4vw, 4.5rem);
+      grid-template-columns: minmax(0, .9fr) minmax(22rem, 1.1fr);
+      padding: clamp(2rem, 4.5vw, 4.5rem);
+    }
+    .detector-case .dog-mission-copy { align-self: center; max-width: 42rem; }
+    .detector-case .dog-mission-copy h2 {
+      font-size: clamp(2.6rem, 5vw, 5.8rem);
+      line-height: .98;
+      margin: 1rem 0 2rem;
+      max-width: 11ch;
+      overflow-wrap: break-word;
+    }
+    .detector-case .dog-mission-copy > p:not(.label) {
+      color: var(--ink-muted);
+      font-family: var(--font-serif);
+      font-size: clamp(1rem, 1.3vw, 1.15rem);
+      line-height: 1.65;
+      margin: 0;
+      max-width: 40rem;
+    }
+    .detector-case .dog-mission-copy > p:not(.label) + p { margin-top: 1.25rem; }
+    .detector-case .dog-origin-story .dog-mission-steps {
+      border-top: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .detector-case .dog-origin-story .dog-mission-steps article {
+      border-left: 1px solid var(--rule);
+      padding: clamp(1.75rem, 3vw, 3rem);
+    }
+    .detector-case .dog-origin-story .dog-mission-steps article:first-child { border-left: 0; }
+    .detector-case .dog-origin-story .dog-mission-steps strong {
+      font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+      line-height: 1.2;
+      margin-top: .75rem;
+    }
+    .detector-case .dog-origin-story .dog-mission-steps p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-top: 1rem;
+    }
+    .poop-commute {
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        #263522;
+      background-size: 2rem 2rem;
+      border: 1px solid rgba(212,173,51,.65);
+      height: clamp(18rem, 30vw, 26rem);
+      overflow: hidden;
+      position: relative;
+    }
+    .poop-commute:focus-visible { outline: 3px solid var(--case-accent); outline-offset: 4px; }
+    .commute-path {
+      background: rgba(238,232,208,.78);
+      border-block: 2px dashed rgba(47,44,36,.38);
+      height: 42%;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 31%;
+    }
+    .commute-location {
+      background: #171912;
+      color: #f3efe4;
+      font-family: var(--font-grotesk);
+      font-size: .72rem;
+      letter-spacing: .1em;
+      padding: .65rem .8rem;
+      position: absolute;
+      text-transform: uppercase;
+      z-index: 4;
+    }
+    .commute-home { left: 1rem; top: 1rem; }
+    .commute-campus { right: 1rem; top: 1rem; }
+    .commute-dog {
+      animation: dogWatch 1.2s ease-in-out infinite alternate;
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      position: absolute;
+      right: 8%;
+      top: 15%;
+      transform-origin: bottom center;
+      z-index: 3;
+    }
+    .commute-dog-label {
+      color: #f3efe4;
+      font-family: var(--font-grotesk);
+      font-size: .68rem;
+      letter-spacing: .08em;
+      position: absolute;
+      right: 4%;
+      text-transform: uppercase;
+      top: 30%;
+    }
+    .commute-poop {
+      filter: drop-shadow(0 .35rem .2rem rgba(0,0,0,.25));
+      font-size: clamp(1.55rem, 3vw, 2.5rem);
+      position: absolute;
+      z-index: 2;
+    }
+    .poop-one { left: 28%; top: 54%; }
+    .poop-two { left: 55%; top: 36%; }
+    .poop-three { left: 73%; top: 59%; }
+    .commute-scooter {
+      animation: scooterCommute 6.5s ease-in-out infinite;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      left: 5%;
+      position: absolute;
+      top: 58%;
+      z-index: 5;
+    }
+    .commute-help {
+      bottom: 1rem;
+      color: rgba(243,239,228,.72);
+      font-family: var(--font-grotesk);
+      font-size: .72rem;
+      left: 1rem;
+      position: absolute;
+    }
+    .poop-commute:hover .commute-scooter,
+    .poop-commute:focus .commute-scooter,
+    .poop-commute:hover .commute-dog,
+    .poop-commute:focus .commute-dog { animation-play-state: paused; }
+    @keyframes scooterCommute {
+      0% { left: 5%; top: 58%; transform: rotate(0); }
+      20% { left: 22%; top: 39%; transform: rotate(-8deg); }
+      40% { left: 42%; top: 61%; transform: rotate(7deg); }
+      60% { left: 59%; top: 47%; transform: rotate(-7deg); }
+      80% { left: 76%; top: 35%; transform: rotate(6deg); }
+      100% { left: 92%; top: 55%; transform: rotate(0); }
+    }
+    @keyframes dogWatch {
+      from { transform: rotate(-3deg); }
+      to { transform: rotate(4deg); }
+    }
+    @media (max-width: 900px) {
+      .detector-case .dog-origin-story > .dog-mission-story { grid-template-columns: 1fr; }
+      .detector-case .dog-mission-copy h2 { max-width: 14ch; }
+    }
+    @media (max-width: 700px) {
+      .detector-case .dog-origin-story > .dog-mission-story { padding: 1.75rem; }
+      .detector-case .dog-origin-story .dog-mission-steps { grid-template-columns: 1fr; }
+      .detector-case .dog-origin-story .dog-mission-steps article {
+        border-left: 0;
+        border-top: 1px solid var(--rule);
+        padding: 1.75rem;
+      }
+      .detector-case .dog-origin-story .dog-mission-steps article:first-child { border-top: 0; }
+      .detector-case .dog-mission-copy h2 { font-size: clamp(2.35rem, 11vw, 4rem); }
+      .poop-commute { height: 18rem; }
+      .commute-dog-label { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .commute-scooter, .commute-dog { animation: none; }
+      .commute-scooter { left: 44%; top: 56%; }
+    }
+  </style>
 </head>
 <body class="case-page detector-case"><div class="shell">
   <header class="masthead-bar"><div class="page"><div class="bar">
@@ -24,13 +187,36 @@
       <div class="case-folio"><a class="label" href="index.html#work">← Selected work</a><span class="label">Case study 07 / 09</span></div>
       <p class="label headnote">Side project / Pose estimation + event logic</p>
       <h1 class="case-title"><span>AI Dog Poop</span><span>Detector</span></h1>
-      <p class="case-tagline">A camera system that recognizes a dog’s posture, confirms the behavior across several frames, and marks the cleanup location.</p>
+      <p class="case-tagline">A USC commute, a 25-pound electric scooter, one golden retriever, and a front lawn with terrible quality control.</p>
       <dl class="case-credits"><div><dt class="label">Product idea</dt><dd>Recognize the behavior while the camera still knows the location</dd></div><div><dt class="label">How it works</dt><dd>Six body points · motion · repeated-frame checks · OpenCV</dd></div><div><dt class="label">Tests</dt><dd>False alerts · missed events · response time · location accuracy</dd></div></dl>
     </section>
 
-    <section class="dog-mission" aria-labelledby="dog-mission-title">
-      <div><p class="label">Project goal</p><h2 id="dog-mission-title">Detect the behavior, then save where cleanup is needed.</h2><p>A waste-only detector is unreliable because the object can be hidden, small, or visually different each time. I tested whether a short sequence of body posture and motion could provide an earlier, more consistent signal.</p></div>
-      <div class="dog-mission-steps"><article><span>See</span><strong>Six body points</strong><p>Track the front, middle, and rear spine plus the base, middle, and tip of the tail.</p></article><article><span>Confirm</span><strong>Several matching frames</strong><p>Require the crouch, tail position, low movement, and confidence threshold to agree over time.</p></article><article><span>Record</span><strong>Time and location</strong><p>Save the event frame and place a cleanup marker only after the event passes the checks.</p></article></div>
+    <section class="dog-mission dog-origin-story" aria-labelledby="dog-mission-title">
+      <div class="dog-mission-story">
+        <div class="dog-mission-copy">
+          <p class="label">Why I built this</p>
+          <h2 id="dog-mission-title">My trip to class started with a poop obstacle course.</h2>
+          <p>As a USC student, I carried a 25-pound electric scooter out the front door every morning. A golden retriever had claimed the lawn as its favorite bathroom, and its owners rarely cleaned up. Getting to class meant holding the scooter with one hand while tiptoeing around fresh surprises.</p>
+          <p>I wanted a clear record before talking with the owners. I built a camera prototype that tracked the dog’s posture across several frames, saved the time and location, and gave me evidence for a much less awkward conversation.</p>
+        </div>
+        <div class="poop-commute" tabindex="0" role="img" aria-label="An animated scooter avoiding dog poop between Brandon's front door and USC">
+          <span class="commute-location commute-home">Front door</span>
+          <span class="commute-location commute-campus">USC</span>
+          <div class="commute-path" aria-hidden="true"></div>
+          <span class="commute-dog" aria-hidden="true">🐕</span>
+          <span class="commute-dog-label">Repeat offender</span>
+          <span class="commute-poop poop-one" aria-hidden="true">💩</span>
+          <span class="commute-poop poop-two" aria-hidden="true">💩</span>
+          <span class="commute-poop poop-three" aria-hidden="true">💩</span>
+          <span class="commute-scooter" aria-hidden="true">🛴</span>
+          <small class="commute-help">Hover or focus here to pause the morning commute</small>
+        </div>
+      </div>
+      <div class="dog-mission-steps">
+        <article><span>01 · Watch</span><strong>Recognize the pose</strong><p>Six points track the spine and tail when the retriever begins crouching.</p></article>
+        <article><span>02 · Check</span><strong>Avoid false accusations</strong><p>Nearby frames confirm the posture and motion so an ordinary sit or stretch does not create an alert.</p></article>
+        <article><span>03 · Save</span><strong>Bring the receipt</strong><p>The prototype records the frame, time, and lawn location for the cleanup conversation.</p></article>
+      </div>
     </section>
 
     <section class="case-glance"><p class="label">Core insight</p><p class="case-promise">Dog waste changes shape, color, and visibility. A crouched spine, straight tail, and stationary pose form a more consistent signal.</p></section>
@@ -73,8 +259,12 @@
     </section>
 
     <section class="story-section">
-      <div class="story-heading"><span class="label story-num">01</span><h2>From problem to observable signal</h2></div>
-      <div class="story-copy prose"><p>A generic object detector asks the camera to recognize waste after it appears. That approach breaks under grass, darkness, scale, occlusion, and changing appearance. The stronger product hypothesis recognizes the dog’s behavior at the moment the location is known.</p><p>The working definition combines three spine points, three tail points, body motion, and time. One frame never decides the event. Evidence accumulates across consecutive frames.</p></div>
+      <div class="story-heading"><span class="label story-num">01</span><h2>Why I tracked the dog’s pose</h2></div>
+      <div class="story-copy prose">
+        <p>A pile might blend into the grass, sit behind the dog, or fall outside the camera frame. The dog’s crouched spine and tail position appear earlier and stay visible across several frames.</p>
+        <p>I tracked three points along the spine and three along the tail. The system also checked movement and duration. One uncertain frame never created a record by itself.</p>
+        <p>The finished prototype separated an ordinary sit or stretch from a sustained crouching event, then saved the time and cleanup location. The result gave me a clearer way to discuss the recurring problem with the owners.</p>
+      </div>
     </section>
 
     <section class="story-section dog-inspector-section">
