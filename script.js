@@ -74,7 +74,7 @@ if (!reducedMotion) {
 
 const projectPeeks = {
   "healthcare-analytics.html": ["6 product releases", [42, 68, 78, 90]],
-  "email-ticket-automation.html": ["136 open items surfaced", [28, 44, 67, 94]],
+  "email-ticket-automation.html": ["502 requests made visible", [28, 44, 67, 94]],
   "glean-ai-rollout.html": ["trust → repeat use", [31, 52, 63, 82]],
   "chatdb.html": ["SQL + NoSQL execution", [80, 42, 72, 58]],
   "protein-binding.html": ["967 PDB complexes", [95, 62, 39, 24]],
@@ -132,7 +132,7 @@ const releaseOrbitData = [
   { number: "03", product: "PCT Retention", outcome: "40% longer pilot retention" },
   { number: "04", product: "Pyramid Report", outcome: "80% faster reporting" },
   { number: "05", product: "Clinical Heatmap", outcome: "4 hours to 5 seconds" },
-  { number: "06", product: "Request Tracker", outcome: "250 requests, 40+ fields" },
+  { number: "06", product: "Request Tracker", outcome: "502 requests, one shared queue" },
 ];
 
 function renderReleaseOrbit(index) {
