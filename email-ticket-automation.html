@@ -1,62 +1,682 @@
-<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="How I turned the HSG shared inbox into a measured support operation: 502 tracked requests, clearer ownership, and a roadmap to reduce friction for field teams."><title>HSG Inbox Request Tracker | Brandon Y. Chang</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=20"><link rel="stylesheet" href="hsg-updates.css?v=20"><script src="script.js?v=20" defer></script></head><body class="case-page email-case"><div class="shell"><header class="masthead-bar"><div class="page"><div class="bar">
-    <a href="index.html" class="wordmark">Brandon&nbsp;Y.&nbsp;Chang</a>
-    <nav class="nav" aria-label="Primary navigation"><a href="index.html#about" class="nav-item">About</a><a href="index.html#work" class="nav-item">Work</a><a href="index.html#experience" class="nav-item">Experience</a><a href="index.html#contact" class="nav-item">Contact</a></nav>
-    <button type="button" class="theme-toggle" aria-label="Switch to light mode" title="Switch to light mode"><span aria-hidden="true">☀</span></button>
-    <button type="button" class="burger" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span class="bar-line" aria-hidden="true"></span><span class="bar-line" aria-hidden="true"></span></button>
-  </div></div></header><div id="mobile-menu" class="drawer" aria-hidden="true"><div class="page drawer-inner"><a href="index.html" class="drawer-link">Home</a><a href="index.html#about" class="drawer-link">About</a><a href="index.html#work" class="drawer-link">Work</a><a href="index.html#experience" class="drawer-link">Experience</a><a href="index.html#contact" class="drawer-link">Contact</a></div></div><main><div class="page email-page">
-    <section class="email-hero">
-      <div class="case-folio"><a class="label" href="index.html#work">← Selected work</a><span class="label">Case study 02 / 09</span></div>
-      <p class="label headnote">DaVita / HSG Data &amp; Analytics / Request operations</p>
-      <h1>Make the work visible.<br>Help the field move.</h1>
-      <p class="email-lead">The HSG shared inbox was where field teams came when access, reporting, or data problems interrupted their work. I built a tracker that turned those emails into a shared operation—and showed us which recurring problems to solve next.</p>
-      <p class="hsg-source">Results as of September 14, 2026 · Tracking began July 28, 2025</p>
-      <dl class="hsg-metrics">
-        <div><dt>Requests captured</dt><dd>502</dd><p>A countable workload where there was no shared measure.</p></div>
-        <div><dt>Requests in August 2026</dt><dd>75</dd><p>A full month of demand that leaders can plan around.</p></div>
-        <div><dt>Median first response</dt><dd>0.9 <small>days</small></dd><p>Time to an initial reply, separate from full resolution.</p></div>
-        <div><dt>Teammates, one queue</dt><dd>5</dd><p>Visible ownership and coverage when someone is away.</p></div>
-      </dl>
-      <nav class="hsg-jump" aria-label="On this page"><a href="#problem">The problem</a><a href="#solution">Before &amp; after</a><a href="#impact">Impact</a><a href="#lessons">Lessons &amp; next steps</a></nav>
-    </section>
+<!doctype html>
+<html lang="en" data-theme="dark">
 
-    <section class="hsg-section" id="problem" aria-labelledby="hsg-problem-title">
-      <div class="hsg-section-head"><p class="label">01 / Why the inbox mattered</p><h2 id="hsg-problem-title">A familiar front door.<br>A hidden workload.</h2></div>
-      <div class="hsg-prose"><p>Field teams already knew where to go for help: email the analytics team. That made the inbox useful, but it also made it a gathering place for very different kinds of work. A request to open a report, a question about a number, and a broken data source could all arrive through the same channel.</p><p>The operational cost extended beyond answering email. When people cannot access a tool or trust a report, their work stalls while analysts investigate. The goal was to reduce that friction: get each request to the right person, keep it moving, and use the patterns to prevent repeat problems.</p></div>
-      <div class="hsg-buckets">
-        <article><p class="label">Access &amp; permissions</p><h3>Help people reach the tools.</h3><p>Access requests were the largest category. Their frequency pointed to an opportunity to improve access guidance and routing at the source.</p></article>
-        <article><p class="label">Data validation &amp; debugging</p><h3>Help people trust the answer.</h3><p>A question about a number can require root-cause analysis: reproduce the discrepancy, trace the source data and report logic, check definitions, and debug the issue before validating the result. These investigations take sustained analyst time; counting emails alone does not capture that effort.</p></article>
-        <article><p class="label">Reporting &amp; technical support</p><h3>Keep field operations moving.</h3><p>Report questions and issues across tools and data sources need context, follow-through, and sometimes another team’s help. A shared record makes the owner and next action visible while that work continues.</p></article>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta
+    name="description"
+    content="How I turned the HSG shared inbox into a structured support system tracking 502 requests and returning up to 126 hours of team capacity."
+  >
+
+  <title>HSG Inbox Request Tracker | Brandon Y. Chang</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="styles.css?v=20">
+  <link rel="stylesheet" href="hsg-updates.css?v=20">
+
+  <script src="script.js?v=20" defer></script>
+</head>
+
+<body class="case-page email-case">
+
+<div class="shell">
+
+  <header class="masthead-bar">
+    <div class="page">
+      <div class="bar">
+
+        <a href="index.html" class="wordmark">
+          Brandon&nbsp;Y.&nbsp;Chang
+        </a>
+
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="index.html#about" class="nav-item">About</a>
+          <a href="index.html#work" class="nav-item">Work</a>
+          <a href="index.html#experience" class="nav-item">Experience</a>
+          <a href="index.html#contact" class="nav-item">Contact</a>
+        </nav>
+
+        <button
+          type="button"
+          class="theme-toggle"
+          aria-label="Switch to light mode"
+          title="Switch to light mode"
+        >
+          <span aria-hidden="true">☀</span>
+        </button>
+
+        <button
+          type="button"
+          class="burger"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Open menu"
+        >
+          <span class="bar-line" aria-hidden="true"></span>
+          <span class="bar-line" aria-hidden="true"></span>
+        </button>
+
       </div>
-    </section>
+    </div>
+  </header>
 
-    <section class="email-objective" aria-labelledby="email-objective-title"><div><p class="label">My role &amp; product goal</p><h2 id="email-objective-title">Keep email simple. Make the work behind it accountable.</h2><p>I built the Outlook-to-Python pipeline, classification and priority rules, conversation deduplication, owner assignment, service-level tracking, and dashboard. The team continued using the same inbox; automation added the shared record and follow-up around it.</p></div><dl><div><dt>For the field</dt><dd>A familiar way to ask for help, with less uncertainty about who is handling the request.</dd></div><div><dt>For the analytics team</dt><dd>One queue to assign, prioritize, update, and hand off work across five teammates.</dd></div><div><dt>For leadership</dt><dd>Evidence for staffing and priority decisions: how much support work arrives, where it accumulates, and which recurring issues deserve investment.</dd></div></dl></section>
 
-    <section class="hsg-section" id="solution" aria-labelledby="hsg-solution-title">
-      <div class="hsg-section-head"><p class="label">02 / Before &amp; after</p><h2 id="hsg-solution-title">From remembering requests<br>to managing a queue.</h2></div>
-      <div class="hsg-comparison"><article><p class="label">Before / Manual follow-up</p><h3>An email was the record.</h3><ul><li>Requests also surfaced in Teams, meetings, and conversations, without a shared backlog to reconcile them.</li><li>Ownership, priority, due dates, and status depended on people remembering to follow up.</li><li>Leaders heard about the workload but could not reliably size it or see aging work.</li></ul></article><article><p class="label">After / Structured intake</p><h3>Each thread has a place.</h3><ul><li>Inbox requests are captured automatically; conversation deduplication keeps replies on one record.</li><li>Each item carries an owner, category, priority, status, and a service-level deadline.</li><li>A daily dashboard and Monday morning digest surface outstanding work and overdue items.</li></ul></article></div>
-      <div class="email-system hsg-pipeline"><div class="email-system-title"><p class="label">How it works</p><h2>Automate coordination.<br>Give investigation room.</h2></div><ol class="automation-rail"><li><b>01</b><div><h3>Capture</h3><p>Read the shared inbox and Sent Items; group messages by conversation.</p></div></li><li><b>02</b><div><h3>Classify</h3><p>Structure application, workstream, request type, and priority.</p></div></li><li><b>03</b><div><h3>Assign</h3><p>Route to an owner and set a service level, from one day for urgent work to ten for routine work.</p></div></li><li><b>04</b><div><h3>Follow through</h3><p>Use reply keywords to close, reassign, or reprioritize requests. Preserve manual overrides.</p></div></li><li><b>05</b><div><h3>Make visible</h3><p>Refresh the dashboard daily and send outstanding items to owners every Monday at 7 a.m.</p></div></li></ol></div>
-    </section>
+  <div id="mobile-menu" class="drawer" aria-hidden="true">
+    <div class="page drawer-inner">
+      <a href="index.html" class="drawer-link">Home</a>
+      <a href="index.html#about" class="drawer-link">About</a>
+      <a href="index.html#work" class="drawer-link">Work</a>
+      <a href="index.html#experience" class="drawer-link">Experience</a>
+      <a href="index.html#contact" class="drawer-link">Contact</a>
+    </div>
+  </div>
 
-    <section class="hsg-section" id="impact" aria-labelledby="hsg-impact-title">
-      <div class="hsg-section-head"><p class="label">03 / What changed</p><h2 id="hsg-impact-title">A basis for decisions,<br>not just a cleaner inbox.</h2></div>
-      <div class="hsg-buckets">
-        <article><p class="label">Demand became measurable</p><h3>69 in July. 75 in August.</h3><p>By summer 2026, monthly intake had grown well beyond the roughly 6–20 requests seen at launch. Leaders responsible for staffing and priorities could now see support as a recurring workstream and discuss capacity with evidence.</p></article>
-        <article><p class="label">Coordination became lighter</p><h3>More time for the actual problem.</h3><p>Automatic capture, routing, and reminders reduced manual administration around each request. The tracker reports an average completion time of about 1.3 days; complex validation and debugging cases can take longer. There is no measured pre-tracker speed baseline for comparison.</p></article>
-        <article><p class="label">Risk became visible</p><h3>40 open. 27 marked overdue.</h3><p>The oldest recorded open request was 150 days old. Surfacing aging work helps leaders decide where to unblock a dependency or add attention. These are recorded statuses: missed closure signals can leave completed work looking open.</p></article>
+
+  <main>
+    <div class="page email-page">
+
+
+      <!-- HERO -->
+
+      <section class="email-hero">
+
+        <div class="case-folio">
+          <a class="label" href="index.html#work">← Selected work</a>
+          <span class="label">Case study 02 / 09</span>
+        </div>
+
+        <p class="label headnote">
+          DaVita / HSG Data &amp; Analytics / Request operations
+        </p>
+
+        <h1>
+          Turn an inbox<br>
+          into an operation.
+        </h1>
+
+        <p class="email-lead">
+          I built a system that automatically turns support emails into a shared,
+          trackable queue for a five-person analytics team.
+        </p>
+
+        <p class="hsg-source">
+          Results through September 14, 2026
+        </p>
+
+        <dl class="hsg-metrics">
+
+          <div>
+            <dt>Requests tracked</dt>
+            <dd>502</dd>
+            <p>One shared record of incoming work.</p>
+          </div>
+
+          <div>
+            <dt>Capacity returned</dt>
+            <dd>84–126 <small>hrs</small></dd>
+            <p>Time returned from manual coordination.</p>
+          </div>
+
+          <div>
+            <dt>Median first response</dt>
+            <dd>0.9 <small>days</small></dd>
+            <p>Faster visibility into incoming needs.</p>
+          </div>
+
+          <div>
+            <dt>One shared queue</dt>
+            <dd>5 <small>people</small></dd>
+            <p>Clear ownership across the team.</p>
+          </div>
+
+        </dl>
+
+        <nav class="hsg-jump" aria-label="On this page">
+          <a href="#problem">Problem</a>
+          <a href="#solution">System</a>
+          <a href="#impact">Impact</a>
+          <a href="#lessons">Next</a>
+        </nav>
+
+      </section>
+
+
+
+      <!-- PROBLEM -->
+
+      <section
+        class="hsg-section"
+        id="problem"
+        aria-labelledby="hsg-problem-title"
+      >
+
+        <div class="hsg-section-head">
+          <p class="label">01 / Problem</p>
+
+          <h2 id="hsg-problem-title">
+            The inbox worked.<br>
+            The workflow did not.
+          </h2>
+        </div>
+
+        <div class="hsg-prose">
+
+          <p>
+            Access issues, broken reports, data questions, and technical requests
+            all entered the same shared inbox.
+          </p>
+
+          <p>
+            Ownership and follow-up depended on memory. Leaders had no clear view
+            of volume, aging work, or team capacity.
+          </p>
+
+        </div>
+
+
+        <div class="hsg-buckets">
+
+          <article>
+            <p class="label">Access</p>
+            <h3>Get people into the right tools.</h3>
+            <p>
+              Access and permission requests became the largest category.
+            </p>
+          </article>
+
+          <article>
+            <p class="label">Data</p>
+            <h3>Find why the number looks wrong.</h3>
+            <p>
+              Analysts traced source data, report logic, and discrepancies.
+            </p>
+          </article>
+
+          <article>
+            <p class="label">Support</p>
+            <h3>Keep work moving.</h3>
+            <p>
+              Every request needed an owner, status, and next action.
+            </p>
+          </article>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ROLE -->
+
+      <section
+        class="email-objective"
+        aria-labelledby="email-objective-title"
+      >
+
+        <div>
+
+          <p class="label">My role</p>
+
+          <h2 id="email-objective-title">
+            Keep email simple.<br>
+            Automate everything behind it.
+          </h2>
+
+          <p>
+            I built the Outlook extraction pipeline, classification logic,
+            priority rules, deduplication, assignment system, SLA tracking,
+            dashboard, and reminders.
+          </p>
+
+        </div>
+
+
+        <dl>
+
+          <div>
+            <dt>Field teams</dt>
+            <dd>
+              Keep using the same inbox.
+            </dd>
+          </div>
+
+          <div>
+            <dt>Analytics team</dt>
+            <dd>
+              See every request, owner, priority, and status.
+            </dd>
+          </div>
+
+          <div>
+            <dt>Leadership</dt>
+            <dd>
+              See workload and where team capacity goes.
+            </dd>
+          </div>
+
+        </dl>
+
+      </section>
+
+
+
+      <!-- SYSTEM -->
+
+      <section
+        class="hsg-section"
+        id="solution"
+        aria-labelledby="hsg-solution-title"
+      >
+
+        <div class="hsg-section-head">
+
+          <p class="label">02 / System</p>
+
+          <h2 id="hsg-solution-title">
+            From inbox<br>
+            to structured queue.
+          </h2>
+
+        </div>
+
+
+        <div class="hsg-comparison">
+
+          <article>
+
+            <p class="label">Before</p>
+
+            <h3>Email was the system.</h3>
+
+            <ul>
+              <li>No shared backlog.</li>
+              <li>Ownership lived in people's heads.</li>
+              <li>Aging requests were hard to see.</li>
+            </ul>
+
+          </article>
+
+
+          <article>
+
+            <p class="label">After</p>
+
+            <h3>Every request has a record.</h3>
+
+            <ul>
+              <li>Emails captured automatically.</li>
+              <li>Owner, priority, status, and SLA tracked.</li>
+              <li>Dashboard and reminders surface open work.</li>
+            </ul>
+
+          </article>
+
+        </div>
+
+
+
+        <div class="email-system hsg-pipeline">
+
+          <div class="email-system-title">
+
+            <p class="label">Workflow</p>
+
+            <h2>
+              Five steps.<br>
+              Minimal admin.
+            </h2>
+
+          </div>
+
+
+          <ol class="automation-rail">
+
+            <li>
+
+              <b>01</b>
+
+              <div>
+                <h3>Capture</h3>
+                <p>
+                  Read Outlook and group each conversation.
+                </p>
+              </div>
+
+            </li>
+
+
+            <li>
+
+              <b>02</b>
+
+              <div>
+                <h3>Classify</h3>
+                <p>
+                  Identify request type, workstream, and priority.
+                </p>
+              </div>
+
+            </li>
+
+
+            <li>
+
+              <b>03</b>
+
+              <div>
+                <h3>Assign</h3>
+                <p>
+                  Add an owner and service deadline.
+                </p>
+              </div>
+
+            </li>
+
+
+            <li>
+
+              <b>04</b>
+
+              <div>
+                <h3>Track</h3>
+                <p>
+                  Update status from replies and manual changes.
+                </p>
+              </div>
+
+            </li>
+
+
+            <li>
+
+              <b>05</b>
+
+              <div>
+                <h3>Surface</h3>
+                <p>
+                  Refresh the dashboard and send weekly reminders.
+                </p>
+              </div>
+
+            </li>
+
+          </ol>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- IMPACT -->
+
+      <section
+        class="hsg-section"
+        id="impact"
+        aria-labelledby="hsg-impact-title"
+      >
+
+        <div class="hsg-section-head">
+
+          <p class="label">03 / Impact</p>
+
+          <h2 id="hsg-impact-title">
+            Less coordination.<br>
+            More analyst capacity.
+          </h2>
+
+        </div>
+
+
+        <aside class="hsg-estimate">
+
+          <p class="label">Capacity returned</p>
+
+          <h3>
+            84–126 hours.
+          </h3>
+
+          <p>
+            Manual sorting, logging, routing, and follow-up removed across
+            502 requests.
+          </p>
+
+        </aside>
+
+
+        <div class="hsg-buckets">
+
+          <article>
+
+            <p class="label">Demand</p>
+
+            <h3>75 requests in August.</h3>
+
+            <p>
+              Support work became a visible recurring workload.
+            </p>
+
+          </article>
+
+
+          <article>
+
+            <p class="label">Coordination</p>
+
+            <h3>One queue for five teammates.</h3>
+
+            <p>
+              Ownership and follow-up became visible across the team.
+            </p>
+
+          </article>
+
+
+          <article>
+
+            <p class="label">Risk</p>
+
+            <h3>40 open. 27 overdue.</h3>
+
+            <p>
+              Aging work became visible before requests disappeared in the inbox.
+            </p>
+
+          </article>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- LESSONS -->
+
+      <section
+        class="hsg-section"
+        id="lessons"
+        aria-labelledby="hsg-lessons-title"
+      >
+
+        <div class="hsg-section-head">
+
+          <p class="label">04 / What's next</p>
+
+          <h2 id="hsg-lessons-title">
+            Use the queue<br>
+            to remove repeat work.
+          </h2>
+
+        </div>
+
+
+        <div class="hsg-lessons">
+
+          <article>
+
+            <span class="label">01</span>
+
+            <div>
+              <h3>Prevent repeat requests.</h3>
+              <p>
+                Use request patterns to improve access guidance and fix recurring
+                technical issues.
+              </p>
+            </div>
+
+          </article>
+
+
+          <article>
+
+            <span class="label">02</span>
+
+            <div>
+              <h3>Improve status accuracy.</h3>
+              <p>
+                Capture owner replies more consistently so completed work closes
+                automatically.
+              </p>
+            </div>
+
+          </article>
+
+
+          <article>
+
+            <span class="label">03</span>
+
+            <div>
+              <h3>Design around team habits.</h3>
+              <p>
+                The Monday digest brought open work directly to each owner.
+              </p>
+            </div>
+
+          </article>
+
+
+          <article>
+
+            <span class="label">04</span>
+
+            <div>
+              <h3>Scale the workflow.</h3>
+              <p>
+                Move the prototype into a durable shared system for broader use.
+              </p>
+            </div>
+
+          </article>
+
+        </div>
+
+
+        <p class="hsg-closing">
+          The tracker turned a shared inbox into measurable operations:
+          502 requests tracked and 84–126 hours returned to the team.
+        </p>
+
+      </section>
+
+
+
+      <!-- PROJECT NAV -->
+
+      <nav
+        class="project-nav case-nav"
+        aria-label="Case study navigation"
+      >
+        <a href="healthcare-analytics.html">
+          ← Healthcare portfolio
+        </a>
+
+        <a href="glean-ai-rollout.html">
+          Enterprise AI →
+        </a>
+      </nav>
+
+
+    </div>
+  </main>
+
+
+
+  <!-- FOOTER -->
+
+  <footer class="colophon" id="contact">
+
+    <div class="page">
+
+      <div class="grid footer-grid">
+
+        <div class="c-4">
+          <p class="label">Brandon Y. Chang</p>
+
+          <p class="colophon-note">
+            Healthcare analytics, product systems, and applied data.
+            San Jose, California.
+          </p>
+
+          <p class="colophon-note">
+            © 2026
+          </p>
+        </div>
+
+
+        <div class="c-4">
+
+          <p class="label">Contact</p>
+
+          <ul class="colophon-list">
+            <li>
+              <a
+                class="link"
+                href="mailto:bychang@alumni.usc.edu"
+              >
+                bychang@alumni.usc.edu
+              </a>
+            </li>
+          </ul>
+
+        </div>
+
+
+        <div class="c-4">
+
+          <p class="label">Elsewhere</p>
+
+          <ul class="colophon-list">
+            <li>
+              <a
+                class="link"
+                href="https://www.linkedin.com/in/brandonychang"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn ↗
+              </a>
+            </li>
+          </ul>
+
+        </div>
+
       </div>
-      <aside class="hsg-estimate"><p class="label">Estimated capacity returned</p><h3>About 84–126 hours of coordination.</h3><p>502 requests × an assumed 10–15 minutes of manual sorting, logging, and follow-up per request. This is an estimate, not a measured time study, and covers coordination rather than the investigation itself. Measuring the actual time removed is a next step.</p></aside>
-    </section>
 
-    <section class="hsg-section" id="lessons" aria-labelledby="hsg-lessons-title">
-      <div class="hsg-section-head"><p class="label">04 / Lessons &amp; next steps</p><h2 id="hsg-lessons-title">The queue showed us<br>what to improve next.</h2></div>
-      <div class="hsg-lessons">
-        <article><span class="label">01 / Prevent repeat demand</span><div><h3>Use the categories to fix recurring friction.</h3><p>Access led request volume, while the tracker also surfaced ten technical issues across tools and data sources. The opportunity is to improve access guidance and investigate recurring failures together. Next, distinguish high-volume requests from high-effort investigations so priority reflects both frequency and field impact.</p></div></article>
-        <article><span class="label">02 / Make status trustworthy</span><div><h3>Capture the resolution, wherever the reply happens.</h3><p>Replies from personal mailboxes do not always reach the tracker, and vague replies can leave items in progress. Clear closure markers and broader owner-reply capture are on the fix list. Reconciling these gaps matters before treating the overdue count as confirmed unresolved work.</p></div></article>
-        <article><span class="label">03 / Design for daily habits</span><div><h3>Bring the next action to the team.</h3><p>Teammates asked for the Monday digest because it reminded them without requiring a dashboard visit. That feedback became a shipped feature. Eighteen captured feedback items, including fifteen improvement ideas, now provide a backlog for continued iteration.</p></div></article>
-        <article><span class="label">04 / Build for continuity</span><div><h3>Move beyond a prototype on one machine.</h3><p>Python and Excel proved the workflow without a new platform, license, or headcount. The next decision is whether to move to a more durable setup, such as a SharePoint List, Power BI, and event-driven capture, and whether to extend it beyond Data &amp; Analytics. That is a proposed direction, not a completed migration.</p></div></article>
-      </div>
-      <p class="hsg-closing">My biggest lesson: a tracker creates value when its data changes what the team does next—who takes a request, which problem gets fixed upstream, and where leaders invest so field teams can keep working.</p>
-      <p class="hsg-source">Source: HSG Inbox Management dashboard and tracker, summarized September 14, 2026. Figures describe the recorded workload; coordination savings are estimated. First response and completion measure different stages of a request.</p>
-    </section>
-    <nav class="project-nav case-nav" aria-label="Case study navigation"><a href="healthcare-analytics.html">← Healthcare portfolio</a><a href="glean-ai-rollout.html">Enterprise AI →</a></nav>
-  </div></main><footer class="colophon" id="contact"><div class="page"><div class="grid footer-grid"><div class="c-4"><p class="label">Brandon Y. Chang</p><p class="colophon-note">Healthcare analytics, product systems, and applied data. San Jose, California.</p><p class="colophon-note">© 2026</p></div><div class="c-4"><p class="label">Contact</p><ul class="colophon-list"><li><a class="link" href="mailto:bychang@alumni.usc.edu">bychang@alumni.usc.edu</a></li></ul></div><div class="c-4"><p class="label">Elsewhere</p><ul class="colophon-list"><li><a class="link" href="https://www.linkedin.com/in/brandonychang" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li></ul></div></div></div></footer></div></body></html>
+    </div>
+
+  </footer>
+
+</div>
+
+</body>
+</html>
