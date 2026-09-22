@@ -3,13 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Brandon Y. Chang's portfolio across product systems, healthcare analytics, applied AI, and biological data.">
+  <meta name="description" content="Meet Brandon Y. Chang: bringing product design, data, and engineering together at DaVita. Explore healthcare products, applied AI, and a background in science at USC.">
   <title>Brandon Y. Chang | Product, Data &amp; Applied AI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20"><link rel="stylesheet" href="hsg-updates.css?v=20">
+  <link rel="stylesheet" href="landing.css?v=21">
   <script src="script.js?v=20" defer></script>
+  <script src="landing.js?v=21" defer></script>
 </head>
 <body class="home-page">
   <div class="shell">
@@ -44,24 +46,45 @@
 
     <main id="top">
       <div class="page">
-        <section class="masthead">
-          <p class="label headnote">Healthcare analytics · product delivery · biology</p>
-          <div class="grid masthead-grid">
-            <h1 class="statement c-9">Turning ideas into simple products people want to use.</h1>
-            <figure class="portrait-card c-3 start-10 interactive-surface" data-tilt>
-              <img src="brandon-portrait.jpg" alt="Brandon Chang standing beneath the colonnade at the University of Southern California">
-              <figcaption>
-                <span class="portrait-name">Brandon Y. Chang</span>
-                <span>B.A. Data Science + Biological Sciences</span>
-                <span>USC · 2025</span>
-              </figcaption>
-              <span class="portrait-corner" aria-hidden="true">Product × Data × Biology</span>
+        <section class="intro-board" aria-labelledby="intro-title">
+          <div class="intro-eyebrow"><span>Product design × data × engineering</span><span>San Jose, California <i aria-hidden="true"></i></span></div>
+          <div class="intro-grid">
+            <div class="intro-copy">
+              <p class="intro-kicker">Hi, I’m Brandon.</p>
+              <h1 id="intro-title">I make complex<br> work feel <em>simple.</em></h1>
+              <p class="intro-description">I bring product design, data, and engineering together to build tools people can trust. At <strong>DaVita</strong>, that means making healthcare work easier for nurses, field leaders, and analysts.</p>
+              <div class="intro-actions"><a class="intro-primary" href="#work">Explore my work <span aria-hidden="true">↗</span></a><a class="intro-secondary" href="mailto:bychang@alumni.usc.edu">Let’s talk <span aria-hidden="true">↗</span></a></div>
+            </div>
+            <figure class="intro-portrait">
+              <img src="brandon-portrait.jpg" alt="Brandon Chang at the University of Southern California" fetchpriority="high" width="900" height="1200">
+              <figcaption><strong>Brandon Y. Chang</strong><span>Curious about people.<br>Careful with the details.</span></figcaption>
+              <span class="intro-portrait-tag">USC ’25</span>
             </figure>
+            <a class="intro-card intro-impact" href="healthcare-analytics.html">
+              <div class="intro-card-top"><span>01 / Healthcare, in practice</span><span class="intro-card-arrow" aria-hidden="true">↗</span></div>
+              <div class="intro-impact-number">6<span>products shipped<br>at DaVita</span></div>
+              <p>From clinical reporting and staffing tools to AI search and request operations.</p>
+              <span class="intro-card-link">See the healthcare portfolio <span aria-hidden="true">→</span></span>
+            </a>
+            <section class="intro-card intro-method" aria-labelledby="intro-method-title">
+              <div class="intro-card-top"><span>02 / How I approach design</span><span aria-hidden="true">↔</span></div>
+              <h2 id="intro-method-title">Start with the person.<br>Follow through to the system.</h2>
+              <div class="method-controls" role="group" aria-label="Explore my design process">
+                <button type="button" data-method="understand" aria-pressed="true" aria-controls="method-detail">01 Understand</button>
+                <button type="button" data-method="simplify" aria-pressed="false" aria-controls="method-detail">02 Simplify</button>
+                <button type="button" data-method="build" aria-pressed="false" aria-controls="method-detail">03 Build</button>
+              </div>
+              <div id="method-detail" class="method-detail" aria-live="polite" aria-atomic="true"><p>For the HSG inbox, the problem started with field teams waiting on access, reports, and answers they could trust.</p><span>Listen for what is getting in the way.</span></div>
+              <a class="intro-card-link" href="email-ticket-automation.html">See this approach in a project <span aria-hidden="true">→</span></a>
+            </section>
+            <div class="intro-card intro-background">
+              <div class="intro-card-top"><span>03 / A different starting point</span><span aria-hidden="true">✳</span></div>
+              <h2>Science taught me<br>to ask better questions.</h2>
+              <p>I studied <strong>Data Science + Biological Sciences at USC</strong>. Research taught me to trace an answer back to its evidence—a habit I bring to product decisions.</p>
+              <div class="intro-background-tags"><a href="protein-binding.html">Salve Therapeutics ↗</a><a href="aparicio-lab.html">USC Aparicio Lab ↗</a></div>
+            </div>
           </div>
-          <a class="scroll-cue" href="#about">
-            <span>Scroll to explore</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
+          <a class="scroll-cue" href="#about"><span>More about me &amp; my work</span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </section>
 
         <section class="section" id="about">
