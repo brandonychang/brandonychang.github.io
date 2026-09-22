@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20"><link rel="stylesheet" href="hsg-updates.css?v=20">
-  <link rel="stylesheet" href="landing.css?v=21">
+  <link rel="stylesheet" href="landing.css?v=22">
   <script src="script.js?v=20" defer></script>
-  <script src="landing.js?v=21" defer></script>
+  <script src="landing.js?v=22" defer></script>
 </head>
 <body class="home-page">
   <div class="shell">
@@ -53,7 +53,15 @@
               <p class="intro-kicker">Hi, I’m Brandon.</p>
               <h1 id="intro-title">I make complex<br> work feel <em>simple.</em></h1>
               <p class="intro-description">I bring product design, data, and engineering together to build tools people can trust. At <strong>DaVita</strong>, that means making healthcare work easier for nurses, field leaders, and analysts.</p>
-              <div class="intro-actions"><a class="intro-primary" href="#work">Explore my work <span aria-hidden="true">↗</span></a><a class="intro-secondary" href="mailto:bychang@alumni.usc.edu">Let’s talk <span aria-hidden="true">↗</span></a></div>
+              <div class="intro-actions"><a class="intro-primary" href="#work">Explore my work <span aria-hidden="true">↗</span></a><button type="button" class="intro-secondary" id="contact-toggle" aria-expanded="false" aria-controls="contact-options">Let’s talk <span aria-hidden="true">↗</span></button></div>
+              <section class="contact-options" id="contact-options" aria-labelledby="contact-options-title" hidden>
+                <h2 id="contact-options-title">Let’s connect.</h2>
+                <p>Have a role, project, or question in mind? Send me a note.</p>
+                <label for="contact-email">Email</label>
+                <div class="contact-copy-row"><input id="contact-email" type="text" value="bychang@alumni.usc.edu" readonly><button type="button" id="copy-contact-email">Copy email</button></div>
+                <div class="contact-browser-links"><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=bychang%40alumni.usc.edu" target="_blank" rel="noopener noreferrer">Compose in Gmail ↗</a><a href="https://www.linkedin.com/in/brandonychang" target="_blank" rel="noopener noreferrer">Connect on LinkedIn ↗</a></div>
+                <p id="contact-copy-status" role="status" aria-live="polite"></p>
+              </section>
             </div>
             <figure class="intro-portrait">
               <img src="brandon-portrait.jpg" alt="Brandon Chang at the University of Southern California" fetchpriority="high" width="900" height="1200">

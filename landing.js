@@ -13,3 +13,30 @@ document.querySelectorAll('[data-method]').forEach(button => {
     methodDetail.querySelector('span').textContent = principle;
   });
 });
+
+const contactToggle = document.querySelector('#contact-toggle');
+const contactOptions = document.querySelector('#contact-options');
+contactToggle.addEventListener('click', () => {
+  const open = contactOptions.hidden;
+  contactOptions.hidden = !open;
+  contactToggle.setAttribute('aria-expanded', String(open));
+});
+contactOptions.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    contactOptions.hidden = true;
+    contactToggle.setAttribute('aria-expanded', 'false');
+    contactToggle.focus();
+  }
+});
+document.querySelector('#copy-contact-email').addEventListener('click', async () => {
+  const email = document.querySelector('#contact-email');
+  const status = document.querySelector('#contact-copy-status');
+  try {
+    await navigator.clipboard.writeText(email.value);
+    status.textContent = 'Email copied. Paste it into any email service.';
+  } catch {
+    email.focus();
+    email.select();
+    status.textContent = 'Select and copy the email address above.';
+  }
+});
