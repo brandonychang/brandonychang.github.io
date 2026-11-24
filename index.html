@@ -8,10 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20"><link rel="stylesheet" href="hsg-updates.css?v=20">
-  <link rel="stylesheet" href="landing.css?v=23">
+  <link rel="stylesheet" href="styles.css?v=26"><link rel="stylesheet" href="hsg-updates.css?v=27">
+  <link rel="stylesheet" href="landing.css?v=26">
   <script src="script.js?v=20" defer></script>
-  <script src="landing.js?v=22" defer></script>
+  <script src="landing.js?v=26" defer></script>
 </head>
 <body class="home-page">
   <div class="shell">
@@ -68,11 +68,11 @@
               <figcaption><strong>Brandon Y. Chang</strong><span>Curious about people.<br>Careful with the details.</span></figcaption>
               <span class="intro-portrait-tag">USC ’25</span>
             </figure>
-            <a class="intro-card intro-impact" href="healthcare-analytics.html">
-              <div class="intro-card-top"><span>01 / Healthcare, in practice</span><span class="intro-card-arrow" aria-hidden="true">↗</span></div>
-              <div class="intro-impact-number">6<span>products shipped<br>at DaVita</span></div>
-              <p>From clinical reporting and staffing tools to AI search and request operations.</p>
-              <span class="intro-card-link">See the healthcare portfolio <span aria-hidden="true">→</span></span>
+            <a class="intro-card intro-impact" href="tableau-usage.html">
+              <div class="intro-card-top"><span>DaVita / Tableau usage</span></div>
+              <div class="intro-impact-number">27<span>workbooks in the<br>quarterly review</span></div>
+              <p>A heavily used finance report took 115.7 seconds to open. Typical load time was 2.1 seconds.</p>
+              <span class="intro-card-link">Explore the usage dashboards</span>
             </a>
             <section class="intro-card intro-method" aria-labelledby="intro-method-title">
               <div class="intro-card-top"><span>02 / How I approach design</span><span aria-hidden="true">↔</span></div>
@@ -133,15 +133,82 @@
           <header class="section-head"><p class="label label-ink">(02) / Selected work</p></header>
           <h2 class="title section-title">Projects<br>with a point</h2>
           <div class="index">
-            <a class="index-row" href="healthcare-analytics.html"><span class="index-num">01</span><span class="index-name">Healthcare Product Portfolio</span><span class="index-desc">Six named releases spanning AI knowledge search, safety, employee retention, clinical reporting, quality control, and request operations.</span><span class="index-meta">DaVita · Product &amp; analytics</span><span class="index-arrow" aria-hidden="true">→</span></a>
-            <a class="index-row" href="email-ticket-automation.html"><span class="index-num">02</span><span class="index-name">Healthcare Analytics Request Tracker</span><span class="index-desc">Turning the HSG inbox into a shared queue: 502 requests made visible, with clearer ownership and evidence for reducing friction in field operations.</span><span class="index-meta">Python · Excel · Operations</span><span class="index-arrow" aria-hidden="true">→</span></a>
-            <a class="index-row" href="glean-ai-rollout.html"><span class="index-num">03</span><span class="index-name">Enterprise AI Search Rollout</span><span class="index-desc">A rollout program that helped healthcare teams find trusted answers across disconnected company systems.</span><span class="index-meta">Glean · Product strategy · Analytics</span><span class="index-arrow" aria-hidden="true">→</span></a>
-            <a class="index-row" href="chatdb.html"><span class="index-num">04</span><span class="index-name">ChatDB</span><span class="index-desc">A learning tool that builds and runs SQL or MongoDB examples against practice data, then shows the results.</span><span class="index-meta">Flask · MySQL · MongoDB</span><span class="index-arrow" aria-hidden="true">→</span></a>
-            <a class="index-row" href="protein-binding.html"><span class="index-num">05</span><span class="index-name">Protein Binding Prediction</span><span class="index-desc">A machine-learning pipeline for estimating protein–ligand binding strength so candidate designs can be compared before slower laboratory screening.</span><span class="index-meta">PyTorch · RDKit · Bioinformatics</span><span class="index-arrow" aria-hidden="true">→</span></a>
-            <a class="index-row" href="genai-chatbot.html"><span class="index-num">06</span><span class="index-name">GenAI Chatbot Prototype</span><span class="index-desc">A support chatbot that answers from company documents, completes approved tasks, and hands uncertain questions to a person.</span><span class="index-meta">RAG · Retrieval · Product delivery</span><span class="index-arrow" aria-hidden="true">→</span></a>
-            <a class="index-row" href="dog-poop-detector.html"><span class="index-num">07</span><span class="index-name">Dog Poop Detector</span><span class="index-desc">A real-time behavior-detection product for recognizing events, capturing video evidence, and sending mobile alerts.</span><span class="index-meta">Computer vision · Product definition</span><span class="index-arrow" aria-hidden="true">→</span></a>
-            <a class="index-row" href="usc-parking.html"><span class="index-num">08</span><span class="index-name">Xposition USC Mobility</span><span class="index-desc">An event-day transportation app for comparing commute modes, parking choices, crowd density, alternate routes, and meeting points near Exposition Boulevard.</span><span class="index-meta">Figma · User research · Product design</span><span class="index-arrow" aria-hidden="true">→</span></a>
-            <a class="index-row" href="aparicio-lab.html"><span class="index-num">09</span><span class="index-name">Yeast DNA Replication Research</span><span class="index-desc">An interactive research story about editing yeast genes, screening colonies, and measuring how cells control the start of DNA replication.</span><span class="index-meta">USC Aparicio Lab · Molecular biology</span><span class="index-arrow" aria-hidden="true">→</span></a>
+            <details class="project-preview" name="featured-preview">
+              <summary class="index-row">
+                <span class="index-num">01</span>
+                <span class="index-name">Tableau Usage Dashboards</span>
+                <span class="index-desc">A quarterly review showing which reports field teams read, which pages they skip, and which workbooks take too long to load.</span>
+                <span class="index-meta">DaVita · Analytics</span>
+                <span class="preview-sign" aria-hidden="true"></span>
+              </summary>
+              <div class="preview-body">
+                <p>Five dashboards cover readership, repeat visits, access, and content health. A second team added its 19 workbooks in one day.</p>
+                <nav aria-label="Tableau project links"><a href="tableau-usage.html">Read case study</a><a href="hsg-projects.html">All 15 HSG projects</a></nav>
+              </div>
+            </details>
+            <details class="project-preview" name="featured-preview">
+              <summary class="index-row">
+                <span class="index-num">02</span>
+                <span class="index-name">HSG Inbox</span>
+                <span class="index-desc">Field teams kept using email. Five analysts got a shared queue and a median first response of 0.9 days.</span>
+                <span class="index-meta">DaVita · Operations</span>
+                <span class="preview-sign" aria-hidden="true"></span>
+              </summary>
+              <div class="preview-body">
+                <div class="result-preview">
+                  <strong>88%</strong>
+                  <div><p>214 of 243 requests resolved in Q3</p>
+                    <meter value="214" max="243" aria-label="214 of 243 requests resolved">88%</meter>
+                  </div>
+                </div>
+                <nav aria-label="HSG Inbox project links">
+                  <a href="email-ticket-automation.html">Read case study</a>
+                  <a href="email-ticket-automation.html#tracker">Inspect the request tracker</a>
+                </nav>
+              </div>
+            </details>
+            <details class="project-preview" name="featured-preview">
+              <summary class="index-row">
+                <span class="index-num">03</span>
+                <span class="index-name">Xposition USC Mobility</span>
+                <span class="index-desc">An event-day route planner shaped by commuter interviews and usability testing.</span>
+                <span class="index-meta">USC · Product design</span>
+                <span class="preview-sign" aria-hidden="true"></span>
+              </summary>
+              <div class="preview-body">
+                <img src="assets/xposition-map.png" loading="lazy" width="1218" height="746" alt="Football-event scenario showing parking options and the route to the Coliseum">
+                <nav aria-label="Xposition USC Mobility project links">
+                  <a href="usc-parking.html">Read case study</a>
+                  <a href="usc-parking.html#planner">Try the route planner</a>
+                </nav>
+              </div>
+            </details>
+            <a class="hsg-directory-link" href="hsg-projects.html">Browse all 15 Hospital Services Group projects</a>
+            <details class="project-archive">
+              <summary>More projects</summary>
+            <details class="project-preview" name="featured-preview">
+              <summary class="index-row">
+                <span class="index-num">04</span>
+                <span class="index-name">ChatDB</span>
+                <span class="index-desc">Choose a dataset, read a query, and see what it returns. A practice tool for learning SQL and MongoDB.</span>
+                <span class="index-meta">USC · Database learning</span>
+                <span class="preview-sign" aria-hidden="true"></span>
+              </summary>
+              <div class="preview-body">
+                <img src="chatdb-interface.png" loading="lazy" width="2048" height="1014" alt="Original ChatDB prototype with database controls and a generated SQL example">
+                <nav aria-label="ChatDB project links">
+                  <a href="chatdb.html">Read case study</a>
+                  <a href="chatdb.html#query-playground">Compare example queries</a>
+                </nav>
+              </div>
+            </details>
+              <a class="index-row" href="healthcare-analytics.html"><span class="index-num">05</span><span class="index-name">Healthcare Product Portfolio</span><span class="index-desc">Six named releases spanning AI knowledge search, safety, employee retention, clinical reporting, quality control, and request operations.</span><span class="index-meta">DaVita · Product &amp; analytics</span><span class="index-arrow" aria-hidden="true">→</span></a>
+              <a class="index-row" href="glean-ai-rollout.html"><span class="index-num">06</span><span class="index-name">Enterprise AI Search Rollout</span><span class="index-desc">A rollout program that helped healthcare teams find trusted answers across disconnected company systems.</span><span class="index-meta">Glean · Product strategy · Analytics</span><span class="index-arrow" aria-hidden="true">→</span></a>
+              <a class="index-row" href="protein-binding.html"><span class="index-num">07</span><span class="index-name">Protein Binding Prediction</span><span class="index-desc">A machine-learning pipeline for estimating protein–ligand binding strength so candidate designs can be compared before slower laboratory screening.</span><span class="index-meta">PyTorch · RDKit · Bioinformatics</span><span class="index-arrow" aria-hidden="true">→</span></a>
+              <a class="index-row" href="genai-chatbot.html"><span class="index-num">08</span><span class="index-name">GenAI Chatbot Prototype</span><span class="index-desc">A support chatbot that answers from company documents, completes approved tasks, and hands uncertain questions to a person.</span><span class="index-meta">RAG · Retrieval · Product delivery</span><span class="index-arrow" aria-hidden="true">→</span></a>
+              <a class="index-row" href="dog-poop-detector.html"><span class="index-num">09</span><span class="index-name">Dog Poop Detector</span><span class="index-desc">A real-time behavior-detection product for recognizing events, capturing video evidence, and sending mobile alerts.</span><span class="index-meta">Computer vision · Product definition</span><span class="index-arrow" aria-hidden="true">→</span></a>
+              <a class="index-row" href="aparicio-lab.html"><span class="index-num">10</span><span class="index-name">Yeast DNA Replication Research</span><span class="index-desc">An interactive research story about editing yeast genes, screening colonies, and measuring how cells control the start of DNA replication.</span><span class="index-meta">USC Aparicio Lab · Molecular biology</span><span class="index-arrow" aria-hidden="true">→</span></a>
+            </details>
           </div>
         </section>
 
@@ -149,7 +216,7 @@
           <header class="section-head"><p class="label label-ink">(03) / Experience</p></header>
           <h2 class="title section-title">Across data,<br>science &amp; operations</h2>
           <div class="index">
-            <a class="index-row experience-row" href="healthcare-analytics.html"><span class="index-num">01</span><span class="index-name">DaVita</span><span class="index-desc">Built and released six internal products for clinical operations, staffing, reporting, safety, employee retention, AI search, and request management.</span><span class="index-meta">2025–Now<br>Healthcare analytics, product delivery &amp; operational systems</span></a>
+            <a class="index-row experience-row" href="hsg-projects.html"><span class="index-num">01</span><span class="index-name">DaVita</span><span class="index-desc">Built and released six internal products for clinical operations and reporting. Run the monthly Hospital Services Group national call for 400 field leaders.</span><span class="index-meta">2025–Now<br>Healthcare analytics, product delivery &amp; operational systems</span></a>
             <a class="index-row experience-row" href="protein-binding.html"><span class="index-num">02</span><span class="index-name">Salve Therapeutics</span><span class="index-desc">Parsed PDB structures, encoded protein and ligand features, generated controlled amino-acid substitutions, and trained binding-affinity baselines.</span><span class="index-meta">2024<br>Machine learning engineer intern</span></a>
             <article class="index-row experience-row"><span class="index-num">03</span><span class="index-name">ProductSC</span><span class="index-desc">Led product case competitions and applied MVP scoping, user segmentation, market sizing, funnel metrics, and A/B testing to evaluate product direction.</span><span class="index-meta">2022–2024<br>Product manager intern</span></article>
             <a class="index-row experience-row" href="aparicio-lab.html"><span class="index-num">04</span><span class="index-name">USC Aparicio Lab</span><span class="index-desc">Studied how yeast cells start DNA replication, built gene-edited strains, screened colonies, and checked results with PCR, sequencing, and controlled comparisons.</span><span class="index-meta">2022–2025<br>DNA replication research assistant</span></a>

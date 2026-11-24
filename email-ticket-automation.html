@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta
     name="description"
-    content="How I turned 1,700+ support emails across 502 unique request threads into a structured analytics workflow that returned 84 to 126 hours of team capacity."
+    content="How DaVita’s analytics team turned a shared inbox into a trackable queue and resolved 214 of 243 requests in Q3."
   >
   <title>HSG Inbox Request Tracker | Brandon Y. Chang</title>
 
@@ -16,8 +16,8 @@
     rel="stylesheet"
   >
 
-  <link rel="stylesheet" href="styles.css?v=20">
-  <link rel="stylesheet" href="hsg-updates.css?v=20">
+  <link rel="stylesheet" href="styles.css?v=26">
+  <link rel="stylesheet" href="hsg-updates.css?v=26">
   <script src="script.js?v=20" defer></script>
 </head>
 
@@ -80,7 +80,7 @@
 
         <div class="case-folio">
           <a class="label" href="index.html#work">← Selected work</a>
-          <span class="label">Case study 02 / 09</span>
+          <span class="label">Request tracker</span>
         </div>
 
         <p class="label headnote">
@@ -93,40 +93,27 @@
         </h1>
 
         <p class="email-lead">
-          More than 1,700 support emails came through the HSG analytics inbox across 502 unique request threads. I built a system that turned them into one trackable queue.
+          Field teams kept the same email address. Five analysts got one queue with owners, priorities, and due dates.
         </p>
 
-        <p class="hsg-source">
-          12 months of support activity
-        </p>
-
-        <dl class="hsg-metrics">
-
-          <div>
-            <dt>Emails processed</dt>
-            <dd>1,700+</dd>
-            <p>Support activity captured across 12 months.</p>
-          </div>
-
-          <div>
-            <dt>Unique request threads</dt>
-            <dd>502</dd>
-            <p>Distinct requests tracked through follow-up.</p>
-          </div>
-
-          <div>
-            <dt>Capacity returned</dt>
-            <dd>84–126 <small>hrs</small></dd>
-            <p>Manual coordination removed from the workflow.</p>
-          </div>
-
-          <div>
-            <dt>Median first response</dt>
-            <dd>0.9 <small>days</small></dd>
-            <p>Time from intake to first response.</p>
-          </div>
-
+        <dl class="hsg-metrics" id="tracker" aria-label="Request tracker results">
+          <div><dt>Q3 requests resolved</dt><dd>88%</dd><p>214 of 243 requests.</p></div>
+          <div><dt>Median first response</dt><dd>0.9 <small>days</small></dd><p>From intake to first reply.</p></div>
+          <div><dt>Same-day response</dt><dd>55%</dd><p>Requests answered the day they arrived.</p></div>
+          <div><dt>Estimated time saved</dt><dd>85–125 <small>hrs</small></dd><p>Across triage, routing, and follow-up.</p></div>
         </dl>
+        <details class="sample-queue">
+          <summary>Inspect a sample queue</summary>
+          <table>
+            <caption>Illustrative records with fictional owners</caption>
+            <thead><tr><th scope="col">Request</th><th scope="col">Owner</th><th scope="col">Priority</th></tr></thead>
+            <tbody>
+              <tr><td>Report access</td><td>Analyst A</td><td>P2</td></tr>
+              <tr><td>Check totals</td><td>Analyst B</td><td>P3</td></tr>
+              <tr><td>New extract</td><td>Analyst C</td><td>P4</td></tr>
+            </tbody>
+          </table>
+        </details>
 
         <nav class="hsg-jump" aria-label="On this page">
           <a href="#problem">The problem</a>
@@ -427,11 +414,11 @@
           <p class="label">Capacity returned</p>
 
           <h3>
-            84–126 hours.
+            Estimated 84–126 hours.
           </h3>
 
           <p>
-            Manual sorting, logging, routing, and follow-up removed across 502 unique request threads.
+            Earlier estimate for the 502 threads in the September 2026 dashboard snapshot.
           </p>
 
         </aside>
@@ -513,7 +500,7 @@
         </div>
 
         <p class="hsg-closing">
-          1,700+ emails became 502 trackable request threads, returning 84–126 hours of coordination capacity to the team.
+          The September snapshot grouped more than 1,700 emails into 502 request threads.
         </p>
 
         <p class="hsg-source">
@@ -527,12 +514,12 @@
         class="project-nav case-nav"
         aria-label="Case study navigation"
       >
-        <a href="healthcare-analytics.html">
-          ← Healthcare portfolio
+        <a href="index.html#work">
+          Selected work
         </a>
 
-        <a href="glean-ai-rollout.html">
-          Enterprise AI →
+        <a href="usc-parking.html">
+          Xposition USC Mobility
         </a>
       </nav>
 

@@ -1,7 +1,7 @@
 const root = document.documentElement;
 const themeButton = document.querySelector(".theme-toggle");
 const savedTheme = localStorage.getItem("theme");
-let theme = savedTheme === "light" ? "light" : "dark";
+let theme = ["light", "dark"].includes(savedTheme) ? savedTheme : root.dataset.theme;
 
 function applyTheme(nextTheme) {
   theme = nextTheme;
@@ -30,8 +30,10 @@ function setMenu(open) {
   drawer.setAttribute("aria-hidden", String(!open));
 }
 
-burger.addEventListener("click", () => setMenu(!drawer.classList.contains("open")));
-document.querySelectorAll(".drawer-link, .wordmark").forEach((link) => link.addEventListener("click", () => setMenu(false)));
+if (burger && drawer) {
+  burger.addEventListener("click", () => setMenu(!drawer.classList.contains("open")));
+  document.querySelectorAll(".drawer-link, .wordmark").forEach((link) => link.addEventListener("click", () => setMenu(false)));
+}
 
 const record = document.querySelector(".record");
 const recordButton = document.querySelector(".record-toggle");

@@ -103,3 +103,29 @@
   .method-controls button { font-size:.875rem; }
   .method-detail { min-height:8rem; }
 }
+
+/* Expand a selected project within the existing ruled index. */
+.project-preview summary, .project-archive summary { cursor: pointer; }
+.project-preview summary { list-style: none; }
+.project-preview summary::-webkit-details-marker { display: none; }
+.project-preview summary:hover .index-name,
+.project-preview[open] .index-name { color: var(--accent); }
+.preview-sign { grid-column: -2 / -1; justify-self: end; font: 1.3rem/1 var(--font-grotesk); color: var(--accent); }
+.preview-sign::before { content: '+'; }
+.project-preview[open] .preview-sign::before { content: '−'; }
+.preview-body {
+  padding: var(--u3) clamp(1rem, 4vw, 4rem);
+  background: var(--paper-sunk);
+  border-bottom: 1px solid var(--rule);
+}
+.preview-body img { display: block; max-width: 100%; width: auto; height: auto; max-height: 21rem; }
+.preview-body nav { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin-top: 1rem; }
+.preview-body a, .project-archive > summary { font: 1rem/1.5 var(--font-grotesk); text-underline-offset: .25em; }
+.result-preview { display: flex; align-items: center; flex-wrap: wrap; gap: .7rem 1.5rem; }
+.result-preview strong { color: var(--accent); font: 500 clamp(2.8rem, 5vw, 4.5rem)/1 var(--font-grotesk); }
+.result-preview meter { width: 100%; accent-color: var(--accent); }
+.project-archive > summary { padding-block: 1rem; }
+@media (max-width: 900px) {
+  .project-preview summary .index-name { grid-column: 2 / -2; }
+  .preview-sign { grid-row: 1; }
+}

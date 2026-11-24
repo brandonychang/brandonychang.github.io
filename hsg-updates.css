@@ -75,3 +75,37 @@
   .hsg-prose { margin-left: 0; }
   .hsg-jump { gap: .5rem 1.25rem; }
 }
+
+.sample-queue { border-bottom: 1px solid var(--rule); padding-block: var(--u2); }
+.sample-queue summary { color: var(--case-accent); cursor: pointer; font: 1rem/1.5 var(--font-grotesk); }
+.sample-queue table { width: min(100%, 42rem); border-collapse: collapse; margin-block: 1rem; font: 1rem/1.5 var(--font-grotesk); }
+.sample-queue caption { text-align: left; color: var(--ink-muted); padding-bottom: .65rem; font-size: .875rem; }
+.sample-queue :is(th, td) { text-align: left; border-bottom: 1px solid var(--rule); padding: .6rem .35rem; }
+
+.hsg-directory-link, .hsg-topics a { font: 500 1rem/1.5 var(--font-grotesk); text-underline-offset: .25em; }
+.hsg-directory-link { display: block; width: fit-content; padding-block: 1rem; }
+.hsg-intro { padding-block: clamp(2rem, 6vw, 5rem) 2rem; }
+.hsg-intro h1 { margin-block: 1rem; font: 500 clamp(2.8rem, 6vw, 6rem)/1.02 var(--font-grotesk); letter-spacing: -.05em; max-width: 17ch; }
+.hsg-intro > p:last-child { max-width: 56ch; font: 400 1.2rem/1.55 var(--font-serif); }
+.hsg-topics { display: flex; flex-wrap: wrap; gap: .7rem 1.5rem; padding-block: 1rem; border-block: 1px solid var(--rule); }
+.hsg-project-group { padding-block: 2rem; }
+.hsg-project-group h2 { font: 500 clamp(1.7rem,3vw,2.8rem)/1.15 var(--font-grotesk); margin-bottom: 1.5rem; }
+.hsg-project-group article { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.7fr); gap: 1rem 2rem; border-top: 1px solid var(--rule); padding-block: 1.3rem; }
+.hsg-project-group h3 { font: 500 1.15rem/1.35 var(--font-grotesk); }
+.hsg-project-group p { max-width: 64ch; font-size: 1.1rem; line-height: 1.55; }
+.hsg-timing { border-block: 1px solid var(--rule-strong); padding-block: 1.4rem; }
+.hsg-timing figcaption, .hsg-timing div { display: grid; gap: .4rem 1.2rem; align-items: center; }
+.hsg-timing figcaption { font: 500 1.25rem/1.45 var(--font-grotesk); margin-bottom: 1rem; }
+.hsg-timing figcaption span { font: .9rem/1.5 var(--font-grotesk); color: var(--ink-muted); }
+.hsg-timing div { grid-template-columns: 10rem minmax(0,1fr) 4.5rem; font: 1rem/1.8 var(--font-grotesk); }
+.hsg-timing meter { width: 100%; accent-color: var(--accent); }
+.hsg-timing b { text-align: right; }
+@media (max-width:900px) {
+  .hsg-work { --cols: 6; --gutter: 1rem; --margin: 1.25rem; }
+}
+@media (max-width:600px) {
+  .hsg-work .bar { gap: 1rem; align-items: center; }
+  .hsg-project-group article { grid-template-columns: minmax(0,1fr); gap: .5rem; }
+  .hsg-timing div { grid-template-columns: minmax(0,1fr) 4.5rem; }
+  .hsg-timing div span { grid-column: 1/-1; }
+}

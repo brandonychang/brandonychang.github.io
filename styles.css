@@ -4636,3 +4636,19 @@ a.index-row:hover .index-arrow {
   .iff-objective-notes article { grid-template-columns: 1fr; }
   .glean-objective dl { grid-template-columns: 1fr; }
 }
+
+/* Use the original case typography and keep project demos close to their introductions. */
+:is(.chatdb-case, .parking-case) .case-intro { padding-bottom: var(--u4); }
+.parking-case #planner, .chatdb-case .case-media-hero { margin-top: 1rem; }
+@media (max-width: 900px) {
+  :is(.chatdb-case, .parking-case, .email-case) { --cols: 6; --gutter: 1rem; --margin: 1.25rem; }
+}
+@media (max-width: 480px) {
+  :is(.chatdb-case, .parking-case, .home-page, .email-case) .bar { gap: 1rem; align-items: center; }
+  .chatdb-case .query-playground,
+  .parking-case .route-planner { padding: 1rem; }
+  .chatdb-case .query-output { min-width: 0; overflow-wrap: anywhere; }
+  .chatdb-case .code-sample code { white-space: normal; overflow-wrap: anywhere; }
+  .parking-case .xposition-feature-grid { grid-template-columns: minmax(0, 1fr); }
+  .parking-case .route-controls fieldset { min-width: 0; }
+}

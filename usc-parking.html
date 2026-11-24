@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=19">
-  <script src="script.js?v=19" defer></script>
+  <link rel="stylesheet" href="styles.css?v=26">
+  <script src="script.js?v=24" defer></script>
 </head>
 <body class="case-page parking-case"><div class="shell">
   <header class="masthead-bar"><div class="page"><div class="bar">
@@ -21,21 +21,14 @@
   <div id="mobile-menu" class="drawer" aria-hidden="true"><div class="page drawer-inner"><a href="index.html" class="drawer-link">Home</a><a href="index.html#about" class="drawer-link">About</a><a href="index.html#work" class="drawer-link">Work</a><a href="index.html#experience" class="drawer-link">Experience</a><a href="index.html#contact" class="drawer-link">Contact</a></div></div>
   <main><div class="page">
     <section class="case-intro">
-      <div class="case-folio"><a class="label" href="index.html#work">← Selected work</a><span class="label">Case study 08 / 09</span></div>
+      <div class="case-folio"><a class="label" href="index.html#work">← Selected work</a></div>
       <p class="label headnote">USC / Product design and user research</p>
-      <h1 class="case-title"><span>Xposition</span><span>USC Mobility</span></h1>
-      <p class="case-tagline">A mobile transportation concept that helps USC students plan safer, clearer commutes around Exposition Boulevard during football games, concerts, and other high-crowd events.</p>
-      <dl class="case-credits"><div><dt class="label">Role</dt><dd>Product designer · researcher · prototype contributor</dd></div><div><dt class="label">Research</dt><dd>Active, hybrid, and rideshare commuter interviews</dd></div><div><dt class="label">Tools</dt><dd>Figma · user flows · usability testing · design system</dd></div></dl>
+      <h1 class="case-title"><span>Xposition</span></h1>
+      <p class="case-tagline">Choose a parking structure and see why the recommendation changes on game day. My contributions included commuter interview synthesis, route comparison, and usability testing.</p>
+
     </section>
 
-    <section class="parking-objective" aria-labelledby="parking-objective-title">
-      <div><p class="label">Project goal</p><h2 id="parking-objective-title">Help a student choose a route before event-day conditions make the decision harder.</h2></div>
-      <div class="parking-objective-details"><p><strong>The problem</strong><span>Students were piecing together traffic, parking, safety, walking distance, and crowd information from separate places.</span></p><p><strong>What we designed</strong><span>One comparison flow that changes parking and route recommendations when arrival time, crowd conditions, or accessibility needs change.</span></p><p><strong>What I contributed</strong><span>Interview synthesis, user flows, route-comparison requirements, interface design, and usability-driven revisions to labels, controls, and map hierarchy.</span></p></div>
-    </section>
-
-    <section class="case-glance"><p class="label">Decision the page supports</p><p class="case-promise">Choose a parking structure and see why the recommendation changed.</p></section>
-
-    <section class="route-planner xposition-planner" aria-labelledby="route-planner-title">
+    <section id="planner" class="route-planner xposition-planner" aria-labelledby="route-planner-title">
       <div class="route-planner-head"><div><p class="label">Xposition event-day planner</p><h2 id="route-planner-title">Plan a drive to the LA Memorial Coliseum.</h2></div><p class="route-disclaimer">Interactive portfolio prototype based on the original Xposition app. The map uses sample times, crowd levels, and parking status to demonstrate product behavior.</p></div>
       <div class="route-controls">
         <fieldset><legend class="label">When are you arriving?</legend><div class="route-button-group"><button type="button" class="active" data-parking-condition="normal">Weekday</button><button type="button" data-parking-condition="event">Football event</button><button type="button" data-parking-condition="evening">Evening</button></div></fieldset>
@@ -132,6 +125,12 @@
       </div>
     </section>
 
+    <dl class="case-credits"><div><dt class="label">Role</dt><dd>Product designer · researcher · prototype contributor</dd></div><div><dt class="label">Research</dt><dd>Active, hybrid, and rideshare commuter interviews</dd></div><div><dt class="label">Tools</dt><dd>Figma · user flows · usability testing · design system</dd></div></dl>
+    <section class="parking-objective" aria-labelledby="parking-objective-title">
+      <div><p class="label">Project goal</p><h2 id="parking-objective-title">Help a student choose a route before event-day conditions make the decision harder.</h2></div>
+      <div class="parking-objective-details"><p><strong>The problem</strong><span>Students were piecing together traffic, parking, safety, walking distance, and crowd information from separate places.</span></p><p><strong>What we designed</strong><span>One comparison flow that changes parking and route recommendations when arrival time, crowd conditions, or accessibility needs change.</span></p><p><strong>What I contributed</strong><span>Interview synthesis, user flows, route-comparison requirements, interface design, and usability-driven revisions to labels, controls, and map hierarchy.</span></p></div>
+    </section>
+
     <section class="story-section">
       <div class="story-heading"><span class="label story-num">01</span><h2>One decision, scattered evidence</h2></div>
       <div class="story-copy prose"><p>Interviews across active, hybrid, and rideshare commuters showed different travel habits but the same concerns: safety, time, crowding, and event-day uncertainty. Students lacked one place to compare travel modes, traffic conditions, alternate routes, parking, and crowd levels.</p><p>The product direction moved from general event planning toward transportation support. Xposition organized event-day choices around one question: what route fits this person’s timing, mobility needs, and tolerance for crowds?</p></div>
@@ -159,7 +158,7 @@
       <div class="story-copy"><div class="decision-grid"><article><p class="label">Clear labels</p><h3>“Heatmap” became “crowdedness”</h3><p>People understood the feature once the controls used everyday words and showed a visible crowd example.</p></article><article><p class="label">Clear buttons</p><h3>Every action needed a boundary</h3><p>Larger buttons, clearer event pins, and fewer map markers made the next step easier to find.</p></article><article><p class="label">Easy-to-see routes</p><h3>Alternatives needed stronger colors</h3><p>A quieter map and bolder route colors made parking and meeting options easier to compare.</p></article><article><p class="label">Complete trip</p><h3>The plan needed a clear finish</h3><p>Directions, a start button, friend controls, meeting points, and alternate routes completed the trip-planning flow.</p></article></div></div>
     </section>
 
-    <nav class="project-nav case-nav" aria-label="Case study navigation"><a href="dog-poop-detector.html">← Behavior detection</a><a href="aparicio-lab.html">Yeast research →</a></nav>
+    <nav class="project-nav case-nav" aria-label="Case study navigation"><a href="email-ticket-automation.html">HSG Inbox</a><a href="chatdb.html">ChatDB</a></nav>
   </div></main>
   <footer class="colophon" id="contact"><div class="page"><div class="grid footer-grid"><div class="c-4"><p class="label">Brandon Y. Chang</p><p class="colophon-note">Healthcare analytics, product systems, and applied data. San Jose, California.</p><p class="colophon-note">© 2026</p></div><div class="c-4"><p class="label">Contact</p><ul class="colophon-list"><li><a class="link" href="mailto:bychang@alumni.usc.edu">bychang@alumni.usc.edu</a></li></ul></div><div class="c-4"><p class="label">Elsewhere</p><ul class="colophon-list"><li><a class="link" href="https://www.linkedin.com/in/brandonychang" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li></ul></div></div></div></footer>
 </div></body>
