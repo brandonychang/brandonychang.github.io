@@ -40,3 +40,26 @@ document.querySelector('#copy-contact-email').addEventListener('click', async ()
     status.textContent = 'Select and copy the email address above.';
   }
 });
+
+// One mark for each workbook in the featured Tableau review.
+const workbookMarks = document.querySelector('.workbook-marks');
+const workbookCount = Number(document.querySelector('#workbook-count').textContent);
+for (let index = 0; index < workbookCount; index++) {
+  const mark = document.createElement('i');
+  mark.style.setProperty('--order', index);
+  workbookMarks.append(mark);
+}
+
+// Content stays visible while the browser waits for its first intersection.
+if ('IntersectionObserver' in window) {
+  const arrivals = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('motion-arrived');
+        arrivals.unobserve(entry.target);
+      }
+    }
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.workbook-marks, .section-title, .project-preview')
+    .forEach(element => arrivals.observe(element));
+}

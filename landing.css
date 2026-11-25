@@ -66,7 +66,7 @@
 .intro-board a:focus-visible, .intro-board button:focus-visible { outline:2px solid var(--accent); outline-offset:5px; }
 .intro-board .scroll-cue { display:flex; width:fit-content; margin:0 auto; padding-top:1.8rem; font-size:.6rem; }
 @media (prefers-reduced-motion:no-preference) {
-  .intro-copy, .intro-portrait, .intro-card { animation:intro-arrive .7s both; }
+  .intro-portrait, .intro-card { animation:intro-arrive .7s backwards; }
   .intro-portrait { animation-delay:.08s; }
   .intro-impact { animation-delay:.16s; }
   .intro-method { animation-delay:.24s; }
@@ -128,4 +128,47 @@
 @media (max-width: 900px) {
   .project-preview summary .index-name { grid-column: 2 / -2; }
   .preview-sign { grid-row: 1; }
+}
+
+.intro-copy em { position: relative; display: inline-block; }
+.ink-stroke { position: absolute; left: 0; bottom: -.12em; width: 100%; height: .16em; overflow: visible; pointer-events: none; }
+.ink-stroke path { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+.intro-impact-number b { font-weight: inherit; }
+.workbook-marks:not(:empty) { display: grid; grid-template-columns: repeat(27, minmax(0, 1fr)); gap: 2px; margin-top: 1.15rem; }
+.workbook-marks i { display: block; height: .85rem; border-radius: 1px; background: #52694f; transform-origin: bottom; }
+.workbook-marks i:nth-child(3n) { background: #324d38; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .title-phrase { display: inline-block; max-width: 100%; animation: title-settle .8s cubic-bezier(.18,.76,.25,1) backwards; }
+  .title-phrase:last-child { animation-delay: .16s; }
+  .ink-stroke path { stroke-dasharray: 1; animation: draw-underline 1s .55s ease-out backwards; }
+  .workbook-marks.motion-arrived i { animation: workbook-wave .6s calc(var(--order) * 30ms) cubic-bezier(.2,.75,.25,1) backwards; }
+  .project-preview.motion-arrived > summary .index-name,
+  .section-title.motion-arrived { animation: index-arrive .65s cubic-bezier(.18,.76,.25,1) backwards; }
+  .project-preview[open] > .preview-body { animation: preview-unfold .32s ease-out; }
+  .project-preview .preview-sign { transition: transform .25s ease; }
+  .project-preview[open] > summary .preview-sign { transform: rotate(180deg); }
+  @keyframes title-settle { from { opacity: .15; transform: translateY(.32em); } }
+  @keyframes draw-underline { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes workbook-wave {
+    from { opacity: .25; transform: scaleY(.18); }
+    65% { opacity: 1; transform: scaleY(1.28); }
+    to { transform: scaleY(1); }
+  }
+  @keyframes index-arrive { from { opacity: .5; transform: translateX(-.65rem); } }
+  @keyframes preview-unfold { from { opacity: .35; transform: translateY(-.5rem); } }
+  @supports (animation-timeline: scroll()) {
+    .home-page .masthead-bar::after {
+      content: ''; position: absolute; inset: auto 0 -1px; height: 2px;
+      background: var(--accent); pointer-events: none; transform-origin: left;
+      animation: reading-progress linear both; animation-timeline: scroll(root block);
+    }
+    @keyframes reading-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  }
+}
+@media (max-width: 560px) {
+  .title-phrase { display: inline; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-portrait:hover img, .intro-impact:hover { transform: none; }
 }

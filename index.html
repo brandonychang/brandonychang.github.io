@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=26"><link rel="stylesheet" href="hsg-updates.css?v=27">
-  <link rel="stylesheet" href="landing.css?v=26">
+  <link rel="stylesheet" href="landing.css?v=28">
   <script src="script.js?v=20" defer></script>
-  <script src="landing.js?v=26" defer></script>
+  <script src="landing.js?v=28" defer></script>
 </head>
 <body class="home-page">
   <div class="shell">
@@ -51,7 +51,7 @@
           <div class="intro-grid">
             <div class="intro-copy">
               <p class="intro-kicker">Hi, I’m Brandon.</p>
-              <h1 id="intro-title">I make complex<br> work feel <em>simple.</em></h1>
+              <h1 id="intro-title"><span class="title-phrase">I make complex</span><br> <span class="title-phrase">work feel <em>simple.<svg class="ink-stroke" viewBox="0 0 180 18" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M3 12 C36 3 71 4 96 7 S146 15 177 5"/></svg></em></span></h1>
               <p class="intro-description">I bring product design, data, and engineering together to build tools people can trust. At <strong>DaVita</strong>, that means making healthcare work easier for nurses, field leaders, and analysts.</p>
               <div class="intro-actions"><a class="intro-primary" href="#work">Explore my work <span aria-hidden="true">↗</span></a><button type="button" class="intro-secondary" id="contact-toggle" aria-expanded="false" aria-controls="contact-options">Let’s talk <span aria-hidden="true">↗</span></button></div>
               <section class="contact-options" id="contact-options" aria-labelledby="contact-options-title" hidden>
@@ -70,7 +70,8 @@
             </figure>
             <a class="intro-card intro-impact" href="tableau-usage.html">
               <div class="intro-card-top"><span>DaVita / Tableau usage</span></div>
-              <div class="intro-impact-number">27<span>workbooks in the<br>quarterly review</span></div>
+              <div class="intro-impact-number"><b id="workbook-count">27</b><span>workbooks in the<br>quarterly review</span></div>
+              <div class="workbook-marks" aria-hidden="true"></div>
               <p>A heavily used finance report took 115.7 seconds to open. Typical load time was 2.1 seconds.</p>
               <span class="intro-card-link">Explore the usage dashboards</span>
             </a>
