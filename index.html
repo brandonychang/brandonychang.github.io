@@ -8,11 +8,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=33"><link rel="stylesheet" href="hsg-updates.css?v=27">
-  <link rel="stylesheet" href="landing.css?v=33">
+  <link rel="stylesheet" href="styles.css?v=34"><link rel="stylesheet" href="hsg-updates.css?v=27">
+  <link rel="stylesheet" href="landing.css?v=34">
   <script src="script.js?v=20" defer></script>
   <script src="landing.js?v=32" defer></script>
-  <script src="scenery.js?v=2" defer></script>
+  <script src="scenery.js?v=3" defer></script>
 </head>
 <body class="home-page">
   <div class="shell">
@@ -52,10 +52,7 @@
           <div class="intro-grid">
             <div class="intro-lead">
               <div class="intro-copy">
-                <div class="intro-greeting">
-                  <figure class="hello-photo"><img src="brandon-portrait.jpg" width="1400" height="933" fetchpriority="high" alt="Brandon Chang at USC"><figcaption>Brandon Y. Chang · USC ’25</figcaption></figure>
-                  <p class="intro-kicker">Hi, I’m Brandon.</p>
-                </div>
+                <p class="intro-kicker">Hi, I’m Brandon.</p>
                 <h1 id="intro-title"><span class="title-phrase">I make complex</span><br> <span class="title-phrase">work feel <em>simple.</em></span></h1>
                 <p class="intro-description">I bring product design, data, and engineering together to build tools people can trust. At <strong>DaVita</strong>, that means making healthcare work easier for nurses, field leaders, and analysts.</p>
                 <div class="intro-actions"><a class="intro-primary" href="#work">Explore my work <span aria-hidden="true">↗</span></a><button type="button" class="intro-secondary" id="contact-toggle" aria-expanded="false" aria-controls="contact-options">Let’s talk <span aria-hidden="true">↗</span></button></div>
@@ -68,6 +65,11 @@
                   <p id="contact-copy-status" role="status" aria-live="polite"></p>
                 </section>
               </div>
+              <figure class="intro-portrait">
+                <img src="brandon-portrait.jpg" alt="Brandon Chang at the University of Southern California" fetchpriority="high" width="1400" height="933">
+                <figcaption><strong>Brandon Y. Chang</strong><span>Curious about people.<br>Careful with the details.</span></figcaption>
+                <span class="intro-portrait-tag">USC ’25</span>
+              </figure>
             </div>
             <section class="work-reel" aria-labelledby="reel-heading">
               <header class="reel-head">
@@ -249,6 +251,9 @@
           </div>
         </section>
 
+      </div>
+      <div class="farm-landscape" data-farm="morning" aria-hidden="true"></div>
+      <div class="page">
         <section class="section" id="work">
           <header class="section-head"><p class="label label-ink">(02) / Selected work</p></header>
           <h2 class="title section-title">Projects<br>with a point</h2>
@@ -332,6 +337,9 @@
           </div>
         </section>
 
+      </div>
+      <div id="three-little-pigs" class="farm-landscape" data-farm="storybook" aria-hidden="true"></div>
+      <div class="page">
         <section class="section" id="experience">
           <header class="section-head"><p class="label label-ink">(03) / Experience</p></header>
           <h2 class="title section-title">Across data,<br>science &amp; operations</h2>
