@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=26"><link rel="stylesheet" href="hsg-updates.css?v=27">
-  <link rel="stylesheet" href="landing.css?v=29">
+  <link rel="stylesheet" href="landing.css?v=30">
   <script src="script.js?v=20" defer></script>
-  <script src="landing.js?v=29" defer></script>
+  <script src="landing.js?v=30" defer></script>
 </head>
 <body class="home-page">
   <div class="shell">
@@ -47,13 +47,11 @@
     <main id="top">
       <div class="page">
         <section class="intro-board" aria-labelledby="intro-title">
-          <div class="intro-eyebrow"><span>Product design × data × engineering</span><span>San Jose, California <i aria-hidden="true"></i></span>
-            <button class="motion-switch" type="button" hidden>Pause motion</button></div>
+          <div class="intro-eyebrow"><span>Product design × data × engineering</span><span>San Jose, California <i aria-hidden="true"></i></span></div>
           <div class="intro-grid">
             <div class="intro-copy">
-              <canvas class="current-field" aria-hidden="true"></canvas>
               <p class="intro-kicker">Hi, I’m Brandon.</p>
-              <h1 id="intro-title"><span class="title-phrase">I make complex</span><br> <span class="title-phrase">work feel <em>simple.<svg class="ink-stroke" viewBox="0 0 180 18" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M3 12 C36 3 71 4 96 7 S146 15 177 5"/></svg></em></span></h1>
+              <h1 id="intro-title"><span class="title-phrase">I make complex</span><br> <span class="title-phrase">work feel <em>simple.</em></span></h1>
               <p class="intro-description">I bring product design, data, and engineering together to build tools people can trust. At <strong>DaVita</strong>, that means making healthcare work easier for nurses, field leaders, and analysts.</p>
               <div class="intro-actions"><a class="intro-primary" href="#work">Explore my work <span aria-hidden="true">↗</span></a><button type="button" class="intro-secondary" id="contact-toggle" aria-expanded="false" aria-controls="contact-options">Let’s talk <span aria-hidden="true">↗</span></button></div>
               <section class="contact-options" id="contact-options" aria-labelledby="contact-options-title" hidden>
@@ -74,35 +72,119 @@
               <header class="reel-head">
                 <h2 id="reel-heading">Project reel</h2>
                 <div class="reel-controls" hidden>
-                  <button type="button" data-step="-1" aria-controls="reel-track" aria-label="Previous project">‹</button>
-                  <button type="button" data-step="1" aria-controls="reel-track" aria-label="Next project">›</button>
+                  <button type="button" class="motion-switch">Pause reel</button>
+                  <button type="button" data-step="-1" aria-label="Previous project">‹</button>
+                  <button type="button" data-step="1" aria-label="Next project">›</button>
                 </div>
               </header>
-              <div class="reel-track" id="reel-track" tabindex="0" aria-label="Browse project previews">
-                <a class="reel-project" href="tableau-usage.html">
-                  <div class="reel-art time-art" aria-hidden="true">
-                    <span>Workbook load time</span>
-                    <div><b>115.7 s</b><i></i></div><div><b>2.1 s</b><i></i></div>
+              <div class="reel-track" id="reel-track" aria-label="Interactive project previews" tabindex="0">
+                <article class="reel-project reel-tableau" id="reel-tableau" aria-labelledby="title-tableau">
+                  <div class="project-copy">
+                    <p class="project-meta">DaVita · Analytics</p>
+                    <h3 id="title-tableau">Tableau Usage Dashboards</h3>
+                    <p>A heavily used finance workbook took nearly two minutes to open. Compare its load time with a typical report.</p>
+                    <a href="tableau-usage.html">Read the dashboard study</a>
                   </div>
-                  <strong>Tableau Usage Dashboards</strong><small>DaVita · Healthcare analytics</small>
-                </a>
-                <a class="reel-project" href="usc-parking.html#planner">
-                  <div class="reel-art route-art"><img src="assets/xposition-map.png" alt="Xposition parking map for a football event"></div>
-                  <strong>Xposition</strong><small>USC · Route planner</small>
-                </a>
-                <a class="reel-project" href="email-ticket-automation.html#tracker">
-                  <div class="reel-art inbox-art" aria-hidden="true"><span>Q3 request tracker</span><div><b>88<small>%</small></b><i>214 of 243<br>resolved</i></div></div>
-                  <strong>HSG Inbox</strong><small>DaVita · Request operations</small>
-                </a>
-                <a class="reel-project" href="chatdb.html#query-playground">
-                  <div class="reel-art query-art"><img src="chatdb-interface.png" alt="ChatDB query builder and generated SQL"></div>
-                  <strong>ChatDB</strong><small>USC · Database learning</small>
-                </a>
-                <a class="reel-project" href="dog-poop-detector.html">
-                  <div class="reel-art dog-art"><img src="dog-pose-yard.jpg" alt="Outdoor dog posture used in the detection project"></div>
-                  <strong>Dog Poop Detector</strong><small>Computer vision · Behavior detection</small>
-                </a>
+                  <div class="project-demo" data-state="0">
+                    <div class="gauge-screen">
+                    <svg class="gauge" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+                      <circle class="dial-ticks" cx="100" cy="100" r="91" pathLength="120"/>
+                      <circle class="dial-track" cx="100" cy="100" r="80"/>
+                      <circle class="dial-value" cx="100" cy="100" r="80" pathLength="120"/>
+                    </svg>
+                    <div class="dial-reading"><b><span data-first="2.1" data-second="115.7">2.1</span><small> s</small></b><span>Load time</span></div>
+                  </div>
+                  <div class="demo-floor"><span>120-second scale</span><div class="demo-options" role="group" aria-label="Compare workbook load times">
+                      <button type="button" data-mode="0" aria-pressed="true">Typical</button>
+                      <button type="button" data-mode="1" aria-pressed="false">Finance report</button>
+                    </div></div>
+                  </div>
+                </article>
+                <article class="reel-project reel-xposition" id="reel-xposition" aria-labelledby="title-xposition">
+                  <div class="project-copy">
+                    <p class="project-meta">USC · Interaction design</p>
+                    <h3 id="title-xposition">Xposition</h3>
+                    <p>On game day, the fastest place to park changes. Switch the arrival conditions to see where the planner sends you.</p>
+                    <a href="usc-parking.html#planner">Try the full route planner</a>
+                  </div>
+                  <div class="project-demo" data-state="0">
+                    <div class="map-screen">
+                    <img src="assets/reel-map-normal.webp" alt="Weekday route from Blue Structure to the Coliseum">
+                    <img class="event-map" src="assets/reel-map-event.webp" alt="Football-event route from Flower Street Structure">
+                    <p class="map-choice" data-first="Blue Structure · 17 min" data-second="Flower Street · 26 min">Blue Structure · 17 min</p>
+                  </div>
+                  <div class="demo-floor"><span>Sample trip</span><div class="demo-options" role="group" aria-label="Choose arrival conditions">
+                      <button type="button" data-mode="0" aria-pressed="true">Weekday</button>
+                      <button type="button" data-mode="1" aria-pressed="false">Game day</button>
+                    </div></div>
+                  </div>
+                </article>
+                <article class="reel-project reel-inbox" id="reel-inbox" aria-labelledby="title-inbox">
+                  <div class="project-copy">
+                    <p class="project-meta">DaVita · Operations</p>
+                    <h3 id="title-inbox">HSG Inbox</h3>
+                    <p>Field teams kept using email. Five analysts got one queue with owners and priorities. The team resolved 214 of 243 requests in Q3.</p>
+                    <a href="email-ticket-automation.html#tracker">Inspect the request tracker</a>
+                  </div>
+                  <div class="project-demo" data-state="0">
+                    <div class="queue-screen">
+                    <p class="screen-label" data-first="Incoming requests" data-second="Assigned requests">Incoming requests</p>
+                    <ul><li style="--row:0"><span>Report access</span><span class="owner">Analyst A</span></li><li style="--row:1"><span>Check totals</span><span class="owner">Analyst B</span></li><li style="--row:2"><span>New extract</span><span class="owner">Analyst C</span></li></ul>
+                  </div>
+                  <div class="demo-floor"><span>Illustrative records</span><div class="demo-options" role="group" aria-label="Compare request workflows">
+                      <button type="button" data-mode="0" aria-pressed="true">Inbox</button>
+                      <button type="button" data-mode="1" aria-pressed="false">Shared queue</button>
+                    </div></div>
+                  </div>
+                </article>
+                <article class="reel-project reel-chatdb" id="reel-chatdb" aria-labelledby="title-chatdb">
+                  <div class="project-copy">
+                    <p class="project-meta">USC · Database learning</p>
+                    <h3 id="title-chatdb">ChatDB</h3>
+                    <p>What does a WHERE clause actually remove? Filter three practice transactions and follow the change from the query to its results.</p>
+                    <a href="chatdb.html#query-playground">Explore the query builder</a>
+                  </div>
+                  <div class="project-demo" data-state="0">
+                    <div class="query-screen">
+                    <code>SELECT transaction_id, transaction_qty<br>FROM coffee_shop_sales<span class="clause"><br>WHERE transaction_qty &gt; 10</span>;</code>
+                    <table><thead><tr><th>ID</th><th>Quantity</th></tr></thead><tbody><tr class="excluded"><td>101</td><td>7</td></tr><tr><td>102</td><td>14</td></tr><tr><td>103</td><td>21</td></tr></tbody></table>
+                  </div>
+                  <div class="demo-floor"><span>Illustrative rows</span><div class="demo-options" role="group" aria-label="Filter practice transactions">
+                      <button type="button" data-mode="0" aria-pressed="true">All rows</button>
+                      <button type="button" data-mode="1" aria-pressed="false">Quantity > 10</button>
+                    </div></div>
+                  </div>
+                </article>
+                <article class="reel-project reel-pose" id="reel-pose" aria-labelledby="title-pose">
+                  <div class="project-copy">
+                    <p class="project-meta">Computer vision</p>
+                    <h3 id="title-pose">Dog Poop Detector</h3>
+                    <p>The model follows the spine and tail across frames. Reveal the six landmarks it uses to evaluate this posture.</p>
+                    <a href="dog-poop-detector.html#pose-image-grid">Inspect the pose model</a>
+                  </div>
+                  <div class="project-demo" data-state="0">
+                    <div class="pose-screen">
+                    <img src="dog-pose-yard.jpg" alt="Outdoor photo of the dog used for posture analysis">
+                    <svg class="tracked-pose" viewBox="0 0 1536 1218" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                      <polyline points="660,646 799,572 937,585 970,565 1075,512 1183,451"/>
+                      <circle cx="660" cy="646" r="12"/><circle cx="799" cy="572" r="12"/><circle cx="937" cy="585" r="12"/>
+                      <circle cx="970" cy="565" r="12"/><circle cx="1075" cy="512" r="12"/><circle cx="1183" cy="451" r="12"/>
+                    </svg>
+                  </div>
+                  <div class="demo-floor"><span>Yard frame</span><div class="demo-options" role="group" aria-label="Inspect the posture model">
+                      <button type="button" data-mode="0" aria-pressed="true">Photo</button>
+                      <button type="button" data-mode="1" aria-pressed="false">Six landmarks</button>
+                    </div></div>
+                  </div>
+                </article>
               </div>
+              <nav class="reel-index" aria-label="Choose a reel project">
+                <a href="#reel-tableau">Tableau</a>
+                <a href="#reel-xposition">Xposition</a>
+                <a href="#reel-inbox">HSG Inbox</a>
+                <a href="#reel-chatdb">ChatDB</a>
+                <a href="#reel-pose">Pose detection</a>
+              </nav>
             </section>
             <a class="intro-card intro-impact" href="tableau-usage.html">
               <div class="intro-card-top"><span>DaVita / Tableau usage</span></div>
