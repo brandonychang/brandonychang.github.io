@@ -8,10 +8,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=31"><link rel="stylesheet" href="hsg-updates.css?v=27">
-  <link rel="stylesheet" href="landing.css?v=31">
+  <link rel="stylesheet" href="styles.css?v=32"><link rel="stylesheet" href="hsg-updates.css?v=27">
+  <link rel="stylesheet" href="landing.css?v=32">
   <script src="script.js?v=20" defer></script>
-  <script src="landing.js?v=31" defer></script>
+  <script src="landing.js?v=32" defer></script>
+  <script src="scenery.js?v=1" defer></script>
 </head>
 <body class="home-page">
   <div class="shell">
@@ -49,40 +50,22 @@
         <section class="intro-board" aria-labelledby="intro-title">
           <div class="intro-eyebrow"><span>Product design × data × engineering</span><span>San Jose, California <i aria-hidden="true"></i></span></div>
           <div class="intro-grid">
-            <div class="intro-copy">
-              <p class="intro-kicker">Hi, I’m Brandon.</p>
-              <h1 id="intro-title"><span class="title-phrase">I make complex</span><br> <span class="title-phrase">work feel <em>simple.</em></span></h1>
-              <p class="intro-description">I bring product design, data, and engineering together to build tools people can trust. At <strong>DaVita</strong>, that means making healthcare work easier for nurses, field leaders, and analysts.</p>
-              <div class="intro-actions"><a class="intro-primary" href="#work">Explore my work <span aria-hidden="true">↗</span></a><button type="button" class="intro-secondary" id="contact-toggle" aria-expanded="false" aria-controls="contact-options">Let’s talk <span aria-hidden="true">↗</span></button></div>
-              <section class="contact-options" id="contact-options" aria-labelledby="contact-options-title" hidden>
-                <h2 id="contact-options-title">Let’s connect.</h2>
-                <p>Have a role, project, or question in mind? Send me a note.</p>
-                <label for="contact-email">Email</label>
-                <div class="contact-copy-row"><input id="contact-email" type="text" value="bychang@alumni.usc.edu" readonly><button type="button" id="copy-contact-email">Copy email</button></div>
-                <div class="contact-browser-links"><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=bychang%40alumni.usc.edu" target="_blank" rel="noopener noreferrer">Compose in Gmail ↗</a><a href="https://www.linkedin.com/in/brandonychang" target="_blank" rel="noopener noreferrer">Connect on LinkedIn ↗</a></div>
-                <p id="contact-copy-status" role="status" aria-live="polite"></p>
-              </section>
-            </div>
-            <figure class="farm-postcard" id="farm">
-              <div class="farm-scene">
-                <img class="farm-art" src="assets/pig-farm.webp" srcset="assets/pig-farm-small.webp 768w, assets/pig-farm.webp 1536w" sizes="(max-width: 760px) 96vw, 58vw" width="1536" height="1024" alt="Piglets doze under an apple tree, splash in a pond, and follow a path past a red barn." fetchpriority="high">
-                <nav class="farm-signs" aria-label="Featured projects on the farm">
-                  <a class="farm-sign barn-sign" href="tableau-usage.html">Tableau <span aria-hidden="true">↗</span><small>Workbook load times</small></a>
-                  <a class="farm-sign patch-sign" href="email-ticket-automation.html#tracker">HSG Inbox <span aria-hidden="true">↗</span><small>Request tracker</small></a>
-                  <a class="farm-sign pond-sign" href="usc-parking.html#planner">Xposition <span aria-hidden="true">↗</span><small>Parking planner</small></a>
-                </nav>
-                <div class="pig-spots" role="group" aria-label="Meet the piglets" hidden>
-                  <button type="button" class="pig-spot hat-pig" data-pig="feed" aria-label="Feed the piglet in the straw hat"><span>Feed piglet</span></button>
-                  <button type="button" class="pig-spot sleepy-pigs" data-pig="sleep" aria-label="Tuck in the sleepy piglets"><span>Tuck them in</span></button>
-                  <button type="button" class="pig-spot pond-pig" data-pig="splash" aria-label="Splash with the pond piglet"><span>Make a splash</span></button>
-                </div>
-                <span class="pig-reaction" aria-hidden="true"></span>
+            <div class="intro-lead">
+              <div class="intro-copy">
+                <p class="intro-kicker">Hi, I’m Brandon.</p>
+                <h1 id="intro-title"><span class="title-phrase">I make complex</span><br> <span class="title-phrase">work feel <em>simple.</em></span></h1>
+                <p class="intro-description">I bring product design, data, and engineering together to build tools people can trust. At <strong>DaVita</strong>, that means making healthcare work easier for nurses, field leaders, and analysts.</p>
+                <div class="intro-actions"><a class="intro-primary" href="#work">Explore my work <span aria-hidden="true">↗</span></a><button type="button" class="intro-secondary" id="contact-toggle" aria-expanded="false" aria-controls="contact-options">Let’s talk <span aria-hidden="true">↗</span></button></div>
+                <section class="contact-options" id="contact-options" aria-labelledby="contact-options-title" hidden>
+                  <h2 id="contact-options-title">Let’s connect.</h2>
+                  <p>Have a role, project, or question in mind? Send me a note.</p>
+                  <label for="contact-email">Email</label>
+                  <div class="contact-copy-row"><input id="contact-email" type="text" value="bychang@alumni.usc.edu" readonly><button type="button" id="copy-contact-email">Copy email</button></div>
+                  <div class="contact-browser-links"><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=bychang%40alumni.usc.edu" target="_blank" rel="noopener noreferrer">Compose in Gmail ↗</a><a href="https://www.linkedin.com/in/brandonychang" target="_blank" rel="noopener noreferrer">Connect on LinkedIn ↗</a></div>
+                  <p id="contact-copy-status" role="status" aria-live="polite"></p>
+                </section>
               </div>
-              <figcaption>
-                <div><strong>Brandon’s pig farm</strong><span class="farm-note" role="status">Pick a signpost to explore a project.</span></div>
-                <button class="feed-pig" type="button" hidden><span aria-hidden="true">🍎</span> Feed piglet</button>
-              </figcaption>
-            </figure>
+            </div>
             <section class="work-reel" aria-labelledby="reel-heading">
               <header class="reel-head">
                 <h2 id="reel-heading">Project reel</h2>
@@ -365,7 +348,7 @@
     <footer class="colophon" id="contact">
       <div class="page">
         <div class="grid footer-grid">
-          <div class="c-4"><a class="farm-return" href="#farm"><img src="assets/farm-piglet.webp" width="44" height="44" alt="">Back to the farm ↑</a><p class="colophon-note">Healthcare analytics, product systems, and applied data. San Jose, California.</p><p class="colophon-note">© 2026</p></div>
+          <div class="c-4"><a class="link" href="#top">Back to top ↑</a><p class="colophon-note">Healthcare analytics, product systems, and applied data. San Jose, California.</p><p class="colophon-note">© 2026</p></div>
           <div class="c-4"><p class="label">Contact</p><ul class="colophon-list"><li><a class="link" href="mailto:bychang@alumni.usc.edu">bychang@alumni.usc.edu</a></li></ul></div>
           <div class="c-4"><p class="label">Elsewhere</p><ul class="colophon-list"><li><a class="link" href="https://www.linkedin.com/in/brandonychang" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li></ul></div>
         </div>

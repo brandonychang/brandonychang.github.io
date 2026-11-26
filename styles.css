@@ -4672,15 +4672,59 @@ a.index-row:hover .index-arrow {
   --rule: #525747;
   --rule-strong: #a7ab95;
 }
-.wordmark::before {
-  content: "";
-  display: inline-block;
-  width: 2rem;
-  height: 2rem;
-  margin-right: .55rem;
-  vertical-align: middle;
-  border: 1px solid var(--rule);
-  border-radius: 46% 52% 43% 49%;
-  background: #cdd69b url("assets/farm-piglet.webp") center/cover;
-}
 .bar { align-items: center; }
+
+/* Artwork sits on the same paper and rules as the surrounding type. */
+.scenery-drawings { position: absolute; pointer-events: none; overflow: hidden; }
+.scenery { display: block; overflow: visible; pointer-events: none; user-select: none; }
+.wordmark .scenery-mark { display: inline-block; width: 2.8rem; height: 2rem; margin-right: .5rem; vertical-align: middle; }
+.colophon, #work .section-head { position: relative; }
+.scenery-intro { position: absolute; right: 0; bottom: 0; width: 46%; }
+.about-portrait { position: relative; }
+.scenery-flowers { position: absolute; width: 4.8rem; bottom: -.24rem; right: -1.4rem; }
+.scenery-verge { position: absolute; width: clamp(8rem, 17vw, 16rem); right: 1%; bottom: 0; }
+.scenery-rest { position: absolute; width: clamp(11rem, 21vw, 19rem); right: clamp(1rem, 5vw, 6.5rem); bottom: 100%; }
+.scenery-toggle { display: block; margin: 1rem 0 0 auto; padding: .5rem 0; color: var(--ink-muted); font: .8rem/1.4 var(--font-grotesk); text-decoration: underline; text-underline-offset: .25em; }
+.scenery .sleeping .pig-back { transform: translateY(8px) scaleY(.94); }
+.scenery .sleeping .leg { transform: scaleY(.65); }
+@media (max-width: 760px) {
+  .intro-lead { padding-bottom: clamp(3.5rem, 15vw, 5.4rem); }
+  .scenery-intro { width: clamp(11rem, 36vw, 16rem); }
+}
+@media (max-width: 530px) {
+  .bar { gap: .75rem; }
+  .bar .theme-toggle { margin-right: 0; min-width: 24px; }
+  .wordmark .scenery-mark { width: 2.1rem; }
+  .intro-lead { padding-bottom: clamp(5.4rem, 24vw, 7.4rem); }
+  .scenery-intro { width: min(100%, 26rem); }
+  .scenery-intro .orchard-tree { transform: translate(403px, 181px) scale(.74); }
+  .scenery-verge { width: 7rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .scenery .grass, .scenery .twig, .scenery .tree-crown {
+    transform-origin: 0 0;
+    animation: field-wind 4.7s ease-in-out var(--phase, -1.3s) infinite alternate;
+  }
+  .scenery .twig { animation-duration: 4.1s; }
+  .scenery .tree-crown { animation-name: bough-wind; animation-duration: 5.8s; }
+  .scenery .walking { animation: pig-walk 15s linear var(--phase) infinite; }
+  .scenery .walking .pig-direction { transform-origin: 51px 34px; animation: pig-turn 15s linear var(--phase) infinite; }
+  .scenery .walking .leg { animation: pig-step .55s ease-in-out var(--phase) infinite alternate; }
+  .scenery .walking .leg.far { animation-direction: alternate-reverse; }
+  .scenery .walking .pig-back { animation: pig-bob .55s ease-in-out var(--phase) infinite; }
+  .scenery .pig-head { transform-origin: 69px 34px; animation: pig-sniff 5.4s ease-in-out var(--phase) infinite; }
+  .scenery .curly-tail { transform-origin: 18px 29px; animation: tail-twitch 4s ease-in-out var(--phase) infinite; }
+  .scenery .sleeping .pig-back { transform-origin: 50px 46px; animation: pig-breathe 2.7s ease-in-out var(--phase) infinite alternate; }
+  .scenery .sleeping .pig-head { animation: none; }
+  .scenery-paused .scenery *, .scenery.offscreen * { animation-play-state: paused !important; }
+  @keyframes field-wind { from { transform: rotate(-4deg) skewX(-2deg); } to { transform: rotate(6deg) skewX(2deg); } }
+  @keyframes bough-wind { from { transform: rotate(-1.7deg); } to { transform: rotate(2.1deg); } }
+  @keyframes pig-walk { 0%, 100% { transform: translateX(-18px); } 48%, 51% { transform: translateX(48px); } 97% { transform: translateX(-18px); } }
+  @keyframes pig-turn { 0%, 47%, 100% { transform: scaleX(1); } 51%, 96% { transform: scaleX(-1); } }
+  @keyframes pig-step { from { transform: rotate(-16deg); } to { transform: rotate(18deg); } }
+  @keyframes pig-bob { 50% { transform: translateY(-1.35px); } }
+  @keyframes pig-sniff { 0%, 38%, 75%, 100% { transform: rotate(0); } 52%, 64% { transform: rotate(6deg); } 59% { transform: rotate(3deg); } }
+  @keyframes tail-twitch { 0%, 62%, 85%, 100% { transform: rotate(-4deg); } 70%, 80% { transform: rotate(10deg); } }
+  @keyframes pig-breathe { from { transform: translateY(6px) scaleY(.90); } to { transform: translateY(6px) scaleY(.96); } }
+}
+@media (prefers-reduced-motion: reduce) { .scenery-toggle { display: none; } }
