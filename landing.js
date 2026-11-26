@@ -260,3 +260,32 @@ function startProjectReel() {
   window.addEventListener('pointercancel', finishDrag);
 }
 startProjectReel();
+
+function enableFarmPiglets() {
+  const feed = document.querySelector('.feed-pig');
+  const spots = document.querySelector('.pig-spots');
+  const reaction = document.querySelector('.pig-reaction');
+  const note = document.querySelector('.farm-note');
+  let apples = 0;
+  let reset;
+  function visit(pig) {
+    if (pig === 'feed') {
+      apples += 1;
+      note.textContent = apples === 1 ? 'One apple for the piglet in the straw hat.' : `${apples} apples for the piglet in the straw hat.`;
+    } else {
+      note.textContent = pig === 'sleep' ? 'The two under the apple tree are fast asleep.' : 'The pond piglet splashes back!';
+    }
+    delete reaction.dataset.action;
+    void reaction.offsetWidth;
+    reaction.dataset.action = pig;
+    clearTimeout(reset);
+    reset = setTimeout(() => delete reaction.dataset.action, 1600);
+  }
+  feed.addEventListener('click', () => visit('feed'));
+  for (const spot of spots.querySelectorAll('[data-pig]')) {
+    spot.addEventListener('click', () => visit(spot.dataset.pig));
+  }
+  feed.hidden = false;
+  spots.hidden = false;
+}
+enableFarmPiglets();

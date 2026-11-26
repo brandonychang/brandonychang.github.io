@@ -4652,3 +4652,35 @@ a.index-row:hover .index-arrow {
   .parking-case .xposition-feature-grid { grid-template-columns: minmax(0, 1fr); }
   .parking-case .route-controls fieldset { min-width: 0; }
 }
+
+/* Paper and ink shared by the farm and its case studies. */
+:root[data-theme="light"] {
+  --paper: #faf7ed;
+  --paper-sunk: #f0ecdf;
+  --ink: #302e25;
+  --ink-muted: #655f4f;
+  --rule: #d2cbb8;
+  --rule-strong: #756e58;
+  --green: #52673b;
+  --carmine: #944651;
+}
+:root[data-theme="dark"] {
+  --paper: #232820;
+  --paper-sunk: #30372b;
+  --ink: #f3efdf;
+  --ink-muted: #c2c4ae;
+  --rule: #525747;
+  --rule-strong: #a7ab95;
+}
+.wordmark::before {
+  content: "";
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  margin-right: .55rem;
+  vertical-align: middle;
+  border: 1px solid var(--rule);
+  border-radius: 46% 52% 43% 49%;
+  background: #cdd69b url("assets/farm-piglet.webp") center/cover;
+}
+.bar { align-items: center; }
