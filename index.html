@@ -8,11 +8,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=32"><link rel="stylesheet" href="hsg-updates.css?v=27">
-  <link rel="stylesheet" href="landing.css?v=32">
+  <link rel="stylesheet" href="styles.css?v=33"><link rel="stylesheet" href="hsg-updates.css?v=27">
+  <link rel="stylesheet" href="landing.css?v=33">
   <script src="script.js?v=20" defer></script>
   <script src="landing.js?v=32" defer></script>
-  <script src="scenery.js?v=1" defer></script>
+  <script src="scenery.js?v=2" defer></script>
 </head>
 <body class="home-page">
   <div class="shell">
@@ -52,7 +52,10 @@
           <div class="intro-grid">
             <div class="intro-lead">
               <div class="intro-copy">
-                <p class="intro-kicker">Hi, I’m Brandon.</p>
+                <div class="intro-greeting">
+                  <figure class="hello-photo"><img src="brandon-portrait.jpg" width="1400" height="933" fetchpriority="high" alt="Brandon Chang at USC"><figcaption>Brandon Y. Chang · USC ’25</figcaption></figure>
+                  <p class="intro-kicker">Hi, I’m Brandon.</p>
+                </div>
                 <h1 id="intro-title"><span class="title-phrase">I make complex</span><br> <span class="title-phrase">work feel <em>simple.</em></span></h1>
                 <p class="intro-description">I bring product design, data, and engineering together to build tools people can trust. At <strong>DaVita</strong>, that means making healthcare work easier for nurses, field leaders, and analysts.</p>
                 <div class="intro-actions"><a class="intro-primary" href="#work">Explore my work <span aria-hidden="true">↗</span></a><button type="button" class="intro-secondary" id="contact-toggle" aria-expanded="false" aria-controls="contact-options">Let’s talk <span aria-hidden="true">↗</span></button></div>
@@ -216,7 +219,6 @@
           <header class="section-head"><p class="label label-ink">(01) / About my work</p></header>
           <h2 class="title section-title">What I do</h2>
           <div class="grid grid-rows">
-            <figure class="about-portrait"><img src="brandon-portrait.jpg" loading="lazy" width="900" height="1200" alt="Brandon Chang at the University of Southern California"><figcaption>Brandon Y. Chang · USC ’25</figcaption></figure>
             <div class="c-7 start-5 prose">
               <p>I enjoy making complex problems easier to understand. My focus is creating intuitive experiences that are built around real needs and deliver meaningful value. At DaVita, I have shipped six internal products for nurses, field leaders, managers, and analysts, including clinical reports, staffing tools, an Outlook request tracker, safety dashboards, and an AI search rollout.</p>
               <p>I studied data science and biological sciences at USC. I check definitions, trace where a number came from, and spend time with the people who will use the finished product. Their questions shape what I build and how I measure the result.</p>

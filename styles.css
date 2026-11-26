@@ -4680,10 +4680,14 @@ a.index-row:hover .index-arrow {
 .wordmark .scenery-mark { display: inline-block; width: 2.8rem; height: 2rem; margin-right: .5rem; vertical-align: middle; }
 .colophon, #work .section-head { position: relative; }
 .scenery-intro { position: absolute; right: 0; bottom: 0; width: 46%; }
-.about-portrait { position: relative; }
-.scenery-flowers { position: absolute; width: 4.8rem; bottom: -.24rem; right: -1.4rem; }
 .scenery-verge { position: absolute; width: clamp(8rem, 17vw, 16rem); right: 1%; bottom: 0; }
-.scenery-rest { position: absolute; width: clamp(11rem, 21vw, 19rem); right: clamp(1rem, 5vw, 6.5rem); bottom: 100%; }
+.scenery-wallow, .scenery-nursery { width: min(100%, 40rem); height: auto; margin-top: clamp(1.4rem, 3vw, 3rem); }
+.scenery-wallow { margin-left: auto; }
+.scenery-rest { position: absolute; width: min(calc(100% - 2rem), 39rem); right: clamp(1rem, 5vw, 6.5rem); bottom: 100%; }
+.scenery .ginger { --coat: #da9f70; --hoof: #b07a5b; }
+.scenery .spotted { --coat: #f3d7ba; --hoof: #d6b294; }
+.scenery .belted { --coat: #8b8077; --hoof: #76695e; }
+.scenery .rooting .pig-head { transform-origin: 66px 36px; transform: rotate(15deg); }
 .scenery-toggle { display: block; margin: 1rem 0 0 auto; padding: .5rem 0; color: var(--ink-muted); font: .8rem/1.4 var(--font-grotesk); text-decoration: underline; text-underline-offset: .25em; }
 .scenery .sleeping .pig-back { transform: translateY(8px) scaleY(.94); }
 .scenery .sleeping .leg { transform: scaleY(.65); }
@@ -4716,6 +4720,12 @@ a.index-row:hover .index-arrow {
   .scenery .curly-tail { transform-origin: 18px 29px; animation: tail-twitch 4s ease-in-out var(--phase) infinite; }
   .scenery .sleeping .pig-back { transform-origin: 50px 46px; animation: pig-breathe 2.7s ease-in-out var(--phase) infinite alternate; }
   .scenery .sleeping .pig-head { animation: none; }
+  .scenery .rooting .pig-head { animation: snuffle-ground 3.9s ease-in-out var(--phase) infinite; }
+  .scenery .mud-head { transform-origin: 0 0; animation: wallow-nod 4.6s ease-in-out -.7s infinite alternate; }
+  .scenery .mud-eyes { transform-origin: 0 -12px; animation: mud-blink 5.3s ease-in-out -2s infinite; }
+  @keyframes snuffle-ground { 0%, 100% { transform: rotate(6deg); } 42%, 67% { transform: rotate(21deg); } 55% { transform: rotate(16deg); } }
+  @keyframes wallow-nod { from { transform: rotate(-3deg) translateY(0); } to { transform: rotate(4deg) translateY(2px); } }
+  @keyframes mud-blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.12); } }
   .scenery-paused .scenery *, .scenery.offscreen * { animation-play-state: paused !important; }
   @keyframes field-wind { from { transform: rotate(-4deg) skewX(-2deg); } to { transform: rotate(6deg) skewX(2deg); } }
   @keyframes bough-wind { from { transform: rotate(-1.7deg); } to { transform: rotate(2.1deg); } }
