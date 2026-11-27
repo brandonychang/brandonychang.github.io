@@ -278,7 +278,7 @@
 .reel-head h2 { font: 500 clamp(1.5rem, 2vw, 2.15rem)/1.15 var(--font-grotesk); letter-spacing: -.035em; text-transform: none; }
 .intro-copy { position: relative; }
 .intro-portrait { align-self: stretch; }
-.intro-lead .scenery-intro { width: clamp(8rem, 16vw, 14rem); height: auto; position: static; margin-top: .6rem; }
+.intro-lead .scenery-intro { display:block; width: clamp(8rem, 16vw, 14rem); height: auto; position: relative; margin-top: .6rem; }
 @media (max-width: 760px) {
   .home-page { --margin: clamp(1rem, 3.5vw, 1.65rem); }
   .intro-lead { display: flex; flex-direction: column; padding: 0; gap: .85rem; }
@@ -289,7 +289,8 @@
   .intro-copy h1 br { display: none; }
   .intro-description, .intro-actions { margin-block: 0; }
   .work-reel { grid-row: auto; margin-top: .85rem; }
-  .intro-lead .scenery-intro { margin: -.5rem 0 0 auto; }
+  .intro-kicker { position: relative; display: flex; align-items: center; min-height: 3rem; }
+  .intro-lead .scenery-intro { position: absolute; right: 0; bottom: .1rem; width: clamp(7rem, 30vw, 10rem); margin: 0; }
 }
 @media (hover: none) { .intro-portrait img { filter: saturate(1); } }
 @media (max-width: 360px) {

@@ -1,147 +1,92 @@
-// The small illustrations share a palette and drawing, with separate joints for wind, steps, and breathing.
 (() => {
-  const drawings = `<svg width="0" height="0" aria-hidden="true" focusable="false" class="scenery-drawings" xmlns="http://www.w3.org/2000/svg"><defs>
-    <g id="blade"><path d="M0 0Q-5 -11 -4 -27Q0 -16 1 0Z" fill="#85955b"/><path d="M0 0Q1 -17 10 -25Q5 -12 2 0Z" fill="#a2ab6d"/><path d="M-1 0Q-11 -11 -14 -17Q-5 -14 1 0Z" fill="#a9b17e"/></g>
-    <g id="daisy"><g fill="#fff0cf" stroke="#bc9b63" stroke-width=".65"><ellipse cy="-3" rx="2" ry="3.6"/><ellipse cy="-3" rx="2" ry="3.6" transform="rotate(72)"/><ellipse cy="-3" rx="2" ry="3.6" transform="rotate(144)"/><ellipse cy="-3" rx="2" ry="3.6" transform="rotate(216)"/><ellipse cy="-3" rx="2" ry="3.6" transform="rotate(288)"/></g><circle r="2.1" fill="#d9a247"/></g>
-  </defs></svg>`;
-  document.body.insertAdjacentHTML('afterbegin', drawings);
-
-  function grass(x, y, size = 1, flowers = false) {
-    return `<g transform="translate(${x} ${y}) scale(${size})"><g class="grass" style="--phase:-${x%13/3}s">
-      <use href="#blade" transform="translate(-8 0) scale(.75)"/><use href="#blade" transform="translate(3 0) scale(.86 1.14)"/><use href="#blade" transform="translate(12 1) scale(.62)"/>
-      ${flowers ? '<path d="M0 0Q-2 -18 -10 -35M2 0Q8 -10 11 -24" fill="none" stroke="#829162" stroke-width="1.5"/><use href="#daisy" transform="translate(-10 -35)"/><use href="#daisy" transform="translate(11 -24) scale(.8)"/>' : ''}
-    </g></g>`;
+  const footer = document.querySelector('.colophon');
+  footer?.insertAdjacentHTML('afterbegin','<div class="farm-landscape" data-farm="evening" aria-hidden="true"></div>');
+  const introCopy=document.querySelector('.intro-copy');
+  if(introCopy){
+    const miniature=document.createElement('span');
+    miniature.className='scenery-intro';miniature.dataset.farm='intro';miniature.setAttribute('aria-hidden','true');
+    const narrow=matchMedia('(max-width: 760px)');
+    const placeMiniature=()=>(narrow.matches?introCopy.querySelector('.intro-kicker'):introCopy).append(miniature);
+    placeMiniature();narrow.addEventListener('change',placeMiniature);
   }
-
-  function wallow(x, y, size) {
-    return `<g transform="translate(${x} ${y}) scale(${size})"><path d="M-68 1Q-73 -8 -50 -11Q-36 -11 -24 -17Q-4 -23 19 -17Q28 -12 48 -12Q67 -11 69 -3Q76 7 53 11Q30 17 2 14Q-23 18 -41 12Q-64 11 -68 1Z" fill="#aa876d"/>
-      <path d="M-52 -4q15 -5 26 -4m41 18q21 0 31 -5m-84 3q8 2 15 2" stroke="#d1ae8e" stroke-linecap="round" fill="none" stroke-width="2"/><ellipse cx="72" cy="10" rx="4" ry="1.8" fill="#b8997b"/></g>`;
-  }
-
-  const sprite = (name, x, y, width, height, motion = '') =>
-    `<image class="${motion}" href="assets/farm/${name}.webp" x="${x}" y="${y}" width="${width}" height="${height}" preserveAspectRatio="xMidYMax meet"/>`;
-
-  const shadow = (x, y, radius, motion = '') =>
-    `<ellipse class="${motion}" cx="${x}" cy="${y}" rx="${radius}" ry="3.2" fill="#51422f" opacity=".22"/>`;
-
-  function noseApple() {
-    return shadow(74,99,35) + sprite('snuffling',20,21,98,76,'nose-push') + `
-      <g transform="translate(122 92)"><g class="rolling-apple">
-        <path d="M0 -6C-12 -13 -14 1 -7 8Q-1 14 6 8C15 -1 10 -13 0 -6Z" fill="#bf5043" stroke="#824f3e" stroke-width="1.4"/>
-        <path d="M0 -6Q-1 -11 4 -14" fill="none" stroke="#725a3e" stroke-width="1.7"/>
-        <path d="M2 -9Q6 -16 11 -13Q9 -7 2 -9Z" fill="#6c8753"/>
-      </g></g>`;
-  }
-
-  function mudBath() {
-    const drops = [[55,86,-13,-19],[48,89,-20,-12],[135,87,17,-23],[145,91,23,-14]];
-    return wallow(99,94,.99) + sprite('rolling',53,33,94,62,'mud-roll') +
-      drops.map(([x,y,dx,dy]) => `<g transform="translate(${x} ${y})"><ellipse class="mud-drop" rx="3" ry="2.3" style="--dx:${dx}px;--dy:${dy}px" fill="#997351"/></g>`).join('');
-  }
-
-  function butterfly() {
-    return `<g transform="translate(134 40)"><g class="butterfly-flight"><g class="butterfly-wings">
-      <path d="M0 0C-13 -16 -17 -5 -7 1C-16 8 -5 11 0 2C9 12 16 3 6 0C20 -9 8 -16 0 0Z" fill="#e1ab54" stroke="#8c673f" stroke-width="1.4"/>
-      <path d="M-1 -3L1 4" stroke="#64523f" stroke-width="2"/></g></g></g>`;
-  }
-
-  function pounce(fireflies = false) {
-    const quarry = fireflies
-      ? '<g transform="translate(122 49)"><g class="firefly"><circle r="6" fill="#fff6a4" opacity=".36"/><circle r="2.5" fill="#fff9bf"/></g></g>'
-      : butterfly();
-    return shadow(84,100,29,'jump-shadow') + sprite('leaping',34,37,83,63,'piglet-pounce') + quarry;
-  }
-
-  function wolfHuff() {
-    return shadow(44,100,33) + sprite('wolf',4,9,90,91,'wolf-huff') + `
-      <path class="huff-breath" d="M88 38q16 -8 32 -4t18 -3m-49 11q18 5 32 1" fill="none" stroke="#fff5d5" stroke-width="2.4" stroke-linecap="round"/>
-      <g class="loose-straw" stroke="#d6ac54" stroke-linecap="round" stroke-width="2.6">
-        <path d="M108 35l13 -5m-8 13l12 -2m-2 -11l8 -5m-4 17l10 2"/>
-      </g>`;
-  }
-
-  function startledPig() {
-    return shadow(78,100,30) + sprite('leaping',29,35,82,64,'startled-hop');
-  }
-
-  function twigBuilder() {
-    return shadow(79,100,30) + `<g class="twig-lift">${sprite('snuffling',25,28,90,72)}
-      <path d="M101 93l36 -19m-13 7l3 -10m-8 13l9 1" stroke="#826448" stroke-width="3" stroke-linecap="round" fill="none"/></g>
-      <path d="M115 101l34 -4m-24 5l20 1" stroke="#9b7855" stroke-width="3" stroke-linecap="round"/>`;
-  }
-
-  function brickHideout() {
-    return `<defs><clipPath id="behind-bricks"><rect x="12" y="0" width="174" height="88"/></clipPath></defs>
-      <g clip-path="url(#behind-bricks)"><g class="piglet-peek">${sprite('peek',52,35,73,59)}</g></g>
-      <g stroke="#895f4e" fill="#bd8069" stroke-width="1.2">
-        <rect x="37" y="87" width="42" height="8" rx="2"/><rect x="80" y="87" width="44" height="8" rx="2"/>
-        <rect x="51" y="96" width="42" height="8" rx="2"/><rect x="94" y="96" width="43" height="8" rx="2"/>
-      </g>`;
-  }
-
-  function cuddle() {
-    return shadow(89,101,64) + sprite('asleep',12,48,87,52,'soft-breath') +
-      `<g class="nuzzle"><g transform="translate(180 0) scale(-1 1)">${sprite('snuffling',10,45,76,57)}</g></g>`;
-  }
-
-  function strawBed() {
-    return `<path d="M35 96Q74 81 139 92L150 100Q94 108 28 101Z" fill="#cba56c"/>
-      <path d="M32 100l26 -8m-14 12l30 -9m28 8l31 -10m-10 11l24 -6" fill="none" stroke="#eed397" stroke-width="2"/>` +
-      sprite('asleep',44,38,92,61,'dream-kick');
-  }
-
-  // Each action has its own small coordinate system. Responsive placement never
-  // stretches the characters when the background crop changes on a phone.
-  const chapters = {
-    morning: [['apple',18,noseApple],['bath',53,mudBath],['chase',83,pounce]],
-    storybook: [['wolf',9,wolfHuff],['straw',30,startledPig],['twigs',55,twigBuilder],['bricks',84,brickHideout]],
-    evening: [['fireflies',20,() => pounce(true)],['nest',53,cuddle],['straw-bed',84,strawBed]]
-  };
-
-  function fillLandscape(element) {
-    const name = element.dataset.farm;
-    const actions = chapters[name].map(([action, x, draw]) =>
-      `<svg class="farm-action scenery action-${action}" style="--place:${x}%" viewBox="0 0 190 110" focusable="false" aria-hidden="true">${draw()}</svg>`
-    ).join('');
-    element.innerHTML = `<img class="farm-panorama" src="assets/farm/${name}.webp" alt="" loading="lazy" decoding="async" width="1680" height="560">${actions}`;
-  }
-
-  function detail(where, type, viewBox, art) {
-    if (where) where.insertAdjacentHTML(type === 'mark' ? 'afterbegin' : 'beforeend',
-      `<svg class="scenery scenery-${type}" viewBox="${viewBox}" aria-hidden="true" focusable="false">${art}</svg>`);
-  }
-  detail(document.querySelector('.wordmark'), 'mark', '0 0 105 64', sprite('peek',23,1,60,61,'hello-pig'));
-  detail(document.querySelector('.intro-copy'), 'intro', '0 0 260 89',
-    grass(18,78,.45,true) + '<g transform="translate(22 3) scale(.74)">' + noseApple() + '</g>' +
-    '<g transform="translate(119 -4) scale(.83)">' + pounce() + '</g>');
-  detail(document.querySelector('#work .section-head'), 'verge', '0 0 245 79',
-    grass(37,71,.6,true) + sprite('snuffling',82,12,79,59,'flower-sniff') + grass(201,69,.68));
-
-  document.querySelector('.colophon')?.insertAdjacentHTML('afterbegin',
-    '<div class="farm-landscape" data-farm="evening" aria-hidden="true"></div>');
-  document.querySelectorAll('.farm-landscape').forEach(fillLandscape);
-
+  document.querySelector('.wordmark')?.insertAdjacentHTML('afterbegin',
+    '<svg class="scenery-mark" viewBox="0 0 44 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 17c0-7 7-11 17-10l4-4 2 6q5 2 6 6l4 1v5l-5 1-3 3-1 4h-3l-1-4q-5 2-11 0l-1 4h-3l-1-6q-4-2-4-6Zm0 0q-6 3-4-2q2-3 3 0"/><circle cx="30" cy="14" r=".8"/></g></svg>');
+  const hosts = [...document.querySelectorAll('[data-farm]')];
+  if (!hosts.length) return;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const toggle = document.createElement('button');
-  toggle.type = 'button';
-  toggle.className = 'scenery-toggle';
-  let paused = false;
+  toggle.type = 'button'; toggle.className = 'scenery-toggle';footer?.querySelector('.page')?.append(toggle);
+  let paused = false, renderer, loading, failed = false, request = 0, lastFrame = 0;
   try { paused = localStorage.getItem('scenery-paused') === 'true'; } catch {}
-  function applyPreference() {
-    document.documentElement.classList.toggle('scenery-paused', paused);
-    toggle.textContent = paused ? 'Play scenery' : 'Pause scenery';
-  }
-  applyPreference();
-  toggle.addEventListener('click', () => {
-    paused = !paused;
-    applyPreference();
-    try { localStorage.setItem('scenery-paused', String(paused)); } catch {}
-  });
-  document.querySelector('.colophon .page')?.append(toggle);
-
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(entries => {
-      for (const entry of entries) entry.target.classList.toggle('offscreen', !entry.isIntersecting);
+  const states = hosts.map(host => {
+    const kind = host.dataset.farm,canvas=document.createElement('canvas');
+    canvas.className='pasture-canvas';canvas.setAttribute('aria-hidden','true');host.append(canvas);
+    const state={host,kind,canvas,visible:false,clock:kind==='storybook'?1.3:.6,px:0,py:0,aimX:0,aimY:0};
+    host.addEventListener('pointermove',e=>{
+      if(e.pointerType!=='mouse')return;
+      const r=host.getBoundingClientRect();state.aimX=(e.clientX-r.left)/r.width*2-1;state.aimY=(e.clientY-r.top)/r.height*2-1;
     });
-    document.querySelectorAll('.scenery:not(.farm-action), .farm-landscape').forEach(art => observer.observe(art));
+    host.addEventListener('pointerleave',()=>{state.aimX=state.aimY=0;});
+    return state;
+  });
+  function loadScript(src) {
+    return new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=src;script.onload=resolve;script.onerror=reject;document.head.append(script);});
   }
+  function displayPreference(){toggle.textContent=paused?'Play scenery':'Pause scenery';}
+  function canRun(){return !failed&&!paused&&!reduced.matches&&!document.hidden&&states.some(s=>s.visible);}
+  function disposeWorld(model) {
+    if(!model)return;
+    const resources=new Set();
+    model.scene.traverse(node=>{
+      if(node.geometry)resources.add(node.geometry);
+      if(node.material){resources.add(node.material);if(node.material.map)resources.add(node.material.map);}
+      if(node.shadow)resources.add(node.shadow);
+    });
+    resources.forEach(r=>r.dispose());
+  }
+  function draw(state,dt) {
+    const {host,canvas,kind}=state,rect=host.getBoundingClientRect();
+    if(rect.width<1||rect.height<1)return;
+    const compact=rect.width<660, ratio=Math.min(devicePixelRatio||1,1.4,1540/rect.width);
+    const w=Math.round(rect.width*ratio),h=Math.round(rect.height*ratio);
+    if(!state.model||state.compact!==compact){disposeWorld(state.model);state.model=window.createPasture(THREE,kind,compact);state.compact=compact;}
+    if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}
+    if(renderer.domElement.width!==w||renderer.domElement.height!==h)renderer.setSize(w,h,false);
+    state.clock+=dt;state.px+=(state.aimX-state.px)*.08;state.py+=(state.aimY-state.py)*.08;
+    const camera=state.model.frame(state.clock,w,h,state.px,state.py);
+    renderer.render(state.model.scene,camera);
+    state.context ||= canvas.getContext('2d',{alpha:true});
+    state.context.clearRect(0,0,w,h);state.context.drawImage(renderer.domElement,0,0);
+    host.classList.add('pasture-ready');
+  }
+  function fail(){failed=true;states.forEach(s=>s.host.classList.remove('pasture-ready'));toggle.hidden=true;}
+  function tick(now) {
+    request=0;if(!canRun()){lastFrame=0;return;}
+    if(!lastFrame||now-lastFrame>=39){
+      const dt=lastFrame?Math.min(.080,(now-lastFrame)/1000):0;lastFrame=now;
+      try {for(const state of states)if(state.visible)draw(state,dt);} catch(error){console.error('Pasture rendering failed',error);fail();return;}
+    }
+    request=requestAnimationFrame(tick);
+  }
+  function wake(){
+    if(!canRun()) {cancelAnimationFrame(request);request=0;lastFrame=0;return;}
+    if(!loading)loading=Promise.all([loadScript('assets/pasture/three.min.js'),loadScript('pasture.js?v=1')]).then(()=>{
+      renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'low-power'});
+      renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+      renderer.setClearColor(0x000000,0);renderer.outputColorSpace=THREE.SRGBColorSpace;
+      renderer.domElement.addEventListener('webglcontextlost',fail);
+      wake();
+    }).catch(fail);
+    if(renderer&&!request)request=requestAnimationFrame(tick);
+  }
+  toggle.addEventListener('click',()=>{paused=!paused;try{localStorage.setItem('scenery-paused',String(paused));}catch{}displayPreference();wake();});
+  displayPreference();
+  document.addEventListener('visibilitychange',wake);
+  reduced.addEventListener('change',wake);
+  const byHost=new Map(states.map(s=>[s.host,s]));
+  const observer=new IntersectionObserver(entries=>{
+    for(const entry of entries)byHost.get(entry.target).visible=entry.isIntersecting;
+    wake();
+  });
+  hosts.forEach(host=>observer.observe(host));
 })();
