@@ -298,3 +298,35 @@
   .reel-head h2 { font-size: 1.25rem; }
   .reel-controls .motion-switch { padding-inline: .55rem; white-space: nowrap; }
 }
+
+/* The page has one project selector, a short career list, and direct contact links. */
+.home-page .intro-board { padding-bottom: 0; }
+.greeting-line { display: flex; align-items: center; gap: .7rem; }
+.greeting-line .intro-kicker { margin: 0; }
+.piglet-toggle { display: inline-grid; place-items: center; width: 6.1rem; height: 3.65rem; margin: -.2rem 0; border: 0; background: none; padding: 0; border-radius: .35rem; }
+.piglet-toggle[hidden] { display: none; }
+.piglet-toggle img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.intro-copy h1 { margin-top: .45rem; }
+.work-links { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .6rem 1.5rem; padding-block: .9rem 0; font-size: .92rem; }
+.work-links a, .career-list a { text-decoration: underline; text-underline-offset: .22em; }
+.more-work summary { cursor: pointer; padding: .25rem 0; }
+.more-work ul { list-style: none; margin: .45rem 0 0; padding: 0; display: grid; gap: .65rem; }
+.career { display: grid; grid-template-columns: minmax(9rem, 1fr) 3fr; gap: 1.8rem; align-items: baseline; padding: 1.4rem 0 2rem; border-top: 1px solid var(--rule); font-family: var(--font-grotesk); }
+.career h2 { font: 500 clamp(1.5rem,2vw,2.15rem)/1.15 var(--font-grotesk); letter-spacing: -.035em; }
+.career-list { list-style: none; margin: 0; padding: 0; }
+.career-list li { display: grid; grid-template-columns: 1fr 1.7fr auto; align-items: baseline; column-gap: 1rem; padding: .75rem 0; border-bottom: 1px solid var(--rule); font-size: .91rem; line-height: 1.35; }
+.career-list li:first-child { padding-top: 0; }
+.career-list strong, .career-list a { color: var(--ink); font-weight: 550; }
+.career-list span { color: var(--ink-muted); }
+.career-date { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.home-page .portfolio-contact { margin: 0; padding: 1.35rem 0; }
+.portfolio-contact .page { display: flex; align-items: baseline; flex-wrap: wrap; gap: .65rem 1.5rem; font: .95rem/1.4 var(--font-grotesk); }
+.portfolio-contact .page > span { margin-left: auto; color: var(--ink-muted); font-size: .85rem; }
+@media (max-width: 760px) {
+  .greeting-line { order: -2; }
+  .career { grid-template-columns: 1fr; gap: 1rem; }
+  .career-list li { grid-template-columns: 1fr auto; row-gap: .2rem; }
+  .career-list li > span:nth-child(2) { grid-column: 1 / -1; grid-row: 2; }
+  .career-date { grid-column: 2; grid-row: 1; font-size: .8rem; }
+  .portfolio-contact .page > span { margin-left: 0; }
+}

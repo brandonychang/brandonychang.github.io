@@ -3,16 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Meet Brandon Y. Chang: bringing product design, data, and engineering together at DaVita. Explore healthcare products, applied AI, and a background in science at USC.">
+  <meta name="description" content="Brandon Y. Chang designs tools for healthcare teams at DaVita. Explore his Tableau dashboards, field request tracker, and USC parking planner.">
   <title>Brandon Y. Chang | Product, Data &amp; Applied AI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Figtree:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=35"><link rel="stylesheet" href="hsg-updates.css?v=27">
-  <link rel="stylesheet" href="landing.css?v=35">
+  <link rel="stylesheet" href="styles.css?v=36"><link rel="stylesheet" href="hsg-updates.css?v=27">
+  <link rel="stylesheet" href="landing.css?v=36">
   <script src="script.js?v=20" defer></script>
-  <script src="landing.js?v=32" defer></script>
-  <script src="scenery.js?v=4" defer></script>
+  <script src="landing.js?v=36" defer></script>
 </head>
 <body class="home-page">
   <div class="shell">
@@ -21,7 +20,6 @@
         <div class="bar">
           <a href="#top" class="wordmark">Brandon&nbsp;Y.&nbsp;Chang</a>
           <nav class="nav" aria-label="Primary navigation">
-            <a href="#about" class="nav-item">About</a>
             <a href="#work" class="nav-item">Work</a>
             <a href="#experience" class="nav-item">Experience</a>
             <a href="#contact" class="nav-item">Contact</a>
@@ -38,7 +36,6 @@
     <div id="mobile-menu" class="drawer" aria-hidden="true">
       <div class="page drawer-inner">
         <a href="#top" class="drawer-link">Home</a>
-        <a href="#about" class="drawer-link">About</a>
         <a href="#work" class="drawer-link">Work</a>
         <a href="#experience" class="drawer-link">Experience</a>
         <a href="#contact" class="drawer-link">Contact</a>
@@ -48,13 +45,18 @@
     <main id="top">
       <div class="page">
         <section class="intro-board" aria-labelledby="intro-title">
-          <div class="intro-eyebrow"><span>Product design × data × engineering</span><span>San Jose, California <i aria-hidden="true"></i></span></div>
+
           <div class="intro-grid">
-            <div class="intro-lead">
+            <div class="intro-lead" id="about">
               <div class="intro-copy">
-                <p class="intro-kicker">Hi, I’m Brandon.</p>
-                <h1 id="intro-title"><span class="title-phrase">I make complex</span><br> <span class="title-phrase">work feel <em>simple.</em></span></h1>
-                <p class="intro-description">I bring product design, data, and engineering together to build tools people can trust. At <strong>DaVita</strong>, that means making healthcare work easier for nurses, field leaders, and analysts.</p>
+                <div class="greeting-line">
+                  <p class="intro-kicker">Hi, I’m Brandon.</p>
+                  <button type="button" class="piglet-toggle" id="three-little-pigs" aria-label="Pause piglet animation" title="Pause piglet animation" hidden>
+                    <img src="assets/piglet-still.webp" alt="" width="211" height="156">
+                  </button>
+                </div>
+                <h1 id="intro-title">I design tools for<br> <em>healthcare teams.</em></h1>
+                <p class="intro-description">At <strong>DaVita</strong>, I’ve shipped six tools, from clinical reports for nurses to a shared request tracker for analysts.</p>
                 <div class="intro-actions"><a class="intro-primary" href="#work">Explore my work <span aria-hidden="true">↗</span></a><button type="button" class="intro-secondary" id="contact-toggle" aria-expanded="false" aria-controls="contact-options">Let’s talk <span aria-hidden="true">↗</span></button></div>
                 <section class="contact-options" id="contact-options" aria-labelledby="contact-options-title" hidden>
                   <h2 id="contact-options-title">Let’s connect.</h2>
@@ -67,13 +69,13 @@
               </div>
               <figure class="intro-portrait">
                 <img src="brandon-portrait.jpg" alt="Brandon Chang at the University of Southern California" fetchpriority="high" width="1400" height="933">
-                <figcaption><strong>Brandon Y. Chang</strong><span>Curious about people.<br>Careful with the details.</span></figcaption>
+                <figcaption><strong>Brandon Y. Chang</strong><span>Data Science &amp; Biological Sciences, USC</span></figcaption>
                 <span class="intro-portrait-tag">USC ’25</span>
               </figure>
             </div>
-            <section class="work-reel" aria-labelledby="reel-heading">
+            <section class="work-reel" id="work" aria-labelledby="reel-heading">
               <header class="reel-head">
-                <h2 id="reel-heading">Project reel</h2>
+                <h2 id="reel-heading">Selected work</h2>
                 <div class="reel-controls" hidden>
                   <button type="button" class="motion-switch">Pause reel</button>
                   <button type="button" data-step="-1" aria-label="Previous project">‹</button>
@@ -85,7 +87,7 @@
                   <div class="project-copy">
                     <p class="project-meta">DaVita · Analytics</p>
                     <h3 id="title-tableau">Tableau Usage Dashboards</h3>
-                    <p>A heavily used finance workbook took nearly two minutes to open. Compare its load time with a typical report.</p>
+                    <p>I reviewed 27 workbooks and found a finance report that took 115.7 seconds to open. A typical report took 2.1 seconds.</p>
                     <a href="tableau-usage.html">Read the dashboard study</a>
                   </div>
                   <div class="project-demo" data-state="0">
@@ -107,7 +109,7 @@
                   <div class="project-copy">
                     <p class="project-meta">USC · Interaction design</p>
                     <h3 id="title-xposition">Xposition</h3>
-                    <p>On game day, the fastest place to park changes. Switch the arrival conditions to see where the planner sends you.</p>
+                    <p>I designed a USC parking planner around commuter interviews. Compare a weekday route with a game-day route.</p>
                     <a href="usc-parking.html#planner">Try the full route planner</a>
                   </div>
                   <div class="project-demo" data-state="0">
@@ -126,7 +128,7 @@
                   <div class="project-copy">
                     <p class="project-meta">DaVita · Operations</p>
                     <h3 id="title-inbox">HSG Inbox</h3>
-                    <p>Field teams kept using email. Five analysts got one queue with owners and priorities. The team resolved 214 of 243 requests in Q3.</p>
+                    <p>I turned incoming emails into a shared queue for five analysts. They resolved 214 of 243 field requests in Q3.</p>
                     <a href="email-ticket-automation.html#tracker">Inspect the request tracker</a>
                   </div>
                   <div class="project-demo" data-state="0">
@@ -144,7 +146,7 @@
                   <div class="project-copy">
                     <p class="project-meta">USC · Database learning</p>
                     <h3 id="title-chatdb">ChatDB</h3>
-                    <p>What does a WHERE clause actually remove? Filter three practice transactions and follow the change from the query to its results.</p>
+                    <p>A practice tool for learning SQL. Filter the sample transactions to see which rows a WHERE clause keeps.</p>
                     <a href="chatdb.html#query-playground">Explore the query builder</a>
                   </div>
                   <div class="project-demo" data-state="0">
@@ -162,7 +164,7 @@
                   <div class="project-copy">
                     <p class="project-meta">Computer vision</p>
                     <h3 id="title-pose">Dog Poop Detector</h3>
-                    <p>The model follows the spine and tail across frames. Reveal the six landmarks it uses to evaluate this posture.</p>
+                    <p>A camera tracks six points along a dog’s spine and tail to detect when it squats.</p>
                     <a href="dog-poop-detector.html#pose-image-grid">Inspect the pose model</a>
                   </div>
                   <div class="project-demo" data-state="0">
@@ -188,180 +190,42 @@
                 <a href="#reel-chatdb">ChatDB</a>
                 <a href="#reel-pose">Pose detection</a>
               </nav>
+              <div class="work-links">
+                <a href="hsg-projects.html">All 15 DaVita hospital services projects <span aria-hidden="true">↗</span></a>
+                <details class="more-work">
+                  <summary>More projects</summary>
+                  <ul>
+                    <li><a href="healthcare-analytics.html">Healthcare analytics</a></li>
+                    <li><a href="glean-ai-rollout.html">Enterprise search rollout</a></li>
+                    <li><a href="genai-chatbot.html">Support chatbot prototype</a></li>
+                    <li><a href="protein-binding.html">Protein binding prediction</a></li>
+                    <li><a href="aparicio-lab.html">Yeast DNA replication</a></li>
+                    <li><a href="iff-biofuels.html">Biofuel analysis</a></li>
+                  </ul>
+                </details>
+              </div>
             </section>
-            <a class="intro-card intro-impact" href="tableau-usage.html">
-              <div class="intro-card-top"><span>DaVita / Tableau usage</span></div>
-              <div class="intro-impact-number"><b id="workbook-count">27</b><span>workbooks in the<br>quarterly review</span></div>
-              <div class="workbook-marks" aria-hidden="true"></div>
-              <p>A heavily used finance report took 115.7 seconds to open. Typical load time was 2.1 seconds.</p>
-              <span class="intro-card-link">Explore the usage dashboards</span>
-            </a>
-            <section class="intro-card intro-method" aria-labelledby="intro-method-title">
-              <div class="intro-card-top"><span>02 / How I approach design</span><span aria-hidden="true">↔</span></div>
-              <h2 id="intro-method-title">Start with the person.<br>Follow through to the system.</h2>
-              <div class="method-controls" role="group" aria-label="Explore my design process">
-                <button type="button" data-method="understand" aria-pressed="true" aria-controls="method-detail">Understand</button>
-                <button type="button" data-method="simplify" aria-pressed="false" aria-controls="method-detail">Simplify</button>
-                <button type="button" data-method="build" aria-pressed="false" aria-controls="method-detail">Build</button>
-              </div>
-              <div id="method-detail" class="method-detail" aria-live="polite" aria-atomic="true"><p>For the HSG inbox, the problem started with field teams waiting on access, reports, and answers they could trust.</p><span>Listen for what is getting in the way.</span></div>
-              <a class="intro-card-link" href="email-ticket-automation.html">See this approach in a project <span aria-hidden="true">→</span></a>
-            </section>
-            <div class="intro-card intro-background">
-              <div class="intro-card-top"><span>03 / A different starting point</span><span aria-hidden="true">✳</span></div>
-              <h2>Science taught me<br>to ask better questions.</h2>
-              <p>I studied <strong>Data Science + Biological Sciences at USC</strong>. Research taught me to trace an answer back to its evidence. I bring that same habit to product decisions.</p>
-              <div class="intro-background-tags"><a href="protein-binding.html">Salve Therapeutics ↗</a><a href="aparicio-lab.html">USC Aparicio Lab ↗</a></div>
-            </div>
-          </div>
-          <a class="scroll-cue" href="#about"><span>More about me &amp; my work</span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        </section>
-
-        <section class="section" id="about">
-          <header class="section-head"><p class="label label-ink">(01) / About my work</p></header>
-          <h2 class="title section-title">What I do</h2>
-          <div class="grid grid-rows">
-            <div class="c-7 start-5 prose">
-              <p>I enjoy making complex problems easier to understand. My focus is creating intuitive experiences that are built around real needs and deliver meaningful value. At DaVita, I have shipped six internal products for nurses, field leaders, managers, and analysts, including clinical reports, staffing tools, an Outlook request tracker, safety dashboards, and an AI search rollout.</p>
-              <p>I studied data science and biological sciences at USC. I check definitions, trace where a number came from, and spend time with the people who will use the finished product. Their questions shape what I build and how I measure the result.</p>
-            </div>
-          </div>
-
-          <div class="record">
-            <p class="label record-label">The record</p>
-            <div class="data">
-              <div class="data-row"><div class="data-figure">6</div><div class="data-label">End-to-end product releases across healthcare analytics and operations</div></div>
-              <div class="data-row"><div class="data-figure">90%+</div><div class="data-label">Adoption reached within 60 days for a new internal product</div></div>
-              <div class="data-row"><div class="data-figure">80%+</div><div class="data-label">Reduction in planning and reporting cycle time</div></div>
-              <div class="data-row record-extra"><div class="data-figure">10–15 hrs</div><div class="data-label">Manual work removed from recurring weekly processes</div></div>
-              <div class="data-row record-extra"><div class="data-figure">100+</div><div class="data-label">Clinics supported through analytics products and reporting</div></div>
-              <div class="data-row record-extra"><div class="data-figure">50+</div><div class="data-label">Healthcare providers served across the product portfolio</div></div>
-            </div>
-            <button type="button" class="record-toggle label" aria-expanded="false">Show 3 more</button>
-          </div>
-
-          <div class="toolkit">
-            <p class="label">Platforms &amp; methods</p>
-            <div class="tool-groups">
-              <article><span>Languages</span><p>Python · C++ · Java · SQL · R</p></article>
-              <article><span>Product</span><p>Product metrics · Analytics · A/B testing · PRDs · Requirements</p></article>
-              <article><span>Data &amp; systems</span><p>ETL/ELT pipelines · APIs · System design · Git · Linux/Bash</p></article>
-              <article><span>Cloud &amp; platforms</span><p>AWS · GCP · Azure · Tableau · Looker · Power BI · Jira · Excel · MATLAB</p></article>
-            </div>
           </div>
         </section>
 
-      </div>
-      <div class="farm-landscape" data-farm="morning" aria-hidden="true"></div>
-      <div class="page">
-        <section class="section" id="work">
-          <header class="section-head"><p class="label label-ink">(02) / Selected work</p></header>
-          <h2 class="title section-title">Projects<br>with a point</h2>
-          <div class="index">
-            <details class="project-preview" name="featured-preview">
-              <summary class="index-row">
-                <span class="index-num">01</span>
-                <span class="index-name">Tableau Usage Dashboards</span>
-                <span class="index-desc">A quarterly review showing which reports field teams read, which pages they skip, and which workbooks take too long to load.</span>
-                <span class="index-meta">DaVita · Analytics</span>
-                <span class="preview-sign" aria-hidden="true"></span>
-              </summary>
-              <div class="preview-body">
-                <p>Five dashboards cover readership, repeat visits, access, and content health. A second team added its 19 workbooks in one day.</p>
-                <nav aria-label="Tableau project links"><a href="tableau-usage.html">Read case study</a><a href="hsg-projects.html">All 15 HSG projects</a></nav>
-              </div>
-            </details>
-            <details class="project-preview" name="featured-preview">
-              <summary class="index-row">
-                <span class="index-num">02</span>
-                <span class="index-name">HSG Inbox</span>
-                <span class="index-desc">Field teams kept using email. Five analysts got a shared queue and a median first response of 0.9 days.</span>
-                <span class="index-meta">DaVita · Operations</span>
-                <span class="preview-sign" aria-hidden="true"></span>
-              </summary>
-              <div class="preview-body">
-                <div class="result-preview">
-                  <strong>88%</strong>
-                  <div><p>214 of 243 requests resolved in Q3</p>
-                    <meter value="214" max="243" aria-label="214 of 243 requests resolved">88%</meter>
-                  </div>
-                </div>
-                <nav aria-label="HSG Inbox project links">
-                  <a href="email-ticket-automation.html">Read case study</a>
-                  <a href="email-ticket-automation.html#tracker">Inspect the request tracker</a>
-                </nav>
-              </div>
-            </details>
-            <details class="project-preview" name="featured-preview">
-              <summary class="index-row">
-                <span class="index-num">03</span>
-                <span class="index-name">Xposition USC Mobility</span>
-                <span class="index-desc">An event-day route planner shaped by commuter interviews and usability testing.</span>
-                <span class="index-meta">USC · Product design</span>
-                <span class="preview-sign" aria-hidden="true"></span>
-              </summary>
-              <div class="preview-body">
-                <img src="assets/xposition-map.png" loading="lazy" width="1218" height="746" alt="Football-event scenario showing parking options and the route to the Coliseum">
-                <nav aria-label="Xposition USC Mobility project links">
-                  <a href="usc-parking.html">Read case study</a>
-                  <a href="usc-parking.html#planner">Try the route planner</a>
-                </nav>
-              </div>
-            </details>
-            <a class="hsg-directory-link" href="hsg-projects.html">Browse all 15 Hospital Services Group projects</a>
-            <details class="project-archive">
-              <summary>More projects</summary>
-            <details class="project-preview" name="featured-preview">
-              <summary class="index-row">
-                <span class="index-num">04</span>
-                <span class="index-name">ChatDB</span>
-                <span class="index-desc">Choose a dataset, read a query, and see what it returns. A practice tool for learning SQL and MongoDB.</span>
-                <span class="index-meta">USC · Database learning</span>
-                <span class="preview-sign" aria-hidden="true"></span>
-              </summary>
-              <div class="preview-body">
-                <img src="chatdb-interface.png" loading="lazy" width="2048" height="1014" alt="Original ChatDB prototype with database controls and a generated SQL example">
-                <nav aria-label="ChatDB project links">
-                  <a href="chatdb.html">Read case study</a>
-                  <a href="chatdb.html#query-playground">Compare example queries</a>
-                </nav>
-              </div>
-            </details>
-              <a class="index-row" href="healthcare-analytics.html"><span class="index-num">05</span><span class="index-name">Healthcare Product Portfolio</span><span class="index-desc">Six named releases spanning AI knowledge search, safety, employee retention, clinical reporting, quality control, and request operations.</span><span class="index-meta">DaVita · Product &amp; analytics</span><span class="index-arrow" aria-hidden="true">→</span></a>
-              <a class="index-row" href="glean-ai-rollout.html"><span class="index-num">06</span><span class="index-name">Enterprise AI Search Rollout</span><span class="index-desc">A rollout program that helped healthcare teams find trusted answers across disconnected company systems.</span><span class="index-meta">Glean · Product strategy · Analytics</span><span class="index-arrow" aria-hidden="true">→</span></a>
-              <a class="index-row" href="protein-binding.html"><span class="index-num">07</span><span class="index-name">Protein Binding Prediction</span><span class="index-desc">A machine-learning pipeline for estimating protein–ligand binding strength so candidate designs can be compared before slower laboratory screening.</span><span class="index-meta">PyTorch · RDKit · Bioinformatics</span><span class="index-arrow" aria-hidden="true">→</span></a>
-              <a class="index-row" href="genai-chatbot.html"><span class="index-num">08</span><span class="index-name">GenAI Chatbot Prototype</span><span class="index-desc">A support chatbot that answers from company documents, completes approved tasks, and hands uncertain questions to a person.</span><span class="index-meta">RAG · Retrieval · Product delivery</span><span class="index-arrow" aria-hidden="true">→</span></a>
-              <a class="index-row" href="dog-poop-detector.html"><span class="index-num">09</span><span class="index-name">Dog Poop Detector</span><span class="index-desc">A real-time behavior-detection product for recognizing events, capturing video evidence, and sending mobile alerts.</span><span class="index-meta">Computer vision · Product definition</span><span class="index-arrow" aria-hidden="true">→</span></a>
-              <a class="index-row" href="aparicio-lab.html"><span class="index-num">10</span><span class="index-name">Yeast DNA Replication Research</span><span class="index-desc">An interactive research story about editing yeast genes, screening colonies, and measuring how cells control the start of DNA replication.</span><span class="index-meta">USC Aparicio Lab · Molecular biology</span><span class="index-arrow" aria-hidden="true">→</span></a>
-            </details>
-          </div>
+        <section class="career" id="experience" aria-labelledby="experience-title">
+          <h2 id="experience-title">Experience</h2>
+          <ul class="career-list">
+            <li><a href="hsg-projects.html">DaVita</a><span>Healthcare analytics · Lead the monthly call for 400 field leaders</span><span class="career-date">2025–present</span></li>
+            <li><a href="protein-binding.html">Salve Therapeutics</a><span>Machine learning intern · Protein binding prediction</span><span class="career-date">2024</span></li>
+            <li><strong>ProductSC</strong><span>Product management intern · Led student case competitions</span><span class="career-date">2022–2024</span></li>
+            <li><a href="aparicio-lab.html">USC Aparicio Lab</a><span>Research assistant · DNA replication</span><span class="career-date">2022–2025</span></li>
+            <li><a href="iff-biofuels.html">International Flavors &amp; Fragrances</a><span>Data science intern · Biofuel experiments</span><span class="career-date">2020</span></li>
+          </ul>
         </section>
-
-      </div>
-      <div id="three-little-pigs" class="farm-landscape" data-farm="storybook" aria-hidden="true"></div>
-      <div class="page">
-        <section class="section" id="experience">
-          <header class="section-head"><p class="label label-ink">(03) / Experience</p></header>
-          <h2 class="title section-title">Across data,<br>science &amp; operations</h2>
-          <div class="index">
-            <a class="index-row experience-row" href="hsg-projects.html"><span class="index-num">01</span><span class="index-name">DaVita</span><span class="index-desc">Built and released six internal products for clinical operations and reporting. Run the monthly Hospital Services Group national call for 400 field leaders.</span><span class="index-meta">2025–Now<br>Healthcare analytics, product delivery &amp; operational systems</span></a>
-            <a class="index-row experience-row" href="protein-binding.html"><span class="index-num">02</span><span class="index-name">Salve Therapeutics</span><span class="index-desc">Parsed PDB structures, encoded protein and ligand features, generated controlled amino-acid substitutions, and trained binding-affinity baselines.</span><span class="index-meta">2024<br>Machine learning engineer intern</span></a>
-            <article class="index-row experience-row"><span class="index-num">03</span><span class="index-name">ProductSC</span><span class="index-desc">Led product case competitions and applied MVP scoping, user segmentation, market sizing, funnel metrics, and A/B testing to evaluate product direction.</span><span class="index-meta">2022–2024<br>Product manager intern</span></article>
-            <a class="index-row experience-row" href="aparicio-lab.html"><span class="index-num">04</span><span class="index-name">USC Aparicio Lab</span><span class="index-desc">Studied how yeast cells start DNA replication, built gene-edited strains, screened colonies, and checked results with PCR, sequencing, and controlled comparisons.</span><span class="index-meta">2022–2025<br>DNA replication research assistant</span></a>
-            <a class="index-row experience-row" href="iff-biofuels.html"><span class="index-num">05</span><span class="index-name">International Flavors &amp; Fragrances</span><span class="index-desc">Refined acid-hydrolysis conditions, measured glucose, xylose, and arabinose with HPLC, and wrote Python scripts to organize fermentation results.</span><span class="index-meta">2020<br>Data science intern</span></a>
-          </div>
-        </section>
-
       </div>
     </main>
 
-    <footer class="colophon" id="contact">
+    <footer class="colophon portfolio-contact" id="contact" aria-label="Contact">
       <div class="page">
-        <div class="grid footer-grid">
-          <div class="c-4"><a class="link" href="#top">Back to top ↑</a><p class="colophon-note">Healthcare analytics, product systems, and applied data. San Jose, California.</p><p class="colophon-note">© 2026</p></div>
-          <div class="c-4"><p class="label">Contact</p><ul class="colophon-list"><li><a class="link" href="mailto:bychang@alumni.usc.edu">bychang@alumni.usc.edu</a></li></ul></div>
-          <div class="c-4"><p class="label">Elsewhere</p><ul class="colophon-list"><li><a class="link" href="https://www.linkedin.com/in/brandonychang" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li></ul></div>
-        </div>
+        <a class="link" href="mailto:bychang@alumni.usc.edu">bychang@alumni.usc.edu</a>
+        <a class="link" href="https://www.linkedin.com/in/brandonychang" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        <span>San Jose, California</span>
       </div>
     </footer>
   </div>
